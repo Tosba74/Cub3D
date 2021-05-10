@@ -6,19 +6,12 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/09 18:27:04 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/10 17:45:45 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
-
-# include <errno.h>
-# include <math.h>
-# include <fcntl.h>
-
-# include "../libft/includes/libft.h"
-# include "../minilibx/mlx.h"
 
 #define PI 3.14159265
 #define OR 1.61803398
@@ -42,10 +35,18 @@
 #define MOV_LEFT 0b00000100
 #define MOV_RIGHT 0b00010000
 
-#define SPEED 0.8
+#define SPEED 0.1
 
 #define X_RES 2560
 #define Y_RES 1440
+
+# include <errno.h>
+# include <math.h>
+# include <fcntl.h>
+
+# include "../libft/includes/libft.h"
+# include "../minilibx/mlx.h"
+
 
 // PARSCING
 typedef	struct	s_data
@@ -86,7 +87,17 @@ typedef struct	s_win
     int         bpp;
     int         line_length;
     int         endian;
+	int			w;
+	int			h;
+	int			key_press;
 }				t_win;
+// IMAGE
+typedef struct	s_img
+{
+	char *road;
+	
+	
+}				t_img;
 
 //ALL
 typedef struct	s_global
@@ -103,7 +114,6 @@ void	ft_err(int err);
 // ft_uitls
 void	skip_space_eol(char *s);
 int		iscardino(t_data *data, char *s, int nb);
-int		get_color(int r, int g, int b);
 void	my_pixel_put(t_g *g, int x, int y, int color);
 
 // windows.c
@@ -115,6 +125,10 @@ int		ft_print_map(t_g g);
 void	ft_print_struct_p(t_g g);
 void	ft_print_player(t_g g);
 void	test(t_g g);
+
+// key_event_move.c
+int		deal_key(int key, void *param);
+int     death_key(int key, void *param);
 
 // ft_init_struct.c
 // void	ft_init_struct_all(t_param *param, t_map *map, t_player *player);

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:55:10 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/09 22:24:33 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/10 17:53:42 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,76 +23,93 @@ void	close_window(t_g *g)
 	// exit(1);
 }
 
+static void	putput(int key)
+{
+	printf("\n-------------\n");
+	ft_putbytes(key);
+	printf(" <== %d\n", key);
+	printf("-------------\n");
+}
+
 int     deal_key(int key, void *param)
 {
 	t_g *g = param;
+	putput(key);
 	if (key == KEY_ESC)
 	{
 		close_window(g);
 	}
 	else if (key == KEY_LEFT || key == KEY_A)
 	{
-		printf("\n-------------\n");
-		ft_putbytes(key);
-		printf(" <== %d\n", key);
-		printf("-------------\n");
-		return (MOV_LEFT);
+		g->win.key_press |= MOV_LEFT;
 	}
 	else if (key == KEY_RIGHT || key == KEY_D)
 	{
-		printf("\n-------------\n");
-		ft_putbytes(key);
-		printf(" ==> %d\n", key);
-		printf("-------------\n");
-		return (MOV_RIGHT);
-	}
-	else if (key == KEY_DOWN || key == KEY_S)
-	{
-		printf("\n-------------\n");
-		ft_putbytes(key);
-		printf(" vvv %d\n", key);
-		printf("-------------\n");
-		return (MOV_DOWN);
+		g->win.key_press |= MOV_RIGHT;
 	}
 	else if (key == KEY_UP || key == KEY_W)
 	{
-		printf("\n-------------\n");
-		ft_putbytes(key);
-		printf(" ^^^ %d\n", key);
-		printf("-------------\n");
-		return (MOV_UP);
+		g->win.key_press |= MOV_UP;
 	}
-	else if (key)
+	else if (key == KEY_DOWN || key == KEY_S)
 	{
-		printf("-------------");
-		ft_putbytes(key);
-		printf("<> %d\n", key);
-		printf("-------------");
+		g->win.key_press |= MOV_DOWN;
 	}
 	return(0);   
 }
+
+
+int     death_key(int key, void *param)
+{
+	t_g *g = param;
+	putput(key);
+	if (key == KEY_ESC)
+	{
+		close_window(g);
+	}
+	else if (key == KEY_LEFT || key == KEY_A)
+	{
+		g->win.key_press &= ~MOV_LEFT;
+	}
+	else if (key == KEY_RIGHT || key == KEY_D)
+	{
+		g->win.key_press &= ~MOV_RIGHT;
+	}
+	else if (key == KEY_UP || key == KEY_W)
+	{
+		g->win.key_press &= ~MOV_UP;
+	}
+	else if (key == KEY_DOWN || key == KEY_S)
+	{
+		g->win.key_press &= ~MOV_DOWN;
+	}
+	return(0);   	
+}
+
 void	move(t_g *g)
 {
-    int    dx;
-    int    dy;
+	float	dx = 0;
+	float	dy = 0;
 	char	mov;
     char    movx;
     char    movy;
 	
+	dx = 0;
+	dy = 0;
 	mov = 0;
 	movx = mov & (MOV_LEFT | MOV_RIGHT);
 	movy = mov & (MOV_DOWN | MOV_UP);
     if (movx == MOV_LEFT)
-        dx = -SPEED;
+        dx *= -SPEED;
     else if (movx == MOV_RIGHT)
-        dx = SPEED;
+        dx *= SPEED;
     if (movy == MOV_DOWN)
-        dy = SPEED;
+        dy *= SPEED;
     else if (movy == MOV_UP)
-        dy = -SPEED;
+        dy *= -SPEED;
 	g->player.x += dx;
 	g->player.y += dy;
 }
 
-key_hook(getkeys);
-loop_hook(move);
+// key_hook(getkeys);
+// loop_hook(move);

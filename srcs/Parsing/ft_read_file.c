@@ -70,9 +70,13 @@ static void	check_reso(t_g *g)
 	if (g->data.h <= 0)
 		ft_err(3);
 	if (g->data.w > X_RES)
-		g->data.w = X_RES;
+		g->win.w = X_RES;
+	else
+		g->win.w = g->data.w;
 	if (g->data.h > Y_RES)
-		g->data.h = Y_RES;
+		g->win.h = Y_RES;
+	else
+		g->win.h = g->data.h;
 
 }
 

@@ -57,6 +57,10 @@ int		ft_print_map(t_g g)
 	printf("| ----------  MAP -- %4d x %4d  ------------- |\n", g.map.line + 1, g.map.collumn + 1);
 	printf("*-----------------------------------------------*\n");
 	printf("\n");
+	printf("*-----------------------------------------------*\n");
+	printf("| %s | %19d | %-19d |\n", "R", g.win.w, g.win.h);
+	printf("*-----------------------------------------------*\n");
+	printf("\n");
 	while (g.map.map[++t])
 	{
 		printf("%s\n", g.map.map[t]);

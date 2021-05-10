@@ -39,6 +39,7 @@
 
 #define	MLX_H
 
+#include "/usr/X11/include/X11/X.h"
 
 void	*mlx_init();
 /*
