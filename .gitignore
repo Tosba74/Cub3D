@@ -1,0 +1,6 @@
+*.o
+Cub3d
+.DS_Store
+a.out
+*.a
+*/dylib
