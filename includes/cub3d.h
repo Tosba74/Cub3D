@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/11 17:33:49 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 00:40:46 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@
 #define MOV_UP 0b00000001
 #define MOV_DOWN 0b00000010
 #define MOV_LEFT 0b00000100
-#define MOV_RIGHT 0b00010000
+#define MOV_RIGHT 0b00001000
+#define TURN_LEFT 0b00010000
+#define TURN_RIGHT 0b01000000
 
-#define SPEED 0.1
+#define SPEED 0.8
 
 #define X_RES 2560
 #define Y_RES 1440
@@ -83,7 +85,7 @@ typedef struct	s_win
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img;
-	int		*addr;
+	char	*addr;
 	int		bpp;
 	int		line_length;
 	int		endian;
@@ -95,7 +97,7 @@ typedef struct	s_win
 typedef struct	s_img
 {
 	char *road;
-	
+	void *img;
 	
 }				t_img;
 

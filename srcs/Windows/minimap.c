@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:28:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/11 18:07:44 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 00:39:43 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,20 @@ static void print_carrev(t_g *g, int x, int y, int color)
 // 		my_pixel_put(g, x, y + i++, color);
 // }
 
-// static void print_player(t_g *g, int x, int y, int color)
-// {
-// 	int w;
-// 	int h;
+static void print_player(t_g *g, int x, int y, int color)
+{
+	int w;
+	int h;
 
-// 	h = -1;
-// 	while(++h != 6)
-// 	{
-// 		w = -1;
-// 		while(++w != 6)
-// 			my_pixel_put(g, x + w, y + h, color);
-// 	}
-// 	// print_view(g, x + (w / 2), y + (h / 2), color);
-// }
+	h = -1;
+	while(++h != 6)
+	{
+		w = -1;
+		while(++w != 6)
+			my_pixel_put(g, x + w, y + h, color);
+	}
+	// print_view(g, x + (w / 2), y + (h / 2), color);
+}
 
 int	minimap(t_g *g)
 {
@@ -94,7 +94,7 @@ int	minimap(t_g *g)
 			x += 10;
 		}
 		y += 10;
-		// print_player(g, (g->player.x * 10) + 2, (g->player.y * 10) + 12, 16066343);
+		print_player(g, (g->player.x * 10) + 2, (g->player.y * 10) + 12, 16066343);
 	}
 	// mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, g->data.w, g->data.h);
 	return (0);	

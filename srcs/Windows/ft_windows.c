@@ -60,10 +60,9 @@ static int	update(void *param)
 {
 	t_g *g = param;
 
-	g->win.img = mlx_new_image(g->win.mlx_ptr, g->win.w ,g->win.h);
-	g->win.addr = (int *)mlx_get_data_addr(g->win.img, &(g->win.bpp), &(g->win.line_length), &(g->win.endian));
-	minimap(g);
+	g->win.addr = mlx_get_data_addr(g->win.img, &(g->win.bpp), &(g->win.line_length), &(g->win.endian));
 	move(g);
+	minimap(g);
 	mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, g->win.w, g->win.h);
 	return (0);
 }
@@ -71,11 +70,12 @@ static int	update(void *param)
 static void	proc_win(t_g *g)
 {
 	g->win.mlx_ptr = mlx_init();
-	int ret = mlx_get_screen_size(g->win.mlx_ptr, &(g->data.w), &(g->data.h));
-	printf("ret => %d\n",ret);
 	g->win.win_ptr = mlx_new_window(g->win.mlx_ptr, g->win.w, g->win.h, "42");
+	g->win.img = mlx_new_image(g->win.mlx_ptr, g->win.w ,g->win.h);
+	// int ret = mlx_get_screen_size(g->win.mlx_ptr, &(g->data.w), &(g->data.h));
+	// printf("ret => %d\n",ret);
 	mlx_do_key_autorepeatoff(g->win.mlx_ptr);
-	mlx_loop_hook(g->win.win_ptr, update, g);
+	mlx_loop_hook(g->win.mlx_ptr, update, g);
 	mlx_hook(g->win.win_ptr, KeyPress, KeyPressMask, deal_key, g);
 	mlx_hook(g->win.win_ptr, KeyRelease, KeyReleaseMask, death_key, g);
 	mlx_loop(g->win.mlx_ptr);
