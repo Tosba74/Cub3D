@@ -39,7 +39,13 @@
 
 #define	MLX_H
 
-#include "/usr/X11/include/X11/X.h"
+#define KeyPress			3
+#define KeyRelease			4
+#define KeyPressMask		(1L<<0)
+#define KeyReleaseMask		(1L<<1)
+
+// #include "/usr/X11/include/X11/X.h"
+// #include "X11/X.h" 
 
 void	*mlx_init();
 /*

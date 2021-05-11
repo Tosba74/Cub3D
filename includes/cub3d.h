@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/10 17:45:45 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/10 19:18:20 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ typedef struct	s_map
 
 typedef struct	s_player
 {
-	float	x;
-	float	y;
-	int		nb;
-	char	view;
+	float		x;
+	float		y;
+	int			nb;
+	char		view;
 }				t_player;
 
 

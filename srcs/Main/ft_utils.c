@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/09 14:42:12 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/10 22:06:53 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ int		iscardino(t_data *data, char *s, int nb)
 
 void	my_pixel_put(t_g *g, int x, int y, int color)
 {
-		g->win.addr[(y * g->data.w) + x] = color;
+		g->win.addr[(y * g->win.w) + x] = color;
 }

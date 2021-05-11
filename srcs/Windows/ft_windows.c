@@ -12,102 +12,84 @@
 
 # include "cub3d.h"
 
-/*
+
 static void print_carre(t_g *g, int x, int y, int color)
 {
-	int w = 0;
-	int h = 0;
-	while(h != 10)
+	int w;
+	int h;
+
+	h = -1;
+	while(++h != 10)
 	{
-		w = 0;
-		while(w != 10)
-		{
+		w = -1;
+		while(++w != 10)
 			if (w == 0 || w == 9 || h == 0 || h == 9)
 				my_pixel_put(g, x + w, y + h, 900000);
 			else
 				my_pixel_put(g, x + w, y + h, color);
-			w++;
-		}
-		h++;
 	}
 }
 
 static void print_carrev(t_g *g, int x, int y, int color)
 {
-	int w = 0;
-	int h = 0;
-	while(h != 10)
+	int w;
+	int h;
+
+	h = -1;
+	while(++h != 10)
 	{
-		w = 0;
-		while(w != 10)
-		{
+		w = -1;
+		while(++w != 10)
 			if (w == 0 || w == 9 || h == 0 || h == 9)
 				my_pixel_put(g, x + w, y + h, color);
-			w++;
-		}
-		h++;
 	}
 }
 
-static void print_view(t_g *g, int x, int y, int color)
-{
-	int i;
+// static void print_view(t_g *g, int x, int y, int color)
+// {
+// 	int i;
 
-	i = 0;
-	while (i != 20)
-		my_pixel_put(g, x, y + i++, color);
-}
+// 	i = 0;
+// 	while (i != 20)
+// 		my_pixel_put(g, x, y + i++, color);
+// }
 
 static void print_player(t_g *g, int x, int y, int color)
 {
-	int w = 0;
-	int h = 0;
-	(void)x; 
-	(void)y;
-	(void)g;
-	(void)color;
-	while(h != 6)
-	{
-		w = 0;
-		while(w != 6)
-		{
-			my_pixel_put(g, x + w, y + h, color);
-			w++;
-		}
-		h++;
-	}
-	print_view(g, x + (w / 2), y + (h / 2), color);
-}
-*/
+	int w;
+	int h;
 
-static int	update(void *param)
+	h = -1;
+	while(++h != 6)
+	{
+		w = -1;
+		while(++w != 6)
+			my_pixel_put(g, x + w, y + h, color);
+	}
+	// print_view(g, x + (w / 2), y + (h / 2), color);
+}
+
+static int	minimap(t_g *g)
 {
-	t_g *g = param;
-	ft_putstr("Youpi\n");
-	(void)g;
-	// int i = -1;
-	// int t = -1;
-	// int x = 10; 
-	// int y = 10;
-	// while (g->map.map[++t])
-	// {
-	// 	i = -1;
-	// 	x = 10;
-	// 	while (g->map.map[t][++i])
-	// 	{
-	// 		if (g->map.map[t][i] == '1')
-	// 		{       
-	// 			print_carre(g, x, y, 5197647);
-	// 		}
-	// 		else if (g->map.map[t][i] == '0')        
-	// 		{
-	// 			print_carrev(g, x, y, 16514295);
-	// 		}
-	// 		x += 10;
-	// 	}
-	// 	y += 10;
-	// 	print_player(g, (g->player.x * 10) + 2, (g->player.y * 10) + 12, 16066343);
-	// }
+	int i = -1;
+	int t = -1;
+	int x = 10; 
+	int y = 10;
+	while (g->map.map[++t])
+	{
+		i = -1;
+		x = 10;
+		while (g->map.map[t][++i])
+		{
+			if (g->map.map[t][i] == '1')
+				print_carre(g, x, y, 5197647);
+			else if (g->map.map[t][i] == '0')        
+				print_carrev(g, x, y, 16514295);
+			x += 10;
+		}
+		y += 10;
+		print_player(g, (g->player.x * 10) + 2, (g->player.y * 10) + 12, 16066343);
+	}
 	// mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, g->data.w, g->data.h);
 	return (0);	
 }
@@ -169,13 +151,24 @@ static void	proc_win(t_g *g)
 	mlx_loop(g->win.mlx_ptr);
 }
 */
+static int	update(void *param)
+{
+	t_g *g = param;
+
+	g->win.img = mlx_xpm_file_to_image(g->win.mlx_ptr, g->data.cardino[0][0], &(g->data.w), &(g->data.h));
+	minimap(g);
+	// g->win.img = mlx_xpm_file_to_image(g->win.mlx_ptr, g->data.cardino[0][0], &(g->data.w), &(g->data.h));
+	// g->win.addr = (int *)mlx_get_data_addr(g->win.img, &(g->win.bpp), &(g->win.line_length), &(g->win.endian));
+	mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, g->win.w, g->win.h);
+	return (0);
+}
 
 static void	proc_win(t_g *g)
 {
 	g->win.mlx_ptr = mlx_init();
 	g->win.win_ptr = mlx_new_window(g->win.mlx_ptr, g->win.w, g->win.h, "42");
 	mlx_do_key_autorepeatoff(g->win.mlx_ptr);
-	// mlx_loop_hook(g->win.mlx_ptr, key_deal, g);
+	// mlx_loop_hook(g->win.mlx_ptr, key_deal, g)	
 	// g->win.img = mlx_xpm_file_to_image(g->win.mlx_ptr, g->data.cardino[0][0], &(g->data.w), &(g->data.h));
 	// g->win.addr = (int *)mlx_get_data_addr(g->win.img, &(g->win.bpp), &(g->win.line_length), &(g->win.endian));
 	// mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, 64, 64);
