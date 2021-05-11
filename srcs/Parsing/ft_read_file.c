@@ -60,7 +60,7 @@ static void	ft_complet_floor(t_g *g, char **tab)
 	}
 	g->data.floor = ft_get_color(g->data.f[0], g->data.f[1], g->data.f[2]);
 	g->data.ceiling = ft_get_color(g->data.c[0], g->data.c[1], g->data.c[2]);
-	wrfree(tab_tmp);	
+	wrfree(tab_tmp);
 }
 
 static void	check_reso(t_g *g)
@@ -77,7 +77,6 @@ static void	check_reso(t_g *g)
 		g->win.h = Y_RES;
 	else
 		g->win.h = g->data.h;
-
 }
 
 static void	get_resolution(t_g *g, char **tab)
@@ -88,8 +87,8 @@ static void	get_resolution(t_g *g, char **tab)
 	printf("*----------- -- --GET RESOLUTION-- -- ----------*\n");
 	if (ft_strslen(tab) == 3)
 	{
-			g->data.w = ft_atoi(tab[i]);
-			g->data.h = ft_atoi(tab[i + 1]);
+		g->data.w = ft_atoi(tab[i]);
+		g->data.h = ft_atoi(tab[i + 1]);
 	}
 	else if (ft_strslen(tab) < 3)
 		ft_err(3);
@@ -107,7 +106,7 @@ static char	*get_road(char *line)
 	ext = ft_strdup(ft_strrchr(s, 46));
 	printf("|----------- -- -- -|GET ROAD|- -- -- ----------|\n");
 	printf("*-----------------------------------------------*\n");
-	printf("| road =>|%-24s|ext =>|%-6s|\n", s, ext);	
+	printf("| road =>|%-24s|ext =>|%-6s|\n", s, ext);
 	if (!ft_strncmp(ext, ".xpm", 4))
 		ft_putstr("| -- -- -- -- --XPM EXTENTION OK!-- -- -- -- -- |\n");
 	else
@@ -116,17 +115,16 @@ static char	*get_road(char *line)
 		ft_err(5);
 	}
 	printf("*- - - - -- -- -- ------------- -- -- -- - - - -*\n");
-	printf("| road =>|%-24s|ext =>|%-6s|\n", s, ext);	
+	printf("| road =>|%-24s|ext =>|%-6s|\n", s, ext);
 	printf("*- - - - -- -- -- ------------- -- -- -- - - - -*\n");
-
-	return(s);
+	return (s);
 }
 
 static void	ft_complet_data(t_g *g, char *line)
 {
 	char	**tab;
-	int 	ret;
-	
+	int		ret;
+
 	printf("*-----------------------------------------------*\n");
 	printf("|--------- -- --|COMPLET  DATA|-- -- -----------|\n");
 	printf("*-----------------------------------------------*\n");
@@ -136,19 +134,16 @@ static void	ft_complet_data(t_g *g, char *line)
 	if (tab)
 	{
 		ret = iscardino(&(g->data), tab[0], 2);
-		// printf("%d\n", ret);
 		if (ret > -1)
 		{
 			g->data.cardino[1][ret] = get_road(line);
 			printf("*-----------------------------------------------*\n");
 			printf("|%4s|%-42s|\n", g->data.cardino[0][ret], g->data.cardino[1][ret]);
 			printf("*-----------------------------------------------*\n");
-
 		}
 		else if (!ft_strcmp(tab[0], "R"))
 		{
 			get_resolution(g, tab);
-			printf("*-----------------------------------------------*\n");
 			printf("| %s | %19d | %-19d |\n", tab[0], g->data.w, g->data.h);
 			printf("*-----------------------------------------------*\n");
 		}
@@ -157,7 +152,6 @@ static void	ft_complet_data(t_g *g, char *line)
 		else if (!ft_strcmp(tab[0], "F") || !ft_strcmp(tab[0], "C"))
 			ft_complet_floor(g, tab);
 		printf("|%2d|line => [%-26s] - ok !|\n",ret, line);
-	printf("*-----------------------------------------------*\n\n");
 	}
 	wrfree(line);
 	wrfree(tab);
@@ -171,12 +165,9 @@ static void	ft_complet_map(t_g *g, char *line)
 	while (line[++i])
 	{
 		if (line[i] == '2')
-		{
 			(void)i;
-		}
 		else if (!(48 <= line[i] && line[i] <= 50) && line[i] != ' ')
 		{
-
 			if (iscardino(&g->data, line + i, 1) != -1)
 			{
 				g->player.view = line[i];
@@ -193,16 +184,16 @@ static void	ft_complet_map(t_g *g, char *line)
 		}
 	}
 	if (g->map.collumn < i)
-	g->map.collumn = i;	
+		g->map.collumn = i;
 	printf("%s\n", line);
 	g->map.map = ft_strsjoin(g->map.map, line);
 	g->map.line++;
 }
 
-int		ft_read_file(int fd, t_g *g)
+int	ft_read_file(int fd, t_g *g)
 {
-	char *line;
-	
+	char	*line;
+
 	line = NULL;
 	if (fd < 0)
 		ft_err(2);
@@ -214,5 +205,5 @@ int		ft_read_file(int fd, t_g *g)
 		else if (ft_isdigit(line[0]) || line[0] == ' ')
 			ft_complet_map(g, line);
 	}
-	return(0);
+	return (0);
 }

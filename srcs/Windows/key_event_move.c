@@ -6,14 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:55:10 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/10 17:53:42 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 17:51:18 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 # include "cub3d.h"
 
-void	close_window(t_g *g)
+static void	close_window(t_g *g)
 {
 	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
 	mlx_destroy_window(g->win.mlx_ptr, g->win.win_ptr);
@@ -55,11 +54,11 @@ int     deal_key(int key, void *param)
 	{
 		g->win.key_press |= MOV_DOWN;
 	}
-	return(0);   
+	return (0);   
 }
 
 
-int     death_key(int key, void *param)
+int	death_key(int key, void *param)
 {
 	t_g *g = param;
 	putput(key);
@@ -83,33 +82,30 @@ int     death_key(int key, void *param)
 	{
 		g->win.key_press &= ~MOV_DOWN;
 	}
-	return(0);   	
+	return (0);
 }
 
 void	move(t_g *g)
 {
-	float	dx = 0;
-	float	dy = 0;
+	float	dx;
+	float	dy;
 	char	mov;
-    char    movx;
-    char    movy;
-	
+	char	movx;
+	char	movy;
+
 	dx = 0;
 	dy = 0;
 	mov = 0;
 	movx = mov & (MOV_LEFT | MOV_RIGHT);
 	movy = mov & (MOV_DOWN | MOV_UP);
-    if (movx == MOV_LEFT)
-        dx *= -SPEED;
-    else if (movx == MOV_RIGHT)
-        dx *= SPEED;
-    if (movy == MOV_DOWN)
-        dy *= SPEED;
-    else if (movy == MOV_UP)
-        dy *= -SPEED;
+	if (movx == MOV_LEFT)
+		dx *= -SPEED;
+	else if (movx == MOV_RIGHT)
+		dx *= SPEED;
+	if (movy == MOV_DOWN)
+		dy *= SPEED;
+	else if (movy == MOV_UP)
+		dy *= -SPEED;
 	g->player.x += dx;
 	g->player.y += dy;
 }
-
-// key_hook(getkeys);
-// loop_hook(move);

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/10 19:18:20 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 17:33:49 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,16 @@ typedef struct	s_player
 // WINDOWS
 typedef struct	s_win
 {
-	void 		*mlx_ptr;
-	void 		*win_ptr;
-	void 		*img;
-    int			*addr;
-    int         bpp;
-    int         line_length;
-    int         endian;
-	int			w;
-	int			h;
-	int			key_press;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img;
+	int		*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+	int		w;
+	int		h;
+	int		key_press;
 }				t_win;
 // IMAGE
 typedef struct	s_img
@@ -111,7 +111,7 @@ typedef struct	s_global
 // ft_error.c
 void	ft_err(int err);
 
-// ft_uitls
+// ft_utils
 void	skip_space_eol(char *s);
 int		iscardino(t_data *data, char *s, int nb);
 void	my_pixel_put(t_g *g, int x, int y, int color);
@@ -127,8 +127,12 @@ void	ft_print_player(t_g g);
 void	test(t_g g);
 
 // key_event_move.c
+void	move(t_g *g);
 int		deal_key(int key, void *param);
 int     death_key(int key, void *param);
+
+// minimap
+int		minimap(t_g *g);
 
 // ft_init_struct.c
 // void	ft_init_struct_all(t_param *param, t_map *map, t_player *player);

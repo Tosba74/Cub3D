@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void		ft_print_struct_p(t_g g)
+void	ft_print_struct_p(t_g g)
 {
 	printf("*-----------------------------------------------*\n");
 	printf("| ---------------  DATA  ---------------------- |\n");
@@ -25,14 +25,17 @@ void		ft_print_struct_p(t_g g)
 	printf("|%8s == [%-32s] |\n", g.data.cardino[0][3], g.data.cardino[1][3]);
 	printf("|%8s == [%-32s] |\n", g.data.cardino[0][4], g.data.cardino[1][4]);
 	printf("|%8s == [%-32s] |\n", "sprite", g.data.sprite);
-	printf("|%8s == [%3d] [%3d] [%3d]                  |\n", "floor", g.data.f[0], g.data.f[1], g.data.f[2]);
-	printf("|%8s == [%3d] [%3d] [%3d]                  |\n", "color", g.data.c[0], g.data.c[1], g.data.c[2]);
+	printf("|%8s == [%3d] [%3d] [%3d]                  |\n", "floor",
+		g.data.f[0], g.data.f[1], g.data.f[2]);
+	printf("|%8s == [%3d] [%3d] [%3d]                  |\n", "color",
+		g.data.c[0], g.data.c[1], g.data.c[2]);
 	printf("|%8s == [%7d]                          |\n", "floor", g.data.floor);
-	printf("|%8s == [%7d]                          |\n", "ceiling", g.data.ceiling);
+	printf("|%8s == [%7d]                          |\n", "ceiling",
+		g.data.ceiling);
 	printf("*-----------------------------------------------*\n\n");
 }
 
-void		ft_print_player(t_g g)
+void	ft_print_player(t_g g)
 {
 	printf("*-----------------------------------------------*\n");
 	printf("| --------------  PLAYER  --------------------- |\n");
@@ -41,20 +44,18 @@ void		ft_print_player(t_g g)
 	printf("| View PLAYER ONE => %-27c|\n", g.player.view);
 	printf("| Pos X => %-12f Pos Y => %-14f |\n", g.player.x, g.player.y);
 	printf("*-----------------------------------------------*\n");
-
-
 }
 
-int		ft_print_map(t_g g)
+int	ft_print_map(t_g g)
 {
-	int t;
-	// int c;
+	int	t;
 
 	t = -1;
-	if (g.map.map== NULL)
+	if (g.map.map == NULL)
 		return (1);
 	printf("*-----------------------------------------------*\n");
-	printf("| ----------  MAP -- %4d x %4d  ------------- |\n", g.map.line + 1, g.map.collumn + 1);
+	printf("| ----------  MAP -- %4d x %4d  ------------- |\n",
+		g.map.line + 1, g.map.collumn + 1);
 	printf("*-----------------------------------------------*\n");
 	printf("\n");
 	printf("*-----------------------------------------------*\n");
@@ -73,5 +74,4 @@ void	test(t_g g)
 {
 	ft_print_struct_p(g);
 	ft_print_player(g);
-	// ft_print_map(g);
 }

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 22:46:46 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/08 23:05:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/11 13:56:03 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static char	*msg_err(int i)
 {
 	static char	*tab[21];
-	
+
 	tab[0] = "Cub3d need an argument\nLa map Connard\n";
 	tab[1] = "Too many arguments\n";
 	tab[2] = "There are problem while opening .cub file\n";
-	tab[3] = "Incorrect Resolution\n";;
+	tab[3] = "Incorrect Resolution\n";
 	tab[4] = "Resolution Too Many Argument\n";
 	tab[5] = "Texture's files must be to \".xpm\"\n";
 	tab[5] = "";
@@ -40,11 +40,10 @@ static char	*msg_err(int i)
 	tab[20] = "Too many players";
 	return (tab[i]);
 }
-	
 
 void	ft_err(int err)
 {
-	char *str_err;
+	char	*str_err;
 
 	str_err = msg_err(err);
 	ft_putstr("Error: ");
