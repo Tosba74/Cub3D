@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:55:10 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/11 17:51:18 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/13 10:31:54 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,21 @@ int     deal_key(int key, void *param)
 	}
 	else if (key == KEY_LEFT || key == KEY_A)
 	{
-		g->win.key_press |= MOV_LEFT;
+		g->win.key_press ^= MOV_LEFT;
 	}
 	else if (key == KEY_RIGHT || key == KEY_D)
 	{
-		g->win.key_press |= MOV_RIGHT;
+		g->win.key_press ^= MOV_RIGHT;
 	}
 	else if (key == KEY_UP || key == KEY_W)
 	{
-		g->win.key_press |= MOV_UP;
+		g->win.key_press ^= MOV_UP;
 	}
 	else if (key == KEY_DOWN || key == KEY_S)
 	{
-		g->win.key_press |= MOV_DOWN;
+		g->win.key_press ^= MOV_DOWN;
 	}
+	ft_print_player(g);
 	return (0);   
 }
 
