@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/12 00:40:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/17 15:36:18 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 #define TURN_LEFT 0b00010000
 #define TURN_RIGHT 0b01000000
 
-#define SPEED 0.8
+#define SPEED 0.1
 
 #define X_RES 2560
 #define Y_RES 1440
@@ -74,6 +74,7 @@ typedef struct	s_player
 {
 	float		x;
 	float		y;
+	int			dir;
 	int			nb;
 	char		view;
 }				t_player;
@@ -91,7 +92,8 @@ typedef struct	s_win
 	int		endian;
 	int		w;
 	int		h;
-	int		key_press;
+	int		key_pressv;
+	int		key_pressh;
 }				t_win;
 // IMAGE
 typedef struct	s_img
@@ -117,6 +119,7 @@ void	ft_err(int err);
 void	skip_space_eol(char *s);
 int		iscardino(t_data *data, char *s, int nb);
 void	my_pixel_put(t_g *g, int x, int y, int color);
+int		is_wall(t_g g);
 
 // windows.c
 void	new_win(t_g *tg);
