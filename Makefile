@@ -28,11 +28,11 @@ VPATH		= ${OBJS1}
 
 FILES_P		= ft_read_file.c ft_init_struct.c
 
-FILES_R		= ft_ray.c
+FILES_R		= raycasting.c
 
 FILES_E		= test.c ft_error.c
 
-FILES_W		= ft_windows.c key_event_move.c minimap.c
+FILES_W		= ft_windows.c key_event_move.c minimap.c move.c
 
 FILES_M		= cub3d.c main.c ft_utils.c 
 

@@ -70,8 +70,25 @@ int	ft_print_map(t_g g)
 	return (0);
 }
 
+void	ft_print_img(t_g g)
+{
+	printf("*-----------------------------------------------*\n");
+	printf("| --------------  IMAGES  --------------------- |\n");
+	printf("*-----------------------------------------------*\n");
+	printf("| ROAD =>NO => %-33s|\n", g.img_c.no.road);
+	printf("| ROAD =>SO => %-33s|\n", g.img_c.so.road);
+	printf("| ROAD =>EA => %-33s|\n", g.img_c.ea.road);
+	printf("| ROAD =>WE => %-33s|\n", g.img_c.we.road);
+	printf("| IMG_C=>NO => %-33p|\n", g.img_c.no.img);
+	printf("| IMG_C=>SO => %-33p|\n", g.img_c.so.img);
+	printf("| IMG_C=>EA => %-33p|\n", g.img_c.ea.img);
+	printf("| IMG_C=>WE => %-33p|\n", g.img_c.we.img);
+	printf("*-----------------------------------------------*\n");
+}
+
 void	test(t_g g)
 {
 	ft_print_struct_p(g);
 	ft_print_player(g);
+	ft_print_img(g);
 }

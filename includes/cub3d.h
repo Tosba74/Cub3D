@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/17 15:36:18 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 18:10:19 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,25 @@ typedef struct	s_win
 	int		key_pressv;
 	int		key_pressh;
 }				t_win;
+
+// VECTOR
+typedef struct	s_vector 
+{
+	float x;
+	float y;
+}				s_vector;
+
+// MOVE
+typedef struct	s_mov
+{
+	int		rot_left;
+	int		rot_right;
+	int		mov_up;
+	int		mov_down;
+	int		mov_left;
+	int		mov_right;
+}				t_mov;
+
 // IMAGE
 typedef struct	s_img
 {
@@ -103,6 +122,14 @@ typedef struct	s_img
 	
 }				t_img;
 
+//TEXTURES
+typedef	struct		s_texture
+{
+	t_img	no;
+	t_img	so;
+	t_img	ea;
+	t_img	we;
+}				t_texture;
 //ALL
 typedef struct	s_global
 {
@@ -110,6 +137,8 @@ typedef struct	s_global
 	t_map		map;
 	t_player	player;
 	t_win		win;
+	t_texture	img_c;
+	t_mov		mov;
 }				t_g;
 
 // ft_error.c
@@ -119,10 +148,16 @@ void	ft_err(int err);
 void	skip_space_eol(char *s);
 int		iscardino(t_data *data, char *s, int nb);
 void	my_pixel_put(t_g *g, int x, int y, int color);
-int		is_wall(t_g g);
+int		is_wall(t_g g, int x, int y);
 
 // windows.c
 void	new_win(t_g *tg);
+void	close_window(t_g *g);
+// move.c
+
+void	mov_updown(t_g *g, int neg);
+void	mov_lateral(t_g *g, int neg);
+void	rot_view(t_g *g, int neg);
 
 // test.c
 void	ft_print_struct_p(t_g g);
@@ -140,7 +175,6 @@ int     death_key(int key, void *param);
 int		minimap(t_g *g);
 
 // ft_init_struct.c
-// void	ft_init_struct_all(t_param *param, t_map *map, t_player *player);
 void	ft_init_global(t_g *global);
 
 // ft_read_map.c

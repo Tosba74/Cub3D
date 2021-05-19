@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:28:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/12 00:39:43 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 18:20:22 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static void print_carrev(t_g *g, int x, int y, int color)
 	}
 }
 
-// static void print_view(t_g *g, int x, int y, int color)
-// {
-// 	int i;
+static void print_view(t_g *g, int x, int y, int color)
+{
+	int i;
 
-// 	i = 0;
-// 	while (i != 20)
-// 		my_pixel_put(g, x, y + i++, color);
-// }
+	i = 0;
+	while (i != 20)
+		my_pixel_put(g, x, y + i++, color);
+}
 
 static void print_player(t_g *g, int x, int y, int color)
 {
@@ -68,7 +68,7 @@ static void print_player(t_g *g, int x, int y, int color)
 		while(++w != 6)
 			my_pixel_put(g, x + w, y + h, color);
 	}
-	// print_view(g, x + (w / 2), y + (h / 2), color);
+	print_view(g, x + (w / 2), y + (h / 2), color);
 }
 
 int	minimap(t_g *g)

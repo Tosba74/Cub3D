@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:55:10 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/18 15:00:14 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/18 11:22:04 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,19 @@ int     deal_key(int key, void *param)
 	}
 	else if (key == KEY_LEFT || key == KEY_A)
 	{
-		g->mov.mov_left = 1;
+		g->win.key_pressv |= MOV_LEFT;
 	}
 	else if (key == KEY_RIGHT || key == KEY_D)
 	{
-		g->mov.mov_right = 1;
+		g->win.key_pressv |= MOV_RIGHT;
 	}
 	else if (key == KEY_UP || key == KEY_W)
 	{
-		g->mov.mov_up = 1;
+		g->win.key_pressh |= MOV_UP;
 	}
 	else if (key == KEY_DOWN || key == KEY_S)
 	{
-		g->mov.mov_down = 1;
-	}
-	else if (key == KEY_Q)
-	{
-		g->mov.rot_left = 1;
-	}
-	else if (key == KEY_E)
-	{
-		g->mov.rot_right = 1;
+		g->win.key_pressh |= MOV_DOWN;
 	}
 	return (0);
 }
@@ -69,43 +61,59 @@ int	death_key(int key, void *param)
 	}
 	else if (key == KEY_LEFT || key == KEY_A)
 	{
-		g->mov.mov_left = 0;
+		g->win.key_pressv &= ~MOV_LEFT;
 	}
 	else if (key == KEY_RIGHT || key == KEY_D)
 	{
-		g->mov.mov_right = 0;
+		g->win.key_pressv &= ~MOV_RIGHT;
 	}
 	else if (key == KEY_UP || key == KEY_W)
 	{
-		g->mov.mov_up = 0;
+		g->win.key_pressh &= ~MOV_UP;
 	}
 	else if (key == KEY_DOWN || key == KEY_S)
 	{
-		g->mov.mov_down = 0;
-	}
-	else if (key == KEY_Q)
-	{
-		g->mov.rot_left = 0;
-	}
-	else if (key == KEY_E)
-	{
-		g->mov.rot_right = 0;
+		g->win.key_pressh &= ~MOV_DOWN;
 	}
 	return (0);
 }
 
+// void	move(t_g *g)
+// {
+// 	float	dx;
+// 	float	dy;
+// 	char	mov;
+
+// 	dx = 0;
+// 	dy = 0;
+// 	mov = 0;
+// 	if (g->win.key_pressv == MOV_LEFT)
+// 		g->player.x += -SPEED;
+// 	else if (g->win.key_pressv == MOV_RIGHT)
+// 		g->player.x *= SPEED;
+// 	if (g->win.key_pressh == MOV_DOWN)
+// 		g->player.y *= SPEED;
+// 	else if (g->win.key_pressh == MOV_UP)
+// 		g->player.y *= -SPEED;
+// }
+	
+	
+// 	printf("dx == %f\n", dx);
+// 	printf("dy == %f\n", dy);
+// 	g->player.x += dx;
+// 	g->player.y += dy;
+// 	printf("x == %f\n", g->player.x);
+// 	printf("y == %f\n", g->player.y);
+// }
+
 void	move(t_g *g)
 {
-	if (g->mov.mov_up == 1) 
-		mov_updown(g, -1);
-	if (g->mov.mov_down == 1) 
-		mov_updown(g, 1);
-	if (g->mov.mov_right == 1)
-		mov_lateral(g, 1);
-	if (g->mov.mov_left == 1)
-		mov_lateral(g, -1);
-	if (g->mov.rot_right == 1)
-		rot_view(g, 1);
-	if (g->mov.rot_left == 1)
-		rot_view(g, -1);
+	if (g->win.key_pressh == MOV_UP && !is_wall(*g))
+		g->player.y -= SPEED;
+	if (g->win.key_pressh == MOV_DOWN && !is_wall(*g))
+		g->player.y += SPEED;
+	if (g->win.key_pressv == MOV_LEFT && !is_wall(*g))
+		g->player.x -= SPEED;
+	if (g->win.key_pressv == MOV_RIGHT && !is_wall(*g))
+		g->player.x += SPEED;
 }

@@ -31,31 +31,17 @@ static void cmpbytes(void)
 	// ft_putbytes(MOV_W|MOV_S);
 	// ft_putchar('\n');
 }
-
-static int	key_deal(int key, void *param)
-{
-	t_g *g = param;
-	if (key == KEY_S || key == KEY_W || key == KEY_DOWN || key == KEY_UP)
-		g->win.img = mlx_xpm_file_to_image(g->win.mlx_ptr, g->data.cardino[0][0], &(g->data.w), &(g->data.h));
-	if (key == KEY_A || key == KEY_D || key == KEY_LEFT || key == KEY_RIGHT)
-		g->win.img = mlx_xpm_file_to_image(g->win.mlx_ptr, g->data.cardino[1][0], &(g->data.w)+64, &(g->data.h)+64);
-	// mlx_loop_hook(g->win.mlx_ptr, key_deal, g);
-	return (0);
-}
-
-static void	proc_win(t_g *g)
-{
-	g->win.mlx_ptr = mlx_init();
-	g->win.win_ptr = mlx_new_window(g->win.mlx_ptr, g->data.w, g->data.h, "42");
-	mlx_key_hook(g->win.win_ptr, key_deal, &(g));
-	mlx_loop_hook(g->win.mlx_ptr, key_deal, g);
-	// g->win.img = mlx_xpm_file_to_image(g->win.mlx_ptr, g->data.cardino[0][0], &(g->data.w), &(g->data.h));
-	// g->win.img += mlx_xpm_file_to_image(g->win.mlx_ptr, g->data.cardino[1][0], &(g->data.w)+64, &(g->data.h)+64);
-	g->win.addr = (int *)mlx_get_data_addr(g->win.img, &(g->win.bpp), &(g->win.line_length), &(g->win.endian));
-	mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, 64, 64);
-	mlx_loop(g->win.mlx_ptr);
-}
 */
+
+void	close_window(t_g *g)
+{
+	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
+	mlx_destroy_window(g->win.mlx_ptr, g->win.win_ptr);
+	ft_err(19);
+	// ft_putstr("FINISH !!!\n");
+	// wrdestroy();
+	// exit(1);
+}
 
 static void	clear_window(t_g *g)
 {
@@ -76,9 +62,9 @@ static int	update(void *param)
 	t_g *g = param;
 
 	clear_window(g);
+	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
+	move(g);
 	minimap(g);
-	if (is_wall(*g))
-		move(g);
 	mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, g->win.w, g->win.h);
 	return (0);
 }
