@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/21 17:27:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 18:08:14 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx/mlx.h"
 
-
 // PARSCING
 typedef	struct	s_data
 {
@@ -72,18 +71,16 @@ typedef struct	s_map
 
 typedef struct	s_player
 {
+	char		view;
 	float		x;
 	float		y;
-	int			dir;
-	int			nb;
-	char		view;
-
 	float		dirX;
 	float		dirY;
-
 	float		planeX;
 	float		planeY;
 	int			side;
+	int			dir;
+	int			nb;
 }				t_player;
 
 
@@ -188,9 +185,6 @@ int		is_wall(t_g g, int x, int y);
 void	new_win(t_g *tg);
 void	close_window(t_g *g);
 
-// inti_texture.c
-void	get_texture(t_g *g);
-
 // move.c
 void	mov_updown(t_g *g, int neg);
 void	mov_lateral(t_g *g, int neg);
@@ -212,7 +206,11 @@ int     death_key(int key, void *param);
 // minimap
 int		minimap(t_g *g);
 
+// inti_texture.c
+void	get_texture(t_g *g);
+
 // ft_init_struct.c
+void	ft_init_player(t_player *player);
 void	ft_init_global(t_g *global);
 
 // ft_read_map.c

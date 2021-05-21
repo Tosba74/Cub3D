@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/21 17:16:51 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 18:12:53 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,18 @@ int	iscardino(t_data *data, char *s, int nb)
 	return (-1);
 }
 
-// void	my_pixel_put(t_g *g, int x, int y, int color)
-// {
-// 	//mlx_pixel_put(g->win.mlx_ptr, g->win.win_ptr, x, y, color);
-// 	g->win.addr[(y * g->win.w) + x] = color;
-// }
-// void	my_pixel_put(t_g *g, int x, int y, int color)
-// {
-// 	int	*dst;
-
-// 	*dst = (int*)g->win.addr + (y * g->win.line_length + x * (g->win.bpp / 8));
-// 	*dst = color;
-// }
-
 void	my_pixel_put(t_win *win, int x, int y, int color)
 {
 	char	*dst;
-	// printf("add = %p, line_len = %d, bpp = %d\n", win->addr, win->line_length, win->bpp);
-	// // exit(1);
-	// win->addr[(y * win->w) + x] = color;
-	dst = (char*)win->addr + (y * win->line_length + x * (win->bpp / 8));
-	*(unsigned int*)dst = color;
+
+	dst = (char *)win->addr + (y * win->line_length + x * (win->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
-
-int		is_wall(t_g g, int x, int y)
+int	is_wall(t_g g, int x, int y)
 {
 	if (g.map.map[x][y] == '0')
-		return(0);
+		return (0);
 	else
 		return (1);
 }
-
