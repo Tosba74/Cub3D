@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/18 18:10:19 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 18:00:36 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct	s_win
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img;
-	char	*addr;
+	int	*addr;
 	int		bpp;
 	int		line_length;
 	int		endian;
@@ -101,7 +101,7 @@ typedef struct	s_vector
 {
 	float x;
 	float y;
-}				s_vector;
+}				t_vector;
 
 // MOVE
 typedef struct	s_mov
@@ -129,6 +129,8 @@ typedef	struct		s_texture
 	t_img	so;
 	t_img	ea;
 	t_img	we;
+	int		floor;
+	int		ceiling;
 }				t_texture;
 //ALL
 typedef struct	s_global
@@ -153,8 +155,11 @@ int		is_wall(t_g g, int x, int y);
 // windows.c
 void	new_win(t_g *tg);
 void	close_window(t_g *g);
-// move.c
 
+// inti_texture.c
+void	get_texture(t_g *g);
+
+// move.c
 void	mov_updown(t_g *g, int neg);
 void	mov_lateral(t_g *g, int neg);
 void	rot_view(t_g *g, int neg);
@@ -164,6 +169,7 @@ void	ft_print_struct_p(t_g g);
 int		ft_print_map(t_g g);
 void	ft_print_struct_p(t_g g);
 void	ft_print_player(t_g g);
+void	ft_print_img(t_g g);
 void	test(t_g g);
 
 // key_event_move.c

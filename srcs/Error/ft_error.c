@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 22:46:46 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/11 13:56:03 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 17:46:06 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static char	*msg_err(int i)
 	tab[2] = "There are problem while opening .cub file\n";
 	tab[3] = "Incorrect Resolution\n";
 	tab[4] = "Resolution Too Many Argument\n";
-	tab[5] = "Texture's files must be to \".xpm\"\n";
-	tab[5] = "";
-	tab[6] = "";
+	tab[5] = "Texture's files incorrect\n";
+	tab[6] = "Color incorrect\n";
 	tab[7] = "";
 	tab[8] = "";
 	tab[9] = "";

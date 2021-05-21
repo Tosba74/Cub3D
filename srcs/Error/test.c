@@ -83,6 +83,8 @@ void	ft_print_img(t_g g)
 	printf("| IMG_C=>SO => %-33p|\n", g.img_c.so.img);
 	printf("| IMG_C=>EA => %-33p|\n", g.img_c.ea.img);
 	printf("| IMG_C=>WE => %-33p|\n", g.img_c.we.img);
+	printf("| COLORFLOOR=> %-33d|\n", g.img_c.floor);
+	printf("| COLORCEIL => %-33d|\n", g.img_c.ceiling);
 	printf("*-----------------------------------------------*\n");
 }
 

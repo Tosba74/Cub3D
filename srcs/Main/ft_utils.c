@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/18 14:51:32 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/20 17:56:33 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ void	my_pixel_put(t_g *g, int x, int y, int color)
 	mlx_pixel_put(g->win.mlx_ptr, g->win.win_ptr, x, y, color);
 	// g->win.addr[(y * g->win.w) + x] = color;
 }
+// void	my_pixel_put(t_g *g, int x, int y, int color)
+// {
+// 	int	*dst;
+
+// 	*dst = (int*)g->win.addr + (y * g->win.line_length + x * (g->win.bpp / 8));
+// 	*dst = color;
+// }
 
 int		is_wall(t_g g, int x, int y)
 {

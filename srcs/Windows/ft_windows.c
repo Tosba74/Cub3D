@@ -43,25 +43,25 @@ void	close_window(t_g *g)
 	// exit(1);
 }
 
-static void	clear_window(t_g *g)
-{
-	int x;
-	int y;
-	x = -1;
-	y = -1;
-	while(++y < g->win.h)
-	{
-		x = -1;
-		while (++x < g->win.w)
-			my_pixel_put(g, x, y, 0x00000000);
-	}
-}
+// static void	clear_window(t_g *g)
+// {
+// 	int x;
+// 	int y;
+// 	x = -1;
+// 	y = -1;
+// 	while(++y < g->win.h)
+// 	{
+// 		x = -1;
+// 		while (++x < g->win.w)
+// 			my_pixel_put(g, x, y, 0x00000000);
+// 	}
+// }
 
 static int	update(void *param)
 {
 	t_g *g = param;
 
-	clear_window(g);
+	// clear_window(g);
 	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
 	move(g);
 	minimap(g);
@@ -73,8 +73,9 @@ static void	proc_win(t_g *g)
 {
 	g->win.mlx_ptr = mlx_init();
 	g->win.win_ptr = mlx_new_window(g->win.mlx_ptr, g->win.w, g->win.h, "42");
+	get_texture(g);
 	g->win.img = mlx_new_image(g->win.mlx_ptr, g->win.w ,g->win.h);
-	g->win.addr = mlx_get_data_addr(g->win.img, &(g->win.bpp), &(g->win.line_length), &(g->win.endian));
+	g->win.addr = (int *)mlx_get_data_addr(g->win.img, &(g->win.bpp), &(g->win.line_length), &(g->win.endian));
 	// int ret = mlx_get_screen_size(g->win.mlx_ptr, &(g->data.w), &(g->data.h));
 	// printf("ret => %d\n",ret);
 	mlx_do_key_autorepeatoff(g->win.mlx_ptr);
