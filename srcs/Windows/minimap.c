@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:28:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/19 21:09:19 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 17:18:24 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void print_carre(t_g *g, int x, int y, int color)
 		while(++w != 10)
 		{
 			if (w == 0 || w == 9 || h == 0 || h == 9)
-				my_pixel_put(g, x + w, y + h, 900000);
+				my_pixel_put(&g->win, x + w, y + h, 900000);
 			else
-				my_pixel_put(g, x + w, y + h, color);
+				my_pixel_put(&g->win, x + w, y + h, color);
 		}
 	}
 }
@@ -43,7 +43,7 @@ static void print_carrev(t_g *g, int x, int y, int color)
 		w = -1;
 		while(++w != 10)
 			if (w == 0 || w == 9 || h == 0 || h == 9)
-				my_pixel_put(g, x + w, y + h, color);
+				my_pixel_put(&g->win, x + w, y + h, color);
 	}
 }
 
@@ -53,7 +53,7 @@ static void print_view(t_g *g, int x, int y, int color)
 
 	i = 0;
 	while (i != 20)
-		my_pixel_put(g, x, y + i++, color);
+		my_pixel_put(&g->win, x, y + i++, color);
 }
 
 static void print_player(t_g *g, int x, int y, int color)
@@ -66,7 +66,7 @@ static void print_player(t_g *g, int x, int y, int color)
 	{
 		w = -1;
 		while(++w != 6)
-			my_pixel_put(g, x + w, y + h, color);
+			my_pixel_put(&g->win, x + w, y + h, color);
 	}
 	print_view(g, x + (w / 2), y + (h / 2), color);
 }
@@ -87,6 +87,7 @@ int	minimap(t_g *g)
 		x = 10;
 		while (g->map.map[t][++i])
 		{
+			printf("i = %d\n", i);
 			if (g->map.map[t][i] == '1')
 				print_carre(g, x, y, 5197647);
 			else if (g->map.map[t][i] == '0')

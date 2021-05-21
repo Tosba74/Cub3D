@@ -157,6 +157,38 @@ static void	ft_complet_data(t_g *g, char *line)
 	wrfree(tab);
 }
 
+static void ft_init_player(t_player *player)
+{
+	if (player->view == 'N')
+	{
+		player->dirX = 0;
+		player->dirY = -1;
+		player->planeX = 0.66;
+		player->planeY = 0;
+	}
+	else if (player->view == 'S')
+	{
+		player->dirX = 0;
+		player->dirY = 1;
+		player->planeX = -0.66;
+		player->planeY = 0;
+	}
+	else if (player->view == 'E')
+	{
+		player->dirX = 1;
+		player->dirY = 0;
+		player->planeX = 0;
+		player->planeY = 0.66;
+	}
+	else if (player->view == 'W')
+	{
+		player->dirX = -1;
+		player->dirY = 0;
+		player->planeX = 0;
+		player->planeY = -0.66;
+	}
+}
+
 static void	ft_complet_map(t_g *g, char *line)
 {
 	int i;
@@ -176,6 +208,7 @@ static void	ft_complet_map(t_g *g, char *line)
 				{	
 					g->player.x = (float)i;
 					g->player.y = (float)g->map.line;
+					ft_init_player(&g->player);
 				}
 				else if (g->player.nb >= 2)
 					ft_err(20);

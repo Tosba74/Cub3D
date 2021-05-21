@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/20 18:00:36 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 17:27:29 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 #define TURN_LEFT 0b00010000
 #define TURN_RIGHT 0b01000000
 
-#define SPEED 0.1
+#define SPEED 0.2
 
 #define X_RES 2560
 #define Y_RES 1440
@@ -77,6 +77,13 @@ typedef struct	s_player
 	int			dir;
 	int			nb;
 	char		view;
+
+	float		dirX;
+	float		dirY;
+
+	float		planeX;
+	float		planeY;
+	int			side;
 }				t_player;
 
 
@@ -86,14 +93,12 @@ typedef struct	s_win
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img;
-	int	*addr;
+	int		*addr;
 	int		bpp;
 	int		line_length;
 	int		endian;
 	int		w;
 	int		h;
-	int		key_pressv;
-	int		key_pressh;
 }				t_win;
 
 // VECTOR
@@ -102,6 +107,32 @@ typedef struct	s_vector
 	float x;
 	float y;
 }				t_vector;
+
+typedef struct	s_rc_var
+{
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+}				t_rc_var;
 
 // MOVE
 typedef struct	s_mov
@@ -147,9 +178,10 @@ typedef struct	s_global
 void	ft_err(int err);
 
 // ft_utils
+double	ft_dda(t_g *g, int x_win, t_rc_var *var);
 void	skip_space_eol(char *s);
 int		iscardino(t_data *data, char *s, int nb);
-void	my_pixel_put(t_g *g, int x, int y, int color);
+void	my_pixel_put(t_win *win, int x, int y, int color);
 int		is_wall(t_g g, int x, int y);
 
 // windows.c

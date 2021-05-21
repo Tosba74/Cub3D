@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 23:36:49 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/20 16:48:02 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 17:02:55 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_init_global(t_g *global)
 		.cardino[0][2] = "WE", .cardino[0][3] = "EA"};
 	map = (t_map){};
 	player = (t_player){};
-	win = (t_win){.bpp = 6, .line_length = 12};
+	win = (t_win){};
 	mov = (t_mov) {};
 	// img_c = (t_texture) {};
 	init_struct_img(&img_c);	
