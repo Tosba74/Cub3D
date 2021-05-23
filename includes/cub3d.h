@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/23 14:04:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/23 17:11:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct	s_win
 	int		endian;
 	int		w;
 	int		h;
+	int		input;
 }				t_win;
 
 // VECTOR

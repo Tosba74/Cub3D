@@ -39,7 +39,7 @@ void	draw_screen(t_g *g)
 	t_rc_var	var;
 
 	x_win = 0;
-	size = (int)(g->win.h / ft_dda(g, x_win, &var));;
+	size = (int)(g->win.h / ft_dda(g, x_win, &var));
 	start = g->win.h / 2 - size / 2;
 	stop = g->win.h / 2 + size / 2;
 	while (x_win < g->win.w)
