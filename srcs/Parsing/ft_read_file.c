@@ -63,22 +63,6 @@ static void	ft_complet_floor(t_g *g, char **tab)
 	wrfree(tab_tmp);
 }
 
-static void	check_reso(t_g *g)
-{
-	if (g->data.w <= 0)
-		ft_err(3);
-	if (g->data.h <= 0)
-		ft_err(3);
-	if (g->data.w > X_RES)
-		g->win.w = X_RES;
-	else
-		g->win.w = g->data.w;
-	if (g->data.h > Y_RES)
-		g->win.h = Y_RES;
-	else
-		g->win.h = g->data.h;
-}
-
 static void	get_resolution(t_g *g, char **tab)
 {
 	int i;
@@ -90,11 +74,13 @@ static void	get_resolution(t_g *g, char **tab)
 		g->data.w = ft_atoi(tab[i]);
 		g->data.h = ft_atoi(tab[i + 1]);
 	}
-	else if (ft_strslen(tab) < 3)
+	else if (ft_strslen(tab) < 3
+		|| g->data.w <= 0 || g->data.h <= 0)
 		ft_err(3);
 	else if (ft_strslen(tab) > 3)
 		ft_err(4);
-	check_reso(g);
+		g->win.w = g->data.w;
+		g->win.h = g->data.h;
 }
 
 static char	*get_road(char *line)

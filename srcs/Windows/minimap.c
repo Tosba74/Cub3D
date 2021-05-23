@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:28:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/21 17:18:24 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/22 21:37:03 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	minimap(t_g *g)
 		x = 10;
 		while (g->map.map[t][++i])
 		{
-			printf("i = %d\n", i);
 			if (g->map.map[t][i] == '1')
 				print_carre(g, x, y, 5197647);
 			else if (g->map.map[t][i] == '0')
