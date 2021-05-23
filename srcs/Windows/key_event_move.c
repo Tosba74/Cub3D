@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:55:10 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/23 17:41:45 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/23 18:42:20 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,27 @@ int			key_death(int key, void *param)
 	else
 		return (0);
 	return (1);
+}
+
+void    move(t_g *g)
+{
+    char mov;
+    char movx;
+    char movy;
+
+    mov = 0;
+    movx = mov & (MOV_LEFT | MOV_RIGHT);
+    movy = mov & (MOV_DOWN | MOV_UP);
+	if (g->mov.mov_up == 1) 
+		mov_updown(g, -1);
+	if (g->mov.mov_down == 1) 
+		mov_updown(g, 1);
+	if (g->mov.mov_right == 1)
+		mov_lateral(g, 1);
+	if (g->mov.mov_left == 1)
+		mov_lateral(g, -1);
+	if (g->mov.rot_right == 1)
+		rot_view(g, 1);
+	if (g->mov.rot_left == 1)
+		rot_view(g, -1);
 }
