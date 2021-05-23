@@ -1,38 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   mlx_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/21 18:12:53 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/05/23 13:58:35 by bmangin           #+#    #+#             */
+/*   Updated: 2021/05/23 14:37:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	skip_space_eol(char *s)
-{
-	int	len;
-
-	len = 0;
-	if (s)
-		len = ft_strlen(s);
-	while (s[--len] == ' ')
-		s[len] = 0;
-}
-
-int	iscardino(t_data *data, char *s, int nb)
-{
-	int		i;
-
-	i = -1;
-	while (++i < 4 && data->cardino[0][i])
-		if (!ft_strncmp(s, data->cardino[0][i], nb))
-			return (i);
-	return (-1);
-}
 
 void	my_pixel_put(t_win *win, int x, int y, int color)
 {
@@ -42,10 +20,26 @@ void	my_pixel_put(t_win *win, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	is_wall(t_g g, int x, int y)
+void clear_window(t_g *g)
 {
-	if (g.map.map[x][y] == '0')
-		return (0);
-	else
-		return (1);
+    int x;
+    int y;
+
+    x = -1;
+    y = -1;
+	while (++y < g->win.h)
+	{
+		x = -1;
+		while (++x < g->win.w)
+			my_pixel_put(&g->win, x, y, 0x00000000);
+	}
+}
+
+void	draw_col(t_g *g, int x, int start, int stop, int color)
+{
+	while (start < stop)
+	{
+		my_pixel_put(&g->win, x, start, color);
+		start++;
+	}
 }

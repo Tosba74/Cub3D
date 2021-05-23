@@ -106,7 +106,7 @@ static char	*get_road(char *line)
 	return (s);
 }
 
-static void	ft_complet_data(t_g *g, char *line)
+void	ft_complet_data(t_g *g, char *line)
 {
 	char	**tab;
 	int		ret;
@@ -143,7 +143,7 @@ static void	ft_complet_data(t_g *g, char *line)
 	wrfree(tab);
 }
 
-static void	ft_complet_map(t_g *g, char *line)
+void	ft_complet_map(t_g *g, char *line)
 {
 	int i;
 
@@ -175,22 +175,4 @@ static void	ft_complet_map(t_g *g, char *line)
 	printf("%s\n", line);
 	g->map.map = ft_strsjoin(g->map.map, line);
 	g->map.line++;
-}
-
-int	ft_read_file(int fd, t_g *g)
-{
-	char	*line;
-
-	line = NULL;
-	if (fd < 0)
-		ft_err(2);
-	while (get_next_line(fd, &line))
-	{
-		skip_space_eol(line);
-		if (ft_isalpha(line[0]))
-			ft_complet_data(g, line);
-		else if (ft_isdigit(line[0]) || line[0] == ' ')
-			ft_complet_map(g, line);
-	}
-	return (0);
 }

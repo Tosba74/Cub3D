@@ -30,29 +30,6 @@ void	close_window(t_g *g)
 	// exit(1);
 }
 
-// static void	clear_window(t_g *g)
-// {
-// 	int x;
-// 	int y;
-// 	x = -1;
-// 	y = -1;
-// 	while(++y < g->win.h)
-// 	{
-// 		x = -1;
-// 		while (++x < g->win.w)
-// 			my_pixel_put(&g->win, x, y, 0x00000000);
-// 	}
-// }
-
-void	draw_col(t_g *g, int x, int start, int stop, int color)
-{
-	while (start < stop)
-	{
-		my_pixel_put(&g->win, x, start, color);
-		start++;
-	}
-}
-
 void	draw_screen(t_g *g)
 {
 	int			x_win;
@@ -79,7 +56,6 @@ static int	update(void *param)
 {
 	t_g *g = param;
 
-	// clear_window(g);
 	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
 	move(g);
 	draw_screen(g);

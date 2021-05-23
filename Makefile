@@ -34,7 +34,7 @@ FILES_E		= test.c ft_error.c
 
 FILES_W		= ft_windows.c key_event_move.c minimap.c move.c init_texture.c
 
-FILES_M		= cub3d.c main.c ft_utils.c 
+FILES_M		= cub3d.c main.c tools.c mlx_tools.c
 
 FILES		= ${addprefix Parsing/, ${FILES_P}} \
 			${addprefix Raycasting/, ${FILES_R}} \

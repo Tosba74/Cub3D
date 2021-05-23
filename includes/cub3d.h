@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/22 21:47:16 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/23 14:04:56 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,12 +174,16 @@ typedef struct	s_global
 // ft_error.c
 void	ft_err(int err);
 
-// ft_utils
+// tools.c
 double	ft_dda(t_g *g, int x_win, t_rc_var *var);
 void	skip_space_eol(char *s);
 int		iscardino(t_data *data, char *s, int nb);
-void	my_pixel_put(t_win *win, int x, int y, int color);
 int		is_wall(t_g g, int x, int y);
+
+// mlx_tools.c
+void	my_pixel_put(t_win *win, int x, int y, int color);
+void	clear_window(t_g *g);
+void	draw_col(t_g *g, int x, int start, int stop);
 
 // windows.c
 void	new_win(t_g *g);
@@ -201,7 +205,7 @@ void	test(t_g g);
 // key_event_move.c
 void	move(t_g *g);
 int		deal_key(int key, void *param);
-int     death_key(int key, void *param);
+int		death_key(int key, void *param);
 
 // minimap
 int		minimap(t_g *g);
@@ -214,7 +218,8 @@ void	ft_init_player(t_player *player);
 void	ft_init_global(t_g *global);
 
 // ft_read_map.c
-int		ft_read_file(int fd, t_g *tg);
+void	ft_complet_data(t_g *g, char *line);
+void	ft_complet_map(t_g *g, char *line);
 
 // Cub3d.c
 void	ft_cub(int fd);
