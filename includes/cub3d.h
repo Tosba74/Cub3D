@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/23 20:37:39 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/25 15:32:07 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@
 #define TURN_LEFT 0b00010000
 #define TURN_RIGHT 0b01000000
 
-#define SPEED 0.2
+#define SPEED 0.1
+#define SPEEDTURN 0.5
 
 #define X_RES 2560
 #define Y_RES 1440
@@ -108,24 +109,24 @@ typedef struct	s_vector
 
 typedef struct	s_rc_var
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	float	posX;
+	float	posY;
+	float	dirX;
+	float	dirY;
+	float	planeX;
+	float	planeY;
 
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
+	float	cameraX;
+	float	rayDirX;
+	float	rayDirY;
 
 	int		mapX;
 	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
+	float	sideDistX;
+	float	sideDistY;
+	float	deltaDistX;
+	float	deltaDistY;
+	float	perpWallDist;
 	int		stepX;
 	int		stepY;
 	int		hit;
@@ -176,7 +177,7 @@ typedef struct	s_global
 void	ft_err(int err);
 
 // tools.c
-double	ft_dda(t_g *g, int x_win, t_rc_var *var);
+float	ft_dda(t_g *g, int x_win, t_rc_var *var);
 void	skip_space_eol(char *s);
 int		iscardino(t_data *data, char *s, int nb);
 int		is_wall(t_g g, int x, int y);

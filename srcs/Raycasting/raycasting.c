@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 17:19:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/21 16:46:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/25 15:41:05 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static double	ft_dist(t_rc_var *v)
 	return (v->perpWallDist);
 }
 
-double			ft_dda(t_g *g, int x_win, t_rc_var *var)
+float			ft_dda(t_g *g, int x_win, t_rc_var *var)
 {
 	init_rc_var(var, g, x_win);
 	while (var->hit == 0)

@@ -75,9 +75,9 @@ static void	mlx_proc_win(t_g *g)
 	ymax = 0;
 	mlx_get_screen_size(g->win.mlx_ptr, &xmax, &ymax);
 	printf("xmax => %d | ymax = =%d\n", xmax, ymax);
-	if (g->data.w > xmax || g->data.w < 500)
+	if (g->data.w > xmax)
 		g->win.w = xmax;
-	if (g->data.h > ymax || g->data.h < 500)
+	if (g->data.h > ymax)
 		g->win.h = ymax;
 	g->win.win_ptr = mlx_new_window(g->win.mlx_ptr, g->win.w, g->win.h, "Cub3d");
 	g->win.img = mlx_new_image(g->win.mlx_ptr, g->win.w ,g->win.h);
