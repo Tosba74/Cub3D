@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:55:10 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/24 11:12:18 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/25 13:35:21 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			key_deal(int key, void *param)
 int			key_death(int key, void *param)
 {
 	t_g	*g;
-	
+
 	g = param;
 	if (key == KEY_ESC)
 		close_window(g);	
@@ -62,22 +62,22 @@ int			key_death(int key, void *param)
 
 void    move(t_g *g)
 {
-    char mov;
-    char movx;
-    char movy;
+	char mov;
+	char movx;
+	char movy;
 	char rot;
 
-    mov = g->win.input;
-    movx = mov & (MOV_LEFT | MOV_RIGHT);
-    movy = mov & (MOV_DOWN | MOV_UP);
+	mov = g->win.input;
+	movx = mov & (MOV_LEFT | MOV_RIGHT);
+	movy = mov & (MOV_DOWN | MOV_UP);
 	rot = mov & (TURN_LEFT | TURN_RIGHT);
 	if (movx == MOV_RIGHT)
-		mov_lateral(g, 1);
-	else if (movx == MOV_LEFT)
-		mov_lateral(g, -1);
-	if (movy == MOV_DOWN) 
 		mov_updown(g, 1);
-	if (movy == MOV_UP) 
+	else if (movx == MOV_LEFT)
+		mov_updown(g, -1);
+	if (movy == MOV_DOWN)
+		mov_updown(g, 1);
+	else if (movy == MOV_UP)
 		mov_updown(g, -1);
 	if (rot == TURN_RIGHT)
 		rot_view(g, 1);
