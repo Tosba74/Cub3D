@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/23 17:11:09 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/23 20:37:39 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ int		is_wall(t_g g, int x, int y);
 // mlx_tools.c
 void	my_pixel_put(t_win *win, int x, int y, int color);
 void	clear_window(t_g *g);
-void	draw_col(t_g *g, int x, int start, int stop);
+void	draw_col(t_g *g, int x, int start, int stop, int color);
 
 // windows.c
 void	new_win(t_g *g);
@@ -205,8 +205,8 @@ void	test(t_g g);
 
 // key_event_move.c
 void	move(t_g *g);
-int		deal_key(int key, void *param);
-int		death_key(int key, void *param);
+int		key_deal(int key, void *param);
+int		key_death(int key, void *param);
 
 // minimap
 int		minimap(t_g *g);

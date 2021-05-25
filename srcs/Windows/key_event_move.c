@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:55:10 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/23 18:42:20 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/24 11:12:18 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,22 @@ void    move(t_g *g)
     char mov;
     char movx;
     char movy;
+	char rot;
 
-    mov = 0;
+    mov = g->win.input;
     movx = mov & (MOV_LEFT | MOV_RIGHT);
     movy = mov & (MOV_DOWN | MOV_UP);
-	if (g->mov.mov_up == 1) 
-		mov_updown(g, -1);
-	if (g->mov.mov_down == 1) 
-		mov_updown(g, 1);
-	if (g->mov.mov_right == 1)
+	rot = mov & (TURN_LEFT | TURN_RIGHT);
+	if (movx == MOV_RIGHT)
 		mov_lateral(g, 1);
-	if (g->mov.mov_left == 1)
+	else if (movx == MOV_LEFT)
 		mov_lateral(g, -1);
-	if (g->mov.rot_right == 1)
+	if (movy == MOV_DOWN) 
+		mov_updown(g, 1);
+	if (movy == MOV_UP) 
+		mov_updown(g, -1);
+	if (rot == TURN_RIGHT)
 		rot_view(g, 1);
-	if (g->mov.rot_left == 1)
+	else if (rot == TURN_LEFT)
 		rot_view(g, -1);
 }

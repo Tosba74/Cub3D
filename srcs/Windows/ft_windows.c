@@ -75,9 +75,9 @@ static void	mlx_proc_win(t_g *g)
 	ymax = 0;
 	mlx_get_screen_size(g->win.mlx_ptr, &xmax, &ymax);
 	printf("xmax => %d | ymax = =%d\n", xmax, ymax);
-	if (g->data.w > xmax)
+	if (g->data.w > xmax || g->data.w < 500)
 		g->win.w = xmax;
-	if (g->data.h > ymax)
+	if (g->data.h > ymax || g->data.h < 500)
 		g->win.h = ymax;
 	g->win.win_ptr = mlx_new_window(g->win.mlx_ptr, g->win.w, g->win.h, "Cub3d");
 	g->win.img = mlx_new_image(g->win.mlx_ptr, g->win.w ,g->win.h);
@@ -91,8 +91,8 @@ void	new_win(t_g *g)
 	g->win.mlx_ptr = mlx_init();
 	mlx_proc_win(g);
 	mlx_do_key_autorepeatoff(g->win.mlx_ptr);
-	mlx_hook(g->win.win_ptr, 02, KeyPressMask, deal_key, g);
-	mlx_hook(g->win.win_ptr, 03, KeyReleaseMask, death_key, g);
+	mlx_hook(g->win.win_ptr, 02, KeyPressMask, key_deal, g);
+	mlx_hook(g->win.win_ptr, 03, KeyReleaseMask, key_death, g);
 	mlx_loop_hook(g->win.mlx_ptr, update, g);
 	mlx_loop(g->win.mlx_ptr);
 }
