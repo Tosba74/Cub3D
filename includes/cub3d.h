@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/25 15:32:07 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 16:53:45 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 #define TURN_RIGHT 0b01000000
 
 #define SPEED 0.1
-#define SPEEDTURN 0.5
+#define SPEEDTURN 0.07535
 
 #define X_RES 2560
 #define Y_RES 1440
@@ -226,4 +226,5 @@ void	ft_complet_map(t_g *g, char *line);
 // Cub3d.c
 void	ft_cub(int fd);
 
+void	draw_line(t_vector p0, t_vector p1, t_g *g, int rgb);
 #endif

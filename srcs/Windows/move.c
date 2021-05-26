@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:35:27 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/25 18:44:11 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 16:39:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,15 @@ void	rot_view(t_g *g, int neg)
 {
 	float	dirX;
 	float	dirY;
-
+	float	planeX;
+	
 	dirX = g->player.dirX;
 	dirY = g->player.dirY;
 	g->player.dirX = dirX * cos(neg * SPEEDTURN) - dirY * sin(neg * SPEEDTURN);
 	g->player.dirY = dirX * sin(neg * SPEEDTURN) + dirY * cos(neg * SPEEDTURN);
-	g->player.planeX = g->player.dirY;
-	g->player.planeY = -1 * g->player.dirX;
+	// g->player.planeX = g->player.dirY;
+	// g->player.planeY = -1 * g->player.dirX;
+	planeX = g->player.planeX;
+	g->player.planeX = planeX * cos(neg * SPEEDTURN) - g->player.planeY * sin(neg * SPEEDTURN);
+    g->player.planeY = planeX * sin(neg * SPEEDTURN) + g->player.planeY * cos(neg * SPEEDTURN);
 }

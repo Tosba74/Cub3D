@@ -39,14 +39,21 @@ void	draw_screen(t_g *g)
 	t_rc_var	var;
 
 	x_win = 0;
-	size = (int)(g->win.h / ft_dda(g, x_win, &var));
-	start = g->win.h / 2 - size / 2;
-	stop = g->win.h / 2 + size / 2;
 	while (x_win < g->win.w)
 	{
-		draw_col(g, x_win, 0, start, g->img_c.ceiling);
-		draw_col(g, x_win, start, stop, 0x00FFFF00);
-		draw_col(g, x_win, stop, g->win.h, g->img_c.floor);
+		size = (int)(g->win.h / ft_dda(g, x_win, &var));
+		start = g->win.h / 2 - size / 2;
+		if (start < 0)
+			start = 0;
+		stop = g->win.h / 2 + size / 2;
+		if (stop > g->win.h)
+			stop = g->win.h;
+		draw_col(g, x_win, 0, start, g->data.ceiling);
+		if (g->player.side == 1)
+			draw_col(g, x_win, start, stop, (0x00FFFF00 >> 1) & 8355711);
+		else
+			draw_col(g, x_win, start, stop, 0x00FFFF00);
+		draw_col(g, x_win, stop, g->win.h, g->data.floor);
 		x_win++;
 	}
 	

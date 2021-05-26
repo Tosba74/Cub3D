@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:28:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/25 19:47:28 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 16:55:22 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,21 @@ static void print_carrev(t_g *g, int x, int y, int color)
 
 static void print_view(t_g *g, int x, int y, int color)
 {
-	int i;
+	t_vector player;
+	t_vector dest;
 
-	i = 0;
+	(void)color;
+	player.x = x;
+	player.y = y;
+	dest.x = (int)(player.x + g->player.dirX * SPEED * 200);
+	dest.y = (int)(player.y + g->player.dirY * SPEED * 200);
+	// draw_line(player, dest, g, color);
+	/*
 	while (i != 20)
 	{
 		my_pixel_put(&g->win, x, y + i++, color);
 	}
+	*/
 }
 
 static void print_player(t_g *g, int x, int y, int color)
