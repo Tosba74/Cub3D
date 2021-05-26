@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:35:27 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/25 18:36:36 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/25 18:44:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ void	mov_updown(t_g *g, int neg)
 	float	xpos;
 	float	ypos;
 
-	xpos = g->player.x + (SPEED * neg);
-	ypos = g->player.y + (SPEED * neg);
+	xpos = g->player.x + (SPEED * neg) * g->player.dirX;
+	ypos = g->player.y + (SPEED * neg) * g->player.dirY;
 	if (!is_wall(*g, (int)xpos, (int)ypos))
 	{
 		g->player.x = xpos;
 		g->player.y = ypos;
 	}
 }
+
 
 /*
 void	mov_updown(t_g *g, int neg)

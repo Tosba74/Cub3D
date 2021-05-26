@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:28:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/22 21:37:03 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/25 19:47:28 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ static void print_view(t_g *g, int x, int y, int color)
 
 	i = 0;
 	while (i != 20)
+	{
 		my_pixel_put(&g->win, x, y + i++, color);
+	}
 }
 
 static void print_player(t_g *g, int x, int y, int color)

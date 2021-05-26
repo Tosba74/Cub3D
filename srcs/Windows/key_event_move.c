@@ -19,21 +19,19 @@ int			key_deal(int key, void *param)
 	g = param;
 	if (key == KEY_ESC)
 		close_window(g);	
-	else if (key == KEY_UP)
+	else if (key == KEY_UP || key == KEY_W)
 		g->win.input |= MOV_UP;
-	else if (key == KEY_DOWN)
+	else if (key == KEY_DOWN || key == KEY_S)
 		g->win.input |= MOV_DOWN;
-	else if (key == KEY_LEFT)
+	else if (key == KEY_LEFT || key == KEY_A)
 		g->win.input |= MOV_LEFT;
-	else if (key == KEY_RIGHT)
+	else if (key == KEY_RIGHT || key == KEY_D)
 		g->win.input |= MOV_RIGHT;
 	else if (key == KEY_Q) 
 		g->win.input |= TURN_LEFT;
 	else if (key == KEY_E)
 		g->win.input |= TURN_RIGHT;
-	else
-		return (0);
-	return (1);
+	return (0);
 }
 
 int			key_death(int key, void *param)
@@ -55,9 +53,7 @@ int			key_death(int key, void *param)
 		g->win.input ^= TURN_LEFT;
 	else if (key == KEY_E)
 		g->win.input ^= TURN_RIGHT;
-	else
-		return (0);
-	return (1);
+	return (0);
 }
 
 void    move(t_g *g)
