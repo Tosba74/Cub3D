@@ -68,13 +68,13 @@ void    move(t_g *g)
 	movy = mov & (MOV_DOWN | MOV_UP);
 	rot = mov & (TURN_LEFT | TURN_RIGHT);
 	if (movx == MOV_RIGHT)
-		mov_updown(g, 1);
+		mov_lateral(g, 1);
 	else if (movx == MOV_LEFT)
-		mov_updown(g, -1);
+		mov_lateral(g, -1);
 	if (movy == MOV_DOWN)
-		mov_updown(g, 1);
-	else if (movy == MOV_UP)
 		mov_updown(g, -1);
+	else if (movy == MOV_UP)
+		mov_updown(g, 1);
 	if (rot == TURN_RIGHT)
 		rot_view(g, 1);
 	else if (rot == TURN_LEFT)

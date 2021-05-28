@@ -65,7 +65,7 @@ all :		minitruc crea_b ${NAME}
 
 ${PATH_O}/%.o : ${PATH_S}/%.c	${INC}
 	${CC} ${FLAGS} -I ${PATH_I} -o $@ -c $<
-	printf "\e[?35l${_Y}$< >>> ${_G}$@${_E} \e[0m\r\e[?35h"
+	printf "\e[?35l${_Y}$< >>> ${_G}$@${_E} \e[0m%20s\r" " "
 
 ${NAME}	:	${BIN}
 	${AR} $@ $?

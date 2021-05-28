@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/26 16:53:45 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 15:20:07 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ int		is_wall(t_g g, int x, int y);
 void	my_pixel_put(t_win *win, int x, int y, int color);
 void	clear_window(t_g *g);
 void	draw_col(t_g *g, int x, int start, int stop, int color);
+void	close_window(t_g *g);
 
 // windows.c
 void	new_win(t_g *g);

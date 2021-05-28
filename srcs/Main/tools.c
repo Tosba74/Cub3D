@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/23 14:07:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 14:56:56 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	iscardino(t_data *data, char *s, int nb)
 			return (i);
 	return (-1);
 }
-
 
 int	is_wall(t_g g, int x, int y)
 {

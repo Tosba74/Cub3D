@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 13:58:35 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/23 14:37:47 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 15:19:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,11 @@ void	draw_col(t_g *g, int x, int start, int stop, int color)
 		my_pixel_put(&g->win, x, start, color);
 		start++;
 	}
+}
+
+void	close_window(t_g *g)
+{
+	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
+	mlx_destroy_window(g->win.mlx_ptr, g->win.win_ptr);
+	ft_err(19);
 }
