@@ -6,11 +6,11 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 11:33:03 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/07 18:49:44bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/29 15:04:32 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
 void	draw_screen(t_g *g)
 {
@@ -18,7 +18,7 @@ void	draw_screen(t_g *g)
 	int			start;
 	int			stop;
 	int			size;
-	t_rc_var	var;
+	t_ray		var;
 
 	x_win = 0;
 	while (x_win < g->win.w)
@@ -38,13 +38,13 @@ void	draw_screen(t_g *g)
 		draw_col(g, x_win, stop, g->win.h, g->data.floor);
 		x_win++;
 	}
-	
 }
 
 static int	update(void *param)
 {
-	t_g *g = param;
+	t_g	*g;
 
+	g = param;
 	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
 	move(g);
 	draw_screen(g);
@@ -56,8 +56,8 @@ static int	update(void *param)
 
 static void	mlx_proc_win(t_g *g)
 {
-	int xmax;
-	int ymax;
+	int	xmax;
+	int	ymax;
 
 	xmax = 0;
 	ymax = 0;
@@ -67,9 +67,11 @@ static void	mlx_proc_win(t_g *g)
 		g->win.w = xmax;
 	if (g->data.h > ymax)
 		g->win.h = ymax;
-	g->win.win_ptr = mlx_new_window(g->win.mlx_ptr, g->win.w, g->win.h, "Cub3d");
-	g->win.img = mlx_new_image(g->win.mlx_ptr, g->win.w ,g->win.h);
-	g->win.addr = (int*)mlx_get_data_addr(g->win.img, &(g->win.bpp), &(g->win.line_length), &(g->win.endian));
+	g->win.win_ptr = mlx_new_window(g->win.mlx_ptr, g->win.w, g->win.h,
+			"Cub3d");
+	g->win.img = mlx_new_image(g->win.mlx_ptr, g->win.w, g->win.h);
+	g->win.addr = (int *)mlx_get_data_addr(g->win.img, &(g->win.bpp),
+			&(g->win.line_length), &(g->win.endian));
 }
 
 void	new_win(t_g *g)

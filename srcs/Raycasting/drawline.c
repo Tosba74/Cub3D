@@ -205,3 +205,4 @@ void	draw_line(t_vector p0, t_vector p1, t_g *g, int rgb)
 		}
 	}
 }
+

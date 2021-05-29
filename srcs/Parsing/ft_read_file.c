@@ -65,7 +65,7 @@ static void	ft_complet_floor(t_g *g, char **tab)
 
 static void	get_resolution(t_g *g, char **tab)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	printf("*----------- -- --GET RESOLUTION-- -- ----------*\n");
@@ -74,13 +74,12 @@ static void	get_resolution(t_g *g, char **tab)
 		g->data.w = ft_atoi(tab[i]);
 		g->data.h = ft_atoi(tab[i + 1]);
 	}
-	else if (ft_strslen(tab) < 3
-		|| g->data.w <= 0 || g->data.h <= 0)
+	else if (ft_strslen(tab) < 3)
 		ft_err(3);
 	else if (ft_strslen(tab) > 3)
 		ft_err(4);
-		g->win.w = g->data.w;
-		g->win.h = g->data.h;
+	g->win.w = g->data.w;
+	g->win.h = g->data.h;
 }
 
 static char	*get_road(char *line)
@@ -123,15 +122,13 @@ void	ft_complet_data(t_g *g, char *line)
 		if (ret > -1)
 		{
 			g->data.cardino[1][ret] = get_road(line);
-			printf("*-----------------------------------------------*\n");
-			printf("|%4s|%-42s|\n", g->data.cardino[0][ret], g->data.cardino[1][ret]);
-			printf("*-----------------------------------------------*\n");
+			printf("|%4s|%-42s|\n", g->data.cardino[0][ret],
+				g->data.cardino[1][ret]);
 		}
 		else if (!ft_strcmp(tab[0], "R"))
 		{
 			get_resolution(g, tab);
 			printf("| %s | %19d | %-19d |\n", tab[0], g->data.w, g->data.h);
-			printf("*-----------------------------------------------*\n");
 		}
 		else if (!ft_strcmp(tab[0], "S"))
 			g->data.sprite = ft_strdup((tab[1]));
@@ -159,11 +156,7 @@ void	ft_complet_map(t_g *g, char *line)
 				g->player.view = line[i];
 				g->player.nb++;
 				if (g->player.nb == 1)
-				{	
-					g->player.x = (float)i;
-					g->player.y = (float)g->map.line;
-					ft_init_player(&g->player);
-				}
+					ft_init_player(&g->player, &g->map, (int)i);
 				else if (g->player.nb >= 2)
 					ft_err(20);
 				line[i] = '0';

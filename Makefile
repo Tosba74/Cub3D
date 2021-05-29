@@ -12,12 +12,12 @@
 
 NAME = Cub3d
 
-L_PATH		= libft
-M_PATH		= minilibx
-I_PATH		= includes
-S_PATH		= srcs
-T_PATH		= textures
-B_PATH		= bin
+override L_PATH		:= libft
+override M_PATH		:= minilibx
+override I_PATH		:= includes
+override S_PATH		:= srcs
+override T_PATH		:= textures
+override B_PATH		:= bin
 
 VPATH		= ${OBJS1}
 #Parsing \
@@ -28,13 +28,13 @@ VPATH		= ${OBJS1}
 
 FILES_P		= ft_read_file.c ft_init_struct.c
 
-FILES_R		= raycasting.c
+FILES_R		= raycasting.c drawline.c
 
 FILES_E		= test.c ft_error.c
 
-FILES_W		= ft_windows.c key_event_move.c minimap.c move.c init_texture.c
+FILES_W		= ft_windows.c key_event_move.c minimap.c move.c 
 
-FILES_M		= cub3d.c main.c tools.c mlx_tools.c drawline.c
+FILES_M		= cub3d.c main.c tools.c mlx_tools.c
 
 FILES		= ${addprefix Parsing/, ${FILES_P}} \
 			${addprefix Raycasting/, ${FILES_R}} \
@@ -62,15 +62,15 @@ MINI_INC	= mlx.h
 MINILIBX	= ${addprefix ${M_PATH}/, ${MINI_NAME}}
 INC_MLX		= ${addprefix ${M_PATH}/, ${MINI_INC}}
 
-CC			= clang
-FLAGS		= -Wall -Wextra -Werror -g
-FLAGS_FS	= -Wall -Wextra -Werror -g3 -fsanitize=address
-FLAGS_O		= -Wall -Wextra -Werror -O3
-FSANIT		= -g3 -fsanitize=address
-MLX			= -L ${M_PATH} -lmlx
-MAKE		= make -C
-CP			= cp 
-RM			= rm -rf
+CC			:= clang
+FLAGS		:= -Wall -Wextra -Werror -g
+FLAGS_FS	:= -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS_O		:= -Wall -Wextra -Werror -O3
+FSANIT		:= -g3 -fsanitize=address
+MLX			:= -L ${M_PATH} -lmlx
+MAKE		:= make -C
+CP			:= cp 
+RM			:= rm -rf
 
 all:		lib ${NAME}
 

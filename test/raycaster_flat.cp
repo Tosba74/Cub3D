@@ -176,7 +176,7 @@ int main(int /*argc*/, char */*argv*/[])
       //draw the pixels of the stripe as a vertical line
       verLine(x, drawStart, drawEnd, color);
     }
-    //timing for input and FPS counter
+    //timing for keypress and FPS counter
     oldTime = time;
     time = getTicks();
     double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds

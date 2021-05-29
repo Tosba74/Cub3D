@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 17:19:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/25 15:41:05 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 19:11:45 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // 	pos_y = g->player.y;
 // }
 
-static void		init_rc_var3(t_rc_var *var)
+static void	init_ray3(t_ray *var)
 {
 	if (var->rayDirX < 0)
 	{
@@ -47,7 +47,7 @@ static void		init_rc_var3(t_rc_var *var)
 	}
 }
 
-static void		init_rc_var2(t_rc_var *var)
+static void	init_ray2(t_ray *var)
 {
 	if (var->rayDirY == 0)
 		var->deltaDistX = 0;
@@ -62,10 +62,10 @@ static void		init_rc_var2(t_rc_var *var)
 	else
 		var->deltaDistY = fabs(1 / var->rayDirY);
 	var->hit = 0;
-	init_rc_var3(var);
+	init_ray3(var);
 }
 
-static void		init_rc_var(t_rc_var *var, t_g *g, int x)
+static void	init_ray(t_ray *var, t_g *g, int x)
 {
 	var->posX = g->player.x;
 	var->posY = g->player.y;
@@ -78,10 +78,10 @@ static void		init_rc_var(t_rc_var *var, t_g *g, int x)
 	var->rayDirY = var->dirY + var->planeY * var->cameraX;
 	var->mapX = (int)(g->player.x);
 	var->mapY = (int)(g->player.y);
-	init_rc_var2(var);
+	init_ray2(var);
 }
 
-static double	ft_dist(t_rc_var *v)
+static double	ft_dist(t_ray *v)
 {
 	if (v->side == 0)
 		v->perpWallDist = (v->mapX - v->posX + (1 - v->stepX) / 2) / v->rayDirX;
@@ -90,9 +90,9 @@ static double	ft_dist(t_rc_var *v)
 	return (v->perpWallDist);
 }
 
-float			ft_dda(t_g *g, int x_win, t_rc_var *var)
+float	ft_dda(t_g *g, int x_win, t_ray *var)
 {
-	init_rc_var(var, g, x_win);
+	init_ray(var, g, x_win);
 	while (var->hit == 0)
 	{
 		if (var->sideDistX < var->sideDistY)

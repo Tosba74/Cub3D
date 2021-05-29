@@ -6,23 +6,22 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:28:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/26 16:55:22 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/28 16:55:54 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 
-# include "cub3d.h"
-
-static void print_carre(t_g *g, int x, int y, int color)
+static void	print_carre(t_g *g, int x, int y, int color)
 {
-	int w;
-	int h;
+	int	w;
+	int	h;
 
 	h = -1;
-	while(++h != 10)
+	while (++h != 10)
 	{
 		w = -1;
-		while(++w != 10)
+		while (++w != 10)
 		{
 			if (w == 0 || w == 9 || h == 0 || h == 9)
 				my_pixel_put(&g->win, x + w, y + h, 900000);
@@ -32,25 +31,25 @@ static void print_carre(t_g *g, int x, int y, int color)
 	}
 }
 
-static void print_carrev(t_g *g, int x, int y, int color)
+static void	print_carrev(t_g *g, int x, int y, int color)
 {
-	int w;
-	int h;
+	int	w;
+	int	h;
 
 	h = -1;
-	while(++h != 10)
+	while (++h != 10)
 	{
 		w = -1;
-		while(++w != 10)
+		while (++w != 10)
 			if (w == 0 || w == 9 || h == 0 || h == 9)
 				my_pixel_put(&g->win, x + w, y + h, color);
 	}
 }
 
-static void print_view(t_g *g, int x, int y, int color)
+static void	print_view(t_g *g, int x, int y, int color)
 {
-	t_vector player;
-	t_vector dest;
+	t_vector	player;
+	t_vector	dest;
 
 	(void)color;
 	player.x = x;
@@ -58,24 +57,18 @@ static void print_view(t_g *g, int x, int y, int color)
 	dest.x = (int)(player.x + g->player.dirX * SPEED * 200);
 	dest.y = (int)(player.y + g->player.dirY * SPEED * 200);
 	// draw_line(player, dest, g, color);
-	/*
-	while (i != 20)
-	{
-		my_pixel_put(&g->win, x, y + i++, color);
-	}
-	*/
 }
 
-static void print_player(t_g *g, int x, int y, int color)
+static void	print_player(t_g *g, int x, int y, int color)
 {
-	int w;
-	int h;
+	int	w;
+	int	h;
 
 	h = -1;
-	while(++h != 6)
+	while (++h != 6)
 	{
 		w = -1;
-		while(++w != 6)
+		while (++w != 6)
 			my_pixel_put(&g->win, x + w, y + h, color);
 	}
 	print_view(g, x + (w / 2), y + (h / 2), color);
@@ -83,10 +76,10 @@ static void print_player(t_g *g, int x, int y, int color)
 
 int	minimap(t_g *g)
 {
-	int x;
-	int i;
-	int t;
-	int y;
+	int	x;
+	int	i;
+	int	t;
+	int	y;
 
 	i = -1;
 	t = -1;
@@ -104,8 +97,8 @@ int	minimap(t_g *g)
 			x += 10;
 		}
 		y += 10;
-		print_player(g, (g->player.x * 10) + 2, (g->player.y * 10) + 12, 16066343);
+		print_player(g, (g->player.x * 10) + 2,
+			(g->player.y * 10) + 12, 16066343);
 	}
-	// mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, g->data.w, g->data.h);
-	return (0);	
+	return (0);
 }

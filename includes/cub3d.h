@@ -6,42 +6,42 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/28 15:20:07 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/29 17:42:51 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#define PI 3.14159265
-#define OR 1.61803398
+# define PI 3.14159265
+# define OR 1.61803398
 
-#define KEY_UP 126
-#define KEY_DOWN 125
-#define KEY_LEFT 123
-#define KEY_RIGHT 124
-#define KEY_W 13
-#define KEY_Q 12
-#define KEY_E 14
-#define KEY_S 1
-#define KEY_A 0
-#define KEY_D 2
-#define KEY_ENTER 36
-#define KEY_SPACE 49
-#define KEY_ESC 53
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_W 13
+# define KEY_Q 12
+# define KEY_E 14
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_ENTER 36
+# define KEY_SPACE 49
+# define KEY_ESC 53
 
-#define MOV_UP 0b00000001
-#define MOV_DOWN 0b00000010
-#define MOV_LEFT 0b00000100
-#define MOV_RIGHT 0b00001000
-#define TURN_LEFT 0b00010000
-#define TURN_RIGHT 0b01000000
+# define MOV_UP 0b00000001
+# define MOV_DOWN 0b00000010
+# define MOV_LEFT 0b00000100
+# define MOV_RIGHT 0b00001000
+# define TURN_LEFT 0b00010000
+# define TURN_RIGHT 0b01000000
 
-#define SPEED 0.1
-#define SPEEDTURN 0.07535
+# define SPEED 0.1
+# define SPEEDTURN 0.07535
 
-#define X_RES 2560
-#define Y_RES 1440
+# define X_RES 2560
+# define Y_RES 1440
 
 # include <errno.h>
 # include <math.h>
@@ -97,17 +97,17 @@ typedef struct	s_win
 	int		endian;
 	int		w;
 	int		h;
-	int		input;
+	int		keypress;
 }				t_win;
 
 // VECTOR
 typedef struct	s_vector 
 {
-	float x;
-	float y;
+	float	x;
+	float	y;
 }				t_vector;
 
-typedef struct	s_rc_var
+typedef struct	s_ray
 {
 	float	posX;
 	float	posY;
@@ -115,11 +115,9 @@ typedef struct	s_rc_var
 	float	dirY;
 	float	planeX;
 	float	planeY;
-
 	float	cameraX;
 	float	rayDirX;
 	float	rayDirY;
-
 	int		mapX;
 	int		mapY;
 	float	sideDistX;
@@ -131,7 +129,7 @@ typedef struct	s_rc_var
 	int		stepY;
 	int		hit;
 	int		side;
-}				t_rc_var;
+}				t_ray;
 
 // MOVE
 typedef struct	s_mov
@@ -147,9 +145,14 @@ typedef struct	s_mov
 // IMAGE
 typedef struct	s_img
 {
-	char *road;
-	void *img;
-	
+	char	*road;
+	void	*img;
+	int		*addr;
+	int		w;
+	int		h;
+	int		endian;
+	int		bytes;
+	int		sizeline;
 }				t_img;
 
 //TEXTURES
@@ -177,7 +180,7 @@ typedef struct	s_global
 void	ft_err(int err);
 
 // tools.c
-float	ft_dda(t_g *g, int x_win, t_rc_var *var);
+float	ft_dda(t_g *g, int x_win, t_ray *var);
 void	skip_space_eol(char *s);
 int		iscardino(t_data *data, char *s, int nb);
 int		is_wall(t_g g, int x, int y);
@@ -187,15 +190,15 @@ void	my_pixel_put(t_win *win, int x, int y, int color);
 void	clear_window(t_g *g);
 void	draw_col(t_g *g, int x, int start, int stop, int color);
 void	close_window(t_g *g);
-
-// windows.c
-void	new_win(t_g *g);
-void	close_window(t_g *g);
+t_img	open_xpm(t_g *g, char *cardino);
 
 // move.c
 void	mov_updown(t_g *g, int neg);
 void	mov_lateral(t_g *g, int neg);
 void	rot_view(t_g *g, int neg);
+
+// windows.c
+void	new_win(t_g *g);
 
 // test.c
 void	ft_print_struct_p(t_g g);
@@ -217,7 +220,7 @@ int		minimap(t_g *g);
 void	get_texture(t_g *g);
 
 // ft_init_struct.c
-void	ft_init_player(t_player *player);
+void	ft_init_player(t_player *player, t_map *map, int i);
 void	ft_init_global(t_g *global);
 
 // ft_read_map.c
