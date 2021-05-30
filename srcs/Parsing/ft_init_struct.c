@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 23:36:49 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/28 16:47:41 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/29 22:49:32 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,29 @@ void	init_struct_img(t_g *g)
 	g->img_c.we = we;
 }
 
-void	ft_init_player(t_player *player, t_map *map, int i)
+void	ft_init_player(t_ray *ray, t_map *map, int i)
 {
-	player->x = (float)i;
-	player->y = (float)map->line;
-	if (player->view == 'N')
+	ray->posX = (float)i;
+	ray->posY = (float)map->line;
+	if (ray->view == 'N')
 	{
-		player->dirY = -1;
-		player->planeX = 0.66;
+		ray->dirY = -1;
+		ray->planeX = 0.66;
 	}
-	else if (player->view == 'S')
+	else if (ray->view == 'S')
 	{
-		player->dirY = 1;
-		player->planeX = -0.66;
+		ray->dirY = 1;
+		ray->planeX = -0.66;
 	}
-	else if (player->view == 'E')
+	else if (ray->view == 'E')
 	{
-		player->dirX = 1;
-		player->planeY = 0.66;
+		ray->dirX = 1;
+		ray->planeY = 0.66;
 	}
-	else if (player->view == 'W')
+	else if (ray->view == 'W')
 	{
-		player->dirX = -1;
-		player->planeY = -0.66;
+		ray->dirX = -1;
+		ray->planeY = -0.66;
 	}
 }
 
@@ -86,20 +86,17 @@ void	ft_init_global(t_g *global)
 {
 	t_data		data;
 	t_map		map;
-	t_player	player;
 	t_win		win;
-	t_mov		mov;
+	t_ray		ray;
 
 	data = (t_data){.cardino[0][0] = "NO", .cardino[0][1] = "SO",
 		.cardino[0][2] = "WE", .cardino[0][3] = "EA"};
 	map = (t_map){};
-	player = (t_player){};
 	win = (t_win){};
-	mov = (t_mov){};
+	ray = (t_ray){};
 	global->data = data;
 	global->map = map;
-	global->player = player;
 	global->win = win;
-	global->mov = mov;
+	global->ray = ray;
 	init_struct_img(global);
 }

@@ -6,110 +6,93 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 17:19:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/28 19:11:45 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/29 22:52:38 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void raycast(t_g *g)
-// {
-// 	t_vector	vector;
-// 	float		pos_x;
-// 	float		pos_y;
-
-// 	vector = (t_vector) {.x = -1};
-// 	pos_x = g->player.x;
-// 	pos_y = g->player.y;
-// }
-
-static void	init_ray3(t_ray *var)
+static void	init_ray_side_and_step(t_ray *ray)
 {
-	if (var->rayDirX < 0)
+	if (ray->rayDirX < 0)
 	{
-		var->stepX = -1;
-		var->sideDistX = (var->posX - var->mapX) * var->deltaDistX;
+		ray->stepX = -1;
+		ray->sideDistX = (ray->posX - ray->mapX) * ray->deltaDistX;
 	}
 	else
 	{
-		var->stepX = 1;
-		var->sideDistX = (var->mapX + 1.0 - var->posX) * var->deltaDistX;
+		ray->stepX = 1;
+		ray->sideDistX = (ray->mapX + 1.0 - ray->posX) * ray->deltaDistX;
 	}
-	if (var->rayDirY < 0)
+	if (ray->rayDirY < 0)
 	{
-		var->stepY = -1;
-		var->sideDistY = (var->posY - var->mapY) * var->deltaDistY;
+		ray->stepY = -1;
+		ray->sideDistY = (ray->posY - ray->mapY) * ray->deltaDistY;
 	}
 	else
 	{
-		var->stepY = 1;
-		var->sideDistY = (var->mapY + 1.0 - var->posY) * var->deltaDistY;
+		ray->stepY = 1;
+		ray->sideDistY = (ray->mapY + 1.0 - ray->posY) * ray->deltaDistY;
 	}
 }
 
-static void	init_ray2(t_ray *var)
+static void	init_ray_delta(t_ray *ray)
 {
-	if (var->rayDirY == 0)
-		var->deltaDistX = 0;
-	else if (var->rayDirX == 0)
-		var->deltaDistX = 1;
+	if (ray->rayDirY == 0)
+		ray->deltaDistX = 0;
+	else if (ray->rayDirX == 0)
+		ray->deltaDistX = 1;
 	else
-		var->deltaDistX = fabs(1 / var->rayDirX);
-	if (var->rayDirX == 0)
-		var->deltaDistY = 0;
-	else if (var->rayDirY == 0)
-		var->deltaDistY = 1;
+		ray->deltaDistX = fabs(1 / ray->rayDirX);
+	if (ray->rayDirX == 0)
+		ray->deltaDistY = 0;
+	else if (ray->rayDirY == 0)
+		ray->deltaDistY = 1;
 	else
-		var->deltaDistY = fabs(1 / var->rayDirY);
-	var->hit = 0;
-	init_ray3(var);
+		ray->deltaDistY = fabs(1 / ray->rayDirY);
+	ray->hit = 0;
 }
 
-static void	init_ray(t_ray *var, t_g *g, int x)
+static void	init_ray(t_ray *ray, t_g *g, int x)
 {
-	var->posX = g->player.x;
-	var->posY = g->player.y;
-	var->dirX = g->player.dirX;
-	var->dirY = g->player.dirY;
-	var->planeX = g->player.planeX;
-	var->planeY = g->player.planeY;
-	var->cameraX = 2 * x / (double)(g->win.w) - 1;
-	var->rayDirX = var->dirX + var->planeX * var->cameraX;
-	var->rayDirY = var->dirY + var->planeY * var->cameraX;
-	var->mapX = (int)(g->player.x);
-	var->mapY = (int)(g->player.y);
-	init_ray2(var);
+	ray->cameraX = 2 * x / (float)(g->win.w) - 1;
+	ray->rayDirX = ray->dirX + ray->planeX * ray->cameraX;
+	ray->rayDirY = ray->dirY + ray->planeY * ray->cameraX;
+	ray->mapX = (int)(g->ray.posX);
+	ray->mapY = (int)(g->ray.posY);
+	init_ray_delta(ray);
+	init_ray_side_and_step(ray);
 }
 
-static double	ft_dist(t_ray *v)
+static double	ft_dist(t_ray *r)
 {
-	if (v->side == 0)
-		v->perpWallDist = (v->mapX - v->posX + (1 - v->stepX) / 2) / v->rayDirX;
+	if (r->side == 0)
+		r->perpWallDist = (r->mapX - r->posX + (1 - r->stepX) / 2) / r->rayDirX;
 	else
-		v->perpWallDist = (v->mapY - v->posY + (1 - v->stepY) / 2) / v->rayDirY;
-	return (v->perpWallDist);
+		r->perpWallDist = (r->mapY - r->posY + (1 - r->stepY) / 2) / r->rayDirY;
+	return (r->perpWallDist);
 }
 
-float	ft_dda(t_g *g, int x_win, t_ray *var)
+float	ft_dda(t_g *g, int x_win, t_ray *ray)
 {
-	init_ray(var, g, x_win);
-	while (var->hit == 0)
+	init_ray(ray, g, x_win);
+	while (ray->hit == 0)
 	{
-		if (var->sideDistX < var->sideDistY)
+		if (ray->sideDistX < ray->sideDistY)
 		{
-			var->sideDistX += var->deltaDistX;
-			var->mapX += var->stepX;
-			var->side = 0;
+			ray->sideDistX += ray->deltaDistX;
+			ray->mapX += ray->stepX;
+			ray->side = 0;
 		}
 		else
 		{
-			var->sideDistY += var->deltaDistY;
-			var->mapY += var->stepY;
-			var->side = 1;
+			ray->sideDistY += ray->deltaDistY;
+			ray->mapY += ray->stepY;
+			ray->side = 1;
 		}
-		if (g->map.map[var->mapY][var->mapX] == '1')
-			var->hit = 1;
+		if (g->map.map[ray->mapY][ray->mapX] == '1')
+			ray->hit = 1;
 	}
-	g->player.side = var->side;
-	return (ft_dist(var));
+	g->ray.side = ray->side;
+	return (ft_dist(ray));
 }

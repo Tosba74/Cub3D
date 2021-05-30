@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/28 14:56:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 16:00:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,17 @@ void	skip_space_eol(char *s)
 int	iscardino(t_data *data, char *s, int nb)
 {
 	int		i;
+	char	*tab[5];
 
 	i = -1;
-	while (++i < 4 && data->cardino[0][i])
-		if (!ft_strncmp(s, data->cardino[0][i], nb))
+	tab[0] = "NO";
+	tab[1] = "SO";
+	tab[2] = "WE";
+	tab[3] = "EA";
+	tab[4] = "";
+	(void)data;
+	while (++i < 4 && tab[i])
+		if (!ft_strncmp(s, tab[i], nb))
 			return (i);
 	return (-1);
 }

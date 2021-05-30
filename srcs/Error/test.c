@@ -35,16 +35,16 @@ void	ft_print_struct_p(t_g g)
 	printf("*-----------------------------------------------*\n\n");
 }
 
-void	ft_print_player(t_g g)
-{
-	printf("*-----------------------------------------------*\n");
-	printf("| --------------  PLAYER  --------------------- |\n");
-	printf("*-----------------------------------------------*\n");
-	printf("| NB PLAYER => %-33d|\n", g.player.nb);
-	printf("| View PLAYER ONE => %-27c|\n", g.player.view);
-	printf("| Pos X => %-12f Pos Y => %-14f |\n", g.player.x, g.player.y);
-	printf("*-----------------------------------------------*\n");
-}
+// void	ft_print_player(t_g g)
+// {
+// 	printf("*-----------------------------------------------*\n");
+// 	printf("| --------------  PLAYER  --------------------- |\n");
+// 	printf("*-----------------------------------------------*\n");
+// 	printf("| NB PLAYER => %-33d|\n", g.player.nb);
+// 	printf("| View PLAYER ONE => %-27c|\n", g.player.view);
+// 	printf("| Pos X => %-12f Pos Y => %-14f |\n", g.player.x, g.player.y);
+// 	printf("*-----------------------------------------------*\n");
+// }
 
 int	ft_print_map(t_g g)
 {
@@ -91,6 +91,6 @@ void	ft_print_img(t_g g)
 void	test(t_g g)
 {
 	ft_print_struct_p(g);
-	ft_print_player(g);
+	// ft_print_player(g);
 	ft_print_img(g);
 }

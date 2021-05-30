@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 11:33:03 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/29 15:04:32 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 10:20:10 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,23 @@ void	draw_screen(t_g *g)
 	int			start;
 	int			stop;
 	int			size;
-	t_ray		var;
 
 	x_win = 0;
 	while (x_win < g->win.w)
 	{
-		size = (int)(g->win.h / ft_dda(g, x_win, &var));
+		size = (int)(g->win.h / ft_dda(g, x_win, &g->ray));
 		start = g->win.h / 2 - size / 2;
 		if (start < 0)
 			start = 0;
 		stop = g->win.h / 2 + size / 2;
 		if (stop > g->win.h)
 			stop = g->win.h;
-		draw_col(g, x_win, 0, start, g->data.ceiling);
-		if (g->player.side == 1)
+		draw_col(g, x_win, 0, start, g->img_c.ceiling);
+		if (g->ray.side == 1)
 			draw_col(g, x_win, start, stop, (0x00FFFF00 >> 1) & 8355711);
 		else
 			draw_col(g, x_win, start, stop, 0x00FFFF00);
-		draw_col(g, x_win, stop, g->win.h, g->data.floor);
+		draw_col(g, x_win, stop, g->win.h, g->img_c.floor);
 		x_win++;
 	}
 }

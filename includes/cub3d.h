@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/29 17:42:51 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/29 22:50:22 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,6 @@ typedef struct	s_map
 	int			collumn;
 }				t_map;
 
-typedef struct	s_player
-{
-	char		view;
-	float		x;
-	float		y;
-	float		dirX;
-	float		dirY;
-	float		planeX;
-	float		planeY;
-	int			side;
-	int			dir;
-	int			nb;
-}				t_player;
-
-
 // WINDOWS
 typedef struct	s_win
 {
@@ -118,29 +103,21 @@ typedef struct	s_ray
 	float	cameraX;
 	float	rayDirX;
 	float	rayDirY;
-	int		mapX;
-	int		mapY;
 	float	sideDistX;
 	float	sideDistY;
 	float	deltaDistX;
 	float	deltaDistY;
 	float	perpWallDist;
+	int		mapX;
+	int		mapY;
 	int		stepX;
 	int		stepY;
 	int		hit;
 	int		side;
+	int		nb_player;
+	char	view;
 }				t_ray;
 
-// MOVE
-typedef struct	s_mov
-{
-	int		rot_left;
-	int		rot_right;
-	int		mov_up;
-	int		mov_down;
-	int		mov_left;
-	int		mov_right;
-}				t_mov;
 
 // IMAGE
 typedef struct	s_img
@@ -170,10 +147,9 @@ typedef struct	s_global
 {
 	t_data		data;
 	t_map		map;
-	t_player	player;
 	t_win		win;
 	t_texture	img_c;
-	t_mov		mov;
+	t_ray		ray;
 }				t_g;
 
 // ft_error.c
@@ -220,7 +196,7 @@ int		minimap(t_g *g);
 void	get_texture(t_g *g);
 
 // ft_init_struct.c
-void	ft_init_player(t_player *player, t_map *map, int i);
+void	ft_init_player(t_ray *ray, t_map *map, int i);
 void	ft_init_global(t_g *global);
 
 // ft_read_map.c

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 01:03:38 by bmangin           #+#    #+#             */
-/*   Updated: 2020/11/24 17:36:21 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/30 14:06:31 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	{
 		j = 0;
 		l = 0;
-		while (haystack[i + j] == needle[j] && l != len)
+		while (l < len && haystack[i + j] == needle[j])
 		{
 			j++;
 			if (needle[j] == '\0')

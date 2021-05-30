@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/28 15:33:41 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/05/29 22:53:13 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_cub(int fd)
 	if (bool)
 		ft_putstr("Error\n");
 	ft_print_struct_p(tg);
-	ft_print_player(tg);
+	// ft_print_player(tg);
 	ft_print_map(tg);
 	new_win(&tg);
 }

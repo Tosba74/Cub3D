@@ -58,8 +58,8 @@ static void	ft_complet_floor(t_g *g, char **tab)
 				g->data.c[i] = ft_atoi(tab_tmp[i]);
 		}
 	}
-	g->data.floor = ft_get_color(g->data.f[0], g->data.f[1], g->data.f[2]);
-	g->data.ceiling = ft_get_color(g->data.c[0], g->data.c[1], g->data.c[2]);
+	g->img_c.floor = ft_get_color(g->data.f[0], g->data.f[1], g->data.f[2]);
+	g->img_c.ceiling = ft_get_color(g->data.c[0], g->data.c[1], g->data.c[2]);
 	wrfree(tab_tmp);
 }
 
@@ -153,11 +153,11 @@ void	ft_complet_map(t_g *g, char *line)
 		{
 			if (iscardino(&g->data, line + i, 1) != -1)
 			{
-				g->player.view = line[i];
-				g->player.nb++;
-				if (g->player.nb == 1)
-					ft_init_player(&g->player, &g->map, (int)i);
-				else if (g->player.nb >= 2)
+				g->ray.view = line[i];
+				g->ray.nb_player++;
+				if (g->ray.nb_player == 1)
+					ft_init_player(&g->ray, &g->map, (int)i);
+				else if (g->ray.nb_player >= 2)
 					ft_err(20);
 				line[i] = '0';
 			}
