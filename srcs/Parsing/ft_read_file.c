@@ -50,36 +50,37 @@ static void	ft_complet_floor(t_g *g, char **tab)
 		if (!ft_strcmp(tab[0], "F"))
 		{
 			while (tab_tmp[++i])
-				g->data.f[i] = ft_atoi(tab_tmp[i]);
+				g->tex.f[i] = ft_atoi(tab_tmp[i]);
 		}
 		else if (!ft_strcmp(tab[0], "C"))
 		{
 			while (tab_tmp[++i])
-				g->data.c[i] = ft_atoi(tab_tmp[i]);
+				g->tex.c[i] = ft_atoi(tab_tmp[i]);
 		}
 	}
-	g->img_c.floor = ft_get_color(g->data.f[0], g->data.f[1], g->data.f[2]);
-	g->img_c.ceiling = ft_get_color(g->data.c[0], g->data.c[1], g->data.c[2]);
+	g->tex.floor = ft_get_color(g->tex.f[0], g->tex.f[1], g->tex.f[2]);
+	g->tex.ceiling = ft_get_color(g->tex.c[0], g->tex.c[1], g->tex.c[2]);
 	wrfree(tab_tmp);
 }
 
 static void	get_resolution(t_g *g, char **tab)
 {
-	int	i;
+	// int	i;
 
-	i = 1;
+	// i = 1;
 	printf("*----------- -- --GET RESOLUTION-- -- ----------*\n");
-	if (ft_strslen(tab) == 3)
-	{
-		g->data.w = ft_atoi(tab[i]);
-		g->data.h = ft_atoi(tab[i + 1]);
-	}
-	else if (ft_strslen(tab) < 3)
-		ft_err(3);
-	else if (ft_strslen(tab) > 3)
-		ft_err(4);
-	g->win.w = g->data.w;
-	g->win.h = g->data.h;
+	// if (ft_strslen(tab) == 3)
+	// {
+	// 	g->win.w = ft_atoi(tab[i]);
+	// 	g->win.h = ft_atoi(tab[i + 1]);
+	// }
+	// else if (ft_strslen(tab) < 3)
+	// 	ft_err(3);
+	// else if (ft_strslen(tab) > 3)
+	// 	ft_err(4);
+	(void)tab;
+	g->win.w = X_RES;
+	g->win.h = Y_RES;
 }
 
 static char	*get_road(char *line)
@@ -88,6 +89,7 @@ static char	*get_road(char *line)
 	char	*ext;
 
 	s = ft_strdup(ft_strchr(line, 32) + 1);
+	skip_space_eol(s);
 	ext = ft_strdup(ft_strrchr(s, 46));
 	printf("|----------- -- -- -|GET ROAD|- -- -- ----------|\n");
 	printf("*-----------------------------------------------*\n");
@@ -102,6 +104,7 @@ static char	*get_road(char *line)
 	printf("*- - - - -- -- -- ------------- -- -- -- - - - -*\n");
 	printf("| road =>|%-24s|ext =>|%-6s|\n", s, ext);
 	printf("*- - - - -- -- -- ------------- -- -- -- - - - -*\n");
+	wrfree(ext);
 	return (s);
 }
 
@@ -118,20 +121,25 @@ void	ft_complet_data(t_g *g, char *line)
 	tab = ft_split(line, ' ');
 	if (tab)
 	{
-		ret = iscardino(&(g->data), tab[0], 2);
+		ret = iscardino(g, tab[0], 2);
 		if (ret > -1)
 		{
-			g->data.cardino[1][ret] = get_road(line);
-			printf("|%4s|%-42s|\n", g->data.cardino[0][ret],
-				g->data.cardino[1][ret]);
+			if (ret == 0)
+				g->tex.cardino[ret].road = get_road(line);
+			if (ret == 1)
+				g->tex.cardino[ret].road = get_road(line);
+			if (ret == 2)
+				g->tex.cardino[ret].road = get_road(line);
+			if (ret == 3)
+				g->tex.cardino[ret].road = get_road(line);
 		}
 		else if (!ft_strcmp(tab[0], "R"))
 		{
 			get_resolution(g, tab);
-			printf("| %s | %19d | %-19d |\n", tab[0], g->data.w, g->data.h);
+			printf("| %s | %19d | %-19d |\n", tab[0], g->win.w, g->win.h);
 		}
 		else if (!ft_strcmp(tab[0], "S"))
-			g->data.sprite = ft_strdup((tab[1]));
+			g->tex.sprite = ft_strdup((tab[1]));
 		else if (!ft_strcmp(tab[0], "F") || !ft_strcmp(tab[0], "C"))
 			ft_complet_floor(g, tab);
 		printf("|%2d|line => [%-26s] - ok !|\n",ret, line);
@@ -151,9 +159,9 @@ void	ft_complet_map(t_g *g, char *line)
 			(void)i;
 		else if (!(48 <= line[i] && line[i] <= 50) && line[i] != ' ')
 		{
-			if (iscardino(&g->data, line + i, 1) != -1)
+			if (iscardino(g, line + i, 1) != -1)
 			{
-				g->ray.view = line[i];
+				g->ray.camera = line[i];
 				g->ray.nb_player++;
 				if (g->ray.nb_player == 1)
 					ft_init_player(&g->ray, &g->map, (int)i);

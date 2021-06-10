@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/29 22:50:22 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 17:58:14 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 # define SPEED 0.1
 # define SPEEDTURN 0.07535
 
-# define X_RES 2560
-# define Y_RES 1440
+# define X_RES 25600
+# define Y_RES 14400
 
 # include <errno.h>
 # include <math.h>
@@ -50,25 +50,53 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx/mlx.h"
 
-// PARSCING
-typedef	struct	s_data
-{
-	int			w;
-	int			h;
-	char		*cardino[2][5];
-	char		*sprite;
-	int			f[3];
-	int			c[3];
-	int			floor;
-	int			ceiling;
-}				t_data;
 
+// SPRITES VAR
+typedef struct s_var
+{
+	float	spriteX;
+	float	spriteY;
+	float	invDet;
+	float	transformX;
+	float	transformY;
+	int		spriteScreenX;
+	int		spriteHeight;
+	int		drawStartY;
+	int		drawEndY;
+	int		spriteWidth;
+	int		drawStartX;
+	int		drawEndX;
+	int		texX;
+	int		texY;
+	int		d;
+}				t_var;
+
+// LIST SPRITES
+typedef struct 	s_sprite
+{
+	float			x;
+	float			y;
+	int				id;
+	t_var			var;
+	struct s_sprite	*next;
+}					t_sprite;
+
+// MAP
 typedef struct	s_map
 {
 	char		**map;
 	int			line;
 	int			collumn;
 }				t_map;
+
+// COLLUMN PXL
+typedef struct s_col
+{
+	int	x;
+	int	start;
+	int	size_max;
+	int	color;
+}				t_col;
 
 // WINDOWS
 typedef struct	s_win
@@ -92,6 +120,7 @@ typedef struct	s_vector
 	float	y;
 }				t_vector;
 
+// RAY
 typedef struct	s_ray
 {
 	float	posX;
@@ -115,9 +144,8 @@ typedef struct	s_ray
 	int		hit;
 	int		side;
 	int		nb_player;
-	char	view;
+	char	camera;
 }				t_ray;
-
 
 // IMAGE
 typedef struct	s_img
@@ -132,41 +160,61 @@ typedef struct	s_img
 	int		sizeline;
 }				t_img;
 
+// WALL_SIZE
+typedef struct s_wall
+{
+	int	start;
+	int	stop;
+	int	height;
+}
+				t_wall;
+
 //TEXTURES
 typedef	struct		s_texture
 {
-	t_img	no;
-	t_img	so;
-	t_img	ea;
-	t_img	we;
-	int		floor;
-	int		ceiling;
-}				t_texture;
+	t_img			cardino[4];
+	t_wall			wall;
+	float			wallX;
+	float			step;
+	float			texPos;
+	int				texWidth;
+	int				texHeight;
+	int				texNum;
+	int				texX;
+	int				texY;
+	int				f[3];
+	int				c[3];
+	int				floor;
+	int				ceiling;
+	char			*sprite;
+}					t_texture;
+
 //ALL
 typedef struct	s_global
 {
-	t_data		data;
 	t_map		map;
 	t_win		win;
-	t_texture	img_c;
+	t_texture	tex;
 	t_ray		ray;
+	t_sprite	sprite;
+	int			zbuffer[X_RES];
 }				t_g;
 
 // ft_error.c
 void	ft_err(int err);
 
 // tools.c
-float	ft_dda(t_g *g, int x_win, t_ray *var);
 void	skip_space_eol(char *s);
-int		iscardino(t_data *data, char *s, int nb);
+int		iscardino(t_g *g, char *s, int nb);
 int		is_wall(t_g g, int x, int y);
 
 // mlx_tools.c
 void	my_pixel_put(t_win *win, int x, int y, int color);
-void	clear_window(t_g *g);
-void	draw_col(t_g *g, int x, int start, int stop, int color);
+// void	clear_window(t_g *g);
 void	close_window(t_g *g);
-t_img	open_xpm(t_g *g, char *cardino);
+void	draw_col(t_win *win, t_col col);
+// void	draw_col(t_g *g, int x, int start, int stop, int color);
+t_img	*open_xpm(void *mlx_ptr, char *cardino);
 
 // move.c
 void	mov_updown(t_g *g, int neg);
@@ -175,12 +223,16 @@ void	rot_view(t_g *g, int neg);
 
 // windows.c
 void	new_win(t_g *g);
+void	get_wall_size(int x_win, t_g *g);
+
+// raycasting.c
+float	ft_dda(t_g *g, int x_win);
 
 // test.c
 void	ft_print_struct_p(t_g g);
 int		ft_print_map(t_g g);
-void	ft_print_struct_p(t_g g);
-void	ft_print_player(t_g g);
+// void	ft_print_struct_p(t_g g);
+// void	ft_print_player(t_g g);
 void	ft_print_img(t_g g);
 void	test(t_g g);
 
@@ -194,6 +246,11 @@ int		minimap(t_g *g);
 
 // inti_texture.c
 void	get_texture(t_g *g);
+// texture.c
+void	ft_dda_x_inf_y(t_ray *ray);
+void	ft_dda_x_sup_y(t_ray *ray);
+void	draw_wall(t_g *g, int x);
+void	draw_screen(t_g *g);
 
 // ft_init_struct.c
 void	ft_init_player(t_ray *ray, t_map *map, int i);

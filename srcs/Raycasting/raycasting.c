@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 17:19:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/29 22:52:38 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 14:44:70y bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,30 @@ static void	init_ray_side_and_step(t_ray *ray)
 	}
 }
 
-static void	init_ray_delta(t_ray *ray)
+// static void	init_ray_delta(t_ray *ray)
+// {
+// 	if (ray->rayDirY == 0)
+// 		ray->deltaDistX = 0;
+// 	else if (ray->rayDirX == 0)
+// 		ray->deltaDistX = 1;
+// 	else
+// 		ray->deltaDistX = fabs(1 / ray->rayDirX);
+// 	if (ray->rayDirX == 0)
+// 		ray->deltaDistY = 0;
+// 	else if (ray->rayDirY == 0)
+// 		ray->deltaDistY = 1;
+// 	else
+// 		ray->deltaDistY = fabs(1 / ray->rayDirY);
+// 	ray->hit = 0;
+// }
+
+static void	init_ray(t_ray *ray, int w, int x)
 {
+	ray->cameraX = 2 * x / (float)(w) - 1;
+	ray->rayDirX = ray->dirX + ray->planeX * ray->cameraX;
+	ray->rayDirY = ray->dirY + ray->planeY * ray->cameraX;
+	ray->mapX = (int)(ray->posX);
+	ray->mapY = (int)(ray->posY);
 	if (ray->rayDirY == 0)
 		ray->deltaDistX = 0;
 	else if (ray->rayDirX == 0)
@@ -51,48 +73,73 @@ static void	init_ray_delta(t_ray *ray)
 	else
 		ray->deltaDistY = fabs(1 / ray->rayDirY);
 	ray->hit = 0;
-}
-
-static void	init_ray(t_ray *ray, t_g *g, int x)
-{
-	ray->cameraX = 2 * x / (float)(g->win.w) - 1;
-	ray->rayDirX = ray->dirX + ray->planeX * ray->cameraX;
-	ray->rayDirY = ray->dirY + ray->planeY * ray->cameraX;
-	ray->mapX = (int)(g->ray.posX);
-	ray->mapY = (int)(g->ray.posY);
-	init_ray_delta(ray);
+	// init_ray_delta(ray);
 	init_ray_side_and_step(ray);
 }
 
-static double	ft_dist(t_ray *r)
-{
-	if (r->side == 0)
-		r->perpWallDist = (r->mapX - r->posX + (1 - r->stepX) / 2) / r->rayDirX;
-	else
-		r->perpWallDist = (r->mapY - r->posY + (1 - r->stepY) / 2) / r->rayDirY;
-	return (r->perpWallDist);
-}
+// static double	ft_dist(t_ray *r)
+// {
+// 	if (r->side == 0)
+// 		r->perpWallDist = (r->mapX - r->posX + (1 - r->stepX) / 2) / r->rayDirX;
+// 	else
+// 		r->perpWallDist = (r->mapY - r->posY + (1 - r->stepY) / 2) / r->rayDirY;
+	// g->ray.side = r->side;
+	// g->zbuffer[x_win] = r->perpWallDist;
+// 	return (r->perpWallDist);
+// }
 
-float	ft_dda(t_g *g, int x_win, t_ray *ray)
+// float	ft_dda(t_g *g, int x_win, t_ray *ray)
+// {
+// 	init_ray(ray, g, x_win);
+// 	while (ray->hit == 0)
+// 	{
+// 		if (ray->sideDistX < ray->sideDistY)
+// 		{
+// 			ray->sideDistX += ray->deltaDistX;
+// 			ray->mapX += ray->stepX;
+// 			ray->side = 0;
+// 		}
+// 		else
+// 		{
+// 			ray->sideDistY += ray->deltaDistY;
+// 			ray->mapY += ray->stepY;
+// 			ray->side = 1;
+// 		}
+// 		if (g->map.map[ray->mapY][ray->mapX] == '1')
+// 			ray->hit = 1;
+// 	}
+// 	g->ray.side = ray->side;
+// 	return (ft_dist(ray));
+// }
+
+float	ft_dda(t_g *g, int x_win)
 {
-	init_ray(ray, g, x_win);
-	while (ray->hit == 0)
+	init_ray(&g->ray, g->win.w, x_win);
+	while (g->ray.hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
-		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
-			ray->side = 0;
-		}
+		if (g->ray.sideDistX < g->ray.sideDistY)
+			ft_dda_x_inf_y(&g->ray);
 		else
-		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
-			ray->side = 1;
-		}
-		if (g->map.map[ray->mapY][ray->mapX] == '1')
-			ray->hit = 1;
+			ft_dda_x_sup_y(&g->ray);
+		if (g->map.map[g->ray.mapY][g->ray.mapX] == '1')
+			g->ray.hit = 1;
+		// if (g->map.map[g->ray.mapY][g->ray.mapX] == '2')
+		// {
+		// 	if (g->lst_sprite == NULL)
+		// 		g->lst_sprite = ft_lst_new(g->ray.mapX + 0.5, g->ray.mapY + 0.5,
+		// 				g->map.map[g->ray.mapY][g->ray.mapX] - '0');
+		// 	else if (ft_in_lst(g->lst_sprite, g->ray.mapX + 0.5,
+		// 			g->ray.mapY + 0.5) == 0)
+		// 		ft_lstadd_frt(&g->lst_sprite, ft_lst_new(g->ray.mapX + 0.5,
+		// 				g->ray.mapY + 0.5,
+		// 				g->map.map[g->ray.mapY][g->ray.mapX] - '0'));
+		// }
 	}
-	g->ray.side = ray->side;
-	return (ft_dist(ray));
+	if (g->ray.side == 0)
+		g->ray.perpWallDist = (g->ray.mapX - g->ray.posX + (1 - g->ray.stepX) / 2) / g->ray.rayDirX;
+	else
+		g->ray.perpWallDist = (g->ray.mapY - g->ray.posY + (1 - g->ray.stepY) / 2) / g->ray.rayDirY;
+	g->zbuffer[x_win] = g->ray.perpWallDist;
+	return (g->ray.perpWallDist);
+	// return (ft_dist(&g->ray));
 }

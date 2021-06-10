@@ -1,8 +1,8 @@
 R 12000 9000
-NO textures/wall/wood.xpm 
-SO textures/wall/wall_4.xpm
-WE textures/wall/wall_2.xpm
-EA textures/wall/wall_b.xpm             
+NO ./textures/wall/wood.xpm
+SO ./textures/wall/wall_4.xpm
+WE ./textures/wall/wall_2.xpm
+EA ./textures/wall/wall_b.xpm             
 S textures/sprites/
 F 255,60,5
 C 35,255,5

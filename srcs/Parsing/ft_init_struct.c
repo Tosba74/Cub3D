@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 23:36:49 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/29 22:49:32 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 17:58:02 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,74 +29,68 @@ int	check_color(int *color)
 
 void	get_texture(t_g *g)
 {
-	g->img_c.no = (open_xpm(g, "NO"));
-	g->img_c.so = (open_xpm(g, "SO"));
-	g->img_c.ea = (open_xpm(g, "EA"));
-	g->img_c.we = (open_xpm(g, "WE"));
-	g->img_c.floor = check_color(g->data.f);
-	g->img_c.ceiling = check_color(g->data.c);
+	g->tex.cardino[0] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[0].road);
+	g->tex.cardino[1] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[1].road);
+	g->tex.cardino[2] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[2].road);
+	g->tex.cardino[3] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[3].road);
+	g->tex.floor = check_color(g->tex.f);
+	g->tex.ceiling = check_color(g->tex.c);
 	ft_print_img(*g);
-}
-
-void	init_struct_img(t_g *g)
-{
-	t_img	no;
-	t_img	so;
-	t_img	ea;
-	t_img	we;
-
-	g->img_c = (t_texture){};
-	no = (t_img){};
-	so = (t_img){};
-	ea = (t_img){};
-	we = (t_img){};
-	g->img_c.no = no;
-	g->img_c.so = so;
-	g->img_c.ea = ea;
-	g->img_c.we = we;
 }
 
 void	ft_init_player(t_ray *ray, t_map *map, int i)
 {
 	ray->posX = (float)i;
 	ray->posY = (float)map->line;
-	if (ray->view == 'N')
+	if (ray->camera == 'N')
 	{
 		ray->dirY = -1;
 		ray->planeX = 0.66;
 	}
-	else if (ray->view == 'S')
+	else if (ray->camera == 'S')
 	{
 		ray->dirY = 1;
 		ray->planeX = -0.66;
 	}
-	else if (ray->view == 'E')
+	else if (ray->camera == 'E')
 	{
 		ray->dirX = 1;
 		ray->planeY = 0.66;
 	}
-	else if (ray->view == 'W')
+	else if (ray->camera == 'W')
 	{
 		ray->dirX = -1;
 		ray->planeY = -0.66;
 	}
 }
 
+void	init_struct_img(t_g *g)
+{
+	int		i;
+	
+	i = -1;
+	g->tex = (t_texture){};
+	g->tex.wall = (t_wall){};
+	while (++i < 4)
+		g->tex.cardino[i] = (t_img){};
+	
+}
+
 void	ft_init_global(t_g *global)
 {
-	t_data		data;
 	t_map		map;
 	t_win		win;
 	t_ray		ray;
+	t_sprite	sprite;
+	
 
-	data = (t_data){.cardino[0][0] = "NO", .cardino[0][1] = "SO",
-		.cardino[0][2] = "WE", .cardino[0][3] = "EA"};
 	map = (t_map){};
 	win = (t_win){};
 	ray = (t_ray){};
-	global->data = data;
+	sprite = (t_sprite){};
 	global->map = map;
 	global->win = win;
 	global->ray = ray;
+	global->sprite = sprite;
 	init_struct_img(global);
 }

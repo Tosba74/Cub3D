@@ -28,7 +28,7 @@ VPATH		= ${OBJS1}
 
 FILES_P		= ft_read_file.c ft_init_struct.c
 
-FILES_R		= raycasting.c drawline.c
+FILES_R		= raycasting.c drawline.c texture.c
 
 FILES_E		= test.c ft_error.c
 
