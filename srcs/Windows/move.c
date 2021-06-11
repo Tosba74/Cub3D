@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:35:27 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/29 22:47:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 17:27:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,16 @@ void	mov_updown(t_g *g, int neg)
 
 	xpos = g->ray.posX + (SPEED * neg) * g->ray.dirX;
 	ypos = g->ray.posY + (SPEED * neg) * g->ray.dirY;
-	if (!is_wall(*g, (int)xpos, (int)ypos))
-	{
+	if (!is_wall(*g, (int)xpos, (int)g->ray.posY))
 		g->ray.posX = xpos;
+	if (!is_wall(*g, (int)g->ray.posX, (int)ypos))
 		g->ray.posY = ypos;
-	}
+	// if (!is_wall(*g, (int)xpos, (int)ypos))
+	// {
+	// 	g->ray.posY = ypos;
+	// }
+	// else if (!is_wall(*g, (int)xpos, (int)ypos))
+	// {
 }
 
 void	mov_lateral(t_g *g, int neg)
@@ -33,11 +38,10 @@ void	mov_lateral(t_g *g, int neg)
 
 	xpos = g->ray.posX + (SPEED * neg) * g->ray.planeX;
 	ypos = g->ray.posY + (SPEED * neg) * g->ray.planeY;
-	if (!is_wall(*g, (int)xpos, (int)ypos))
-	{
+	if (!is_wall(*g, (int)xpos, (int)g->ray.posY))
 		g->ray.posX = xpos;
+	if (!is_wall(*g, (int)g->ray.posX, (int)ypos))
 		g->ray.posY = ypos;
-	}
 }
 
 void	rot_view(t_g *g, int neg)

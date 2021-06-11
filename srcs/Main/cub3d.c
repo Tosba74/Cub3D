@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/30 17:10:49 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 16:44:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_read_file(int fd, t_g *g)
 	while (get_next_line(fd, &line))
 	{
 		skip_space_eol(line);
+		printf("|%s|\n", line);
 		if (ft_isalpha(line[0]))
 			ft_complet_data(g, line);
 		else if (ft_isdigit(line[0]) || line[0] == ' ')

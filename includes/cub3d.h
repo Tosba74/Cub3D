@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/10 17:58:14 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 18:57:31 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 # define SPEED 0.1
 # define SPEEDTURN 0.07535
 
-# define X_RES 25600
-# define Y_RES 14400
+# define X_RES 1200
+# define Y_RES 800
 
 # include <errno.h>
 # include <math.h>
@@ -54,11 +54,11 @@
 // SPRITES VAR
 typedef struct s_var
 {
-	float	spriteX;
-	float	spriteY;
-	float	invDet;
-	float	transformX;
-	float	transformY;
+	float		spriteX;
+	float		spriteY;
+	float		invDet;
+	float		transformX;
+	float		transformY;
 	int		spriteScreenX;
 	int		spriteHeight;
 	int		drawStartY;
@@ -74,10 +74,10 @@ typedef struct s_var
 // LIST SPRITES
 typedef struct 	s_sprite
 {
-	float			x;
-	float			y;
-	int				id;
-	t_var			var;
+	float		x;
+	float		y;
+	int		id;
+	t_var		var;
 	struct s_sprite	*next;
 }					t_sprite;
 
@@ -210,7 +210,7 @@ int		is_wall(t_g g, int x, int y);
 
 // mlx_tools.c
 void	my_pixel_put(t_win *win, int x, int y, int color);
-// void	clear_window(t_g *g);
+void	clear_window(t_g *g);
 void	close_window(t_g *g);
 void	draw_col(t_win *win, t_col col);
 // void	draw_col(t_g *g, int x, int start, int stop, int color);
@@ -249,7 +249,7 @@ void	get_texture(t_g *g);
 // texture.c
 void	ft_dda_x_inf_y(t_ray *ray);
 void	ft_dda_x_sup_y(t_ray *ray);
-void	draw_wall(t_g *g, int x);
+void	draw_wall(t_g *g, int x, t_col col);
 void	draw_screen(t_g *g);
 
 // ft_init_struct.c

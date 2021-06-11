@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:28:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/29 22:43:39 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 16:35:51 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int	minimap(t_g *g)
 			x += 10;
 		}
 		y += 10;
-		print_player(g, (g->ray.posX * 10) + 2,
-			(g->ray.posY * 10) + 12, 16066343);
+		print_player(g, (g->ray.posX * 10) + 7,
+			(g->ray.posY * 10) + 7, 16066343);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 23:36:49 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/10 17:58:02 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 18:35:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	get_texture(t_g *g)
 	g->tex.cardino[3] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[3].road);
 	g->tex.floor = check_color(g->tex.f);
 	g->tex.ceiling = check_color(g->tex.c);
-	ft_print_img(*g);
 }
 
 void	ft_init_player(t_ray *ray, t_map *map, int i)

@@ -20,32 +20,32 @@ void	my_pixel_put(t_win *win, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// void	clear_window(t_g *g)
-// {
-// 	int	x;
-// 	int	y;
+void	draw_col(t_win *win, t_col col)
+{
+	while (col.start < col.size_max)
+		my_pixel_put(win, col.x, col.start++, col.color);
+}
 
-// 	x = -1;
-// 	y = -1;
-// 	while (++y < g->win.h)
-// 	{
-// 		x = -1;
-// 		while (++x < g->win.w)
-// 			my_pixel_put(&g->win, x, y, 0x00000000);
-// 	}
-// }
+void	clear_window(t_g *g)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	y = -1;
+	while (++y < g->win.h)
+	{
+		x = -1;
+		while (++x < g->win.w)
+			my_pixel_put(&g->win, x, y, 0x00000000);
+	}
+}
 
 void	close_window(t_g *g)
 {
 	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
 	mlx_destroy_window(g->win.mlx_ptr, g->win.win_ptr);
 	ft_err(19);
-}
-
-void	draw_col(t_win *win, t_col col)
-{
-	while (col.start++ < col.size_max)
-		my_pixel_put(win, col.x, col.start, col.color);
 }
 
 t_img	*open_xpm(void *mlx_ptr, char *cardino)

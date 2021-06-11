@@ -63,26 +63,6 @@ static void	ft_complet_floor(t_g *g, char **tab)
 	wrfree(tab_tmp);
 }
 
-static void	get_resolution(t_g *g, char **tab)
-{
-	// int	i;
-
-	// i = 1;
-	printf("*----------- -- --GET RESOLUTION-- -- ----------*\n");
-	// if (ft_strslen(tab) == 3)
-	// {
-	// 	g->win.w = ft_atoi(tab[i]);
-	// 	g->win.h = ft_atoi(tab[i + 1]);
-	// }
-	// else if (ft_strslen(tab) < 3)
-	// 	ft_err(3);
-	// else if (ft_strslen(tab) > 3)
-	// 	ft_err(4);
-	(void)tab;
-	g->win.w = X_RES;
-	g->win.h = Y_RES;
-}
-
 static char	*get_road(char *line)
 {
 	char	*s;
@@ -93,7 +73,7 @@ static char	*get_road(char *line)
 	ext = ft_strdup(ft_strrchr(s, 46));
 	printf("|----------- -- -- -|GET ROAD|- -- -- ----------|\n");
 	printf("*-----------------------------------------------*\n");
-	printf("| road =>|%-24s|ext =>|%-6s|\n", s, ext);
+	printf("|road =>|%-26s|ext =>|%-5s|\n", s, ext);
 	if (!ft_strncmp(ext, ".xpm", 4))
 		ft_putstr("| -- -- -- -- --XPM EXTENTION OK!-- -- -- -- -- |\n");
 	else
@@ -102,7 +82,7 @@ static char	*get_road(char *line)
 		ft_err(5);
 	}
 	printf("*- - - - -- -- -- ------------- -- -- -- - - - -*\n");
-	printf("| road =>|%-24s|ext =>|%-6s|\n", s, ext);
+	printf("|road =>|%-26s|ext =>|%-4s|\n", s, ext);
 	printf("*- - - - -- -- -- ------------- -- -- -- - - - -*\n");
 	wrfree(ext);
 	return (s);
@@ -132,11 +112,6 @@ void	ft_complet_data(t_g *g, char *line)
 				g->tex.cardino[ret].road = get_road(line);
 			if (ret == 3)
 				g->tex.cardino[ret].road = get_road(line);
-		}
-		else if (!ft_strcmp(tab[0], "R"))
-		{
-			get_resolution(g, tab);
-			printf("| %s | %19d | %-19d |\n", tab[0], g->win.w, g->win.h);
 		}
 		else if (!ft_strcmp(tab[0], "S"))
 			g->tex.sprite = ft_strdup((tab[1]));
@@ -173,7 +148,6 @@ void	ft_complet_map(t_g *g, char *line)
 	}
 	if (g->map.collumn < i)
 		g->map.collumn = i;
-	printf("%s\n", line);
 	g->map.map = ft_strsjoin(g->map.map, line);
 	g->map.line++;
 }

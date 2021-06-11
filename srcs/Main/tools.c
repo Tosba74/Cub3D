@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/10 17:34:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 16:50:16 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	skip_space_eol(char *s)
 	len = 0;
 	if (s)
 		len = ft_strlen(s);
-	while (0 <= --len && s[len] == ' ')
+	while (0 <= --len && ft_isspace(s[len]))
 		s[len] = 0;
 }
 
@@ -34,7 +34,7 @@ int	iscardino(t_g *g, char *s, int nb)
 	tab[1] = "SO";
 	tab[2] = "WE";
 	tab[3] = "EA";
-	tab[4] = "";
+	tab[4] = 0;
 	while (++i < 4 && tab[i])
 		if (!ft_strncmp(s, tab[i], nb))
 			return (i);
@@ -43,7 +43,7 @@ int	iscardino(t_g *g, char *s, int nb)
 
 int	is_wall(t_g g, int x, int y)
 {
-	if (g.map.map[x][y] == '0')
+	if (g.map.map[y][x] != '1')
 		return (0);
 	else
 		return (1);

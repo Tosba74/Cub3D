@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:25:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/09 18:36:28 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 19:09:39 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,14 @@ static void	ft_init_textr(t_g *g)
 // 	}
 // }
 
-void	draw_wall(t_g *g, int x)
+void	draw_wall(t_g *g, int x, t_col col)
 {
 	int	y;
 	int	color;
 
 	ft_init_textr(g);
+	g->tex.wall.stop = col.size_max;
+	g->tex.wall.start = col.start;
 	g->tex.wallX -= floor((g->tex.wallX));
 	g->tex.texX = (int)(g->tex.wallX * (float)(g->tex.texWidth));
 	if (g->ray.side == 0 && g->ray.rayDirX > 0)
@@ -101,28 +103,30 @@ void	draw_wall(t_g *g, int x)
 			* g->tex.texY + g->tex.texX];
 		if (g->ray.side == 1)
 			color = (color >> 1) & 8355711;
+		printf("h = %d, texY = %d, texX = %d\n", g->tex.cardino[g->tex.texNum].h, g->tex.texY, g->tex.texX);
+		printf("x = %d, y = %d, mlx = %p, color = %d\n", x, y, g->win.mlx_ptr, color);
 		my_pixel_put(g->win.mlx_ptr, x, y, color);
 	}
 }
 
-// void	draw_screen(t_g *g)
-// {
-// 	int			x;
-// 	t_col		col;
+void	draw_screen(t_g *g)
+{
+	int			x;
+	t_col		col;
 
-// 	x = -1;
-// 	while (++x < g->win.w)
-// 	{
-// 		get_wall_size(x, g);
-// 		col = (t_col){x, 0, g->tex.wall.start, g->tex.ceiling};
-// 		draw_col(&g->win, col);
-// 		draw_wall(g, x);
-// 		col = (t_col){x, g->tex.wall.stop, g->win.h, g->tex.floor};
-// 		draw_col(&g->win, col);
-// 	}
+	x = -1;
+	while (++x < g->win.w)
+	{
+		get_wall_size(x, g);
+		col = (t_col){x, 0, g->tex.wall.start, g->tex.ceiling};
+		draw_col(&g->win, col);
+		draw_wall(g, x, col);
+		col = (t_col){x, g->tex.wall.stop, g->win.h, g->tex.floor};
+		draw_col(&g->win, col);
+	}
 	// ft_draw_sprite(g, &g->txtr->var, g->txtr);
 	// ft_clear_lst(&g->lst_sprite);
-// }
+}
 
 
 // void	draw_screen(t_game *game)
