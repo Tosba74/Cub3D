@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 23:36:49 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/10 18:35:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/12 16:46:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_struct_img(t_g *g)
 	int		i;
 	
 	i = -1;
-	g->tex = (t_texture){};
+	g->tex = (t_texture){.texWidth = 64, .texHeight = 64};
 	g->tex.wall = (t_wall){};
 	while (++i < 4)
 		g->tex.cardino[i] = (t_img){};
@@ -81,15 +81,17 @@ void	ft_init_global(t_g *global)
 	t_win		win;
 	t_ray		ray;
 	t_sprite	sprite;
-	
+	t_texture	tex;
 
 	map = (t_map){};
 	win = (t_win){};
 	ray = (t_ray){};
 	sprite = (t_sprite){};
+	tex = (t_texture){};
 	global->map = map;
 	global->win = win;
 	global->ray = ray;
 	global->sprite = sprite;
+	global->tex = tex;
 	init_struct_img(global);
 }

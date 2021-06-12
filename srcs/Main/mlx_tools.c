@@ -52,7 +52,7 @@ t_img	*open_xpm(void *mlx_ptr, char *cardino)
 {
 	t_img	*img;
 
-	(void)mlx_ptr;
+	img = wrmalloc(sizeof(t_img));
 	img = &(t_img){.road = cardino, .h = 64, .w = 64};
 	if (img->road)
 	{

@@ -84,6 +84,10 @@ void	ft_print_img(t_g g)
 	printf("| tex=>SO => %-33p|\n", g.tex.cardino[1].img);
 	printf("| tex=>EA => %-33p|\n", g.tex.cardino[2].img);
 	printf("| tex=>WE => %-33p|\n", g.tex.cardino[3].img);
+	printf("| Wall_X    => %-33f|\n", g.tex.wallX);
+	printf("| Step      => %-33f|\n", g.tex.step);
+	printf("| COLORCEIL => %-33d|\n", g.tex.ceiling);
+	printf("| COLORCEIL => %-33d|\n", g.tex.ceiling);
 	printf("| COLORFLOOR=> %-33d|\n", g.tex.floor);
 	printf("| COLORCEIL => %-33d|\n", g.tex.ceiling);
 	printf("*-----------------------------------------------*\n");

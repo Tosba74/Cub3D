@@ -1,7 +1,7 @@
 NO ./textures/wall/wood.xpm
-SO ./textures/wall/wall_4.xpm
-WE ./textures/wall/wall_2.xpm
-EA ./textures/wall/wall_b.xpm             
+SO ./textures/wall/grasswall.xpm
+WE ./textures/wall/satan.xpm
+EA ./textures/wall/satan.xpm             
 S textures/sprites/
 F 255,60,5
 C 35,255,5
@@ -15,7 +15,7 @@ C 35,255,5
  1100000011        11   1100020001
 110000001111111        11000200011
 100000000000001       11000200011
-1000W0000000001      11000200011
+1000S0000000001      11000200011
 111111110000001     11000200011 11
        10000001    11000200011 101
        100000011111100000001111101        

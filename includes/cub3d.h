@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/10 18:57:31 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/12 18:04:42 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,13 @@ typedef struct	s_ray
 	float	deltaDistX;
 	float	deltaDistY;
 	float	perpWallDist;
-	int		mapX;
-	int		mapY;
-	int		stepX;
-	int		stepY;
-	int		hit;
-	int		side;
-	int		nb_player;
+	int	mapX;
+	int	mapY;
+	int	stepX;
+	int	stepY;
+	int	hit;
+	int	side;
+	int	nb_player;
 	char	camera;
 }				t_ray;
 
@@ -177,15 +177,15 @@ typedef	struct		s_texture
 	float			wallX;
 	float			step;
 	float			texPos;
-	int				texWidth;
-	int				texHeight;
-	int				texNum;
-	int				texX;
-	int				texY;
-	int				f[3];
-	int				c[3];
-	int				floor;
-	int				ceiling;
+	int			texWidth;
+	int			texHeight;
+	int			texNum;
+	int			texX;
+	int			texY;
+	int			f[3];
+	int			c[3];
+	int			floor;
+	int			ceiling;
 	char			*sprite;
 }					t_texture;
 
@@ -197,7 +197,7 @@ typedef struct	s_global
 	t_texture	tex;
 	t_ray		ray;
 	t_sprite	sprite;
-	int			zbuffer[X_RES];
+	int		zbuffer[X_RES];
 }				t_g;
 
 // ft_error.c
