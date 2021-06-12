@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 11:33:03 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/12 18:08:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/12 18:54:34 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ void	draw_screen(t_g *g)
 		draw_col(&g->win, *col);
 		if (g->ray.side == 1)
 		{
-			col = &(t_col){x, g->win.h / 2 - size / 2, g->win.h / 2 + size / 2, (0x00FFFF00 >> 1) & 8355711};
+			col = &(t_col){x, start, stop, (0x00FFFF00 >> 1) & 8355711};
 			draw_wall(g, x, *col);
 			// draw_col(&g->win, *col);
 		}
 		else
 		{
-			col = &(t_col){x, g->win.h / 2 - size / 2, g->win.h / 2 + size / 2, (0x00FFFF00 >> 1) & 8355711};
+			col = &(t_col){x, start, stop, (0x00FFFF00 >> 1) & 8355711};
 			draw_wall(g, x, *col);
 			// draw_col(&g->win, *col);
 		}
