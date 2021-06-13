@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/12 17:01:50 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/13 19:37:12 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_read_file(int fd, t_g *g)
+void	ft_read_file(int fd, t_g *g)
 {
 	char	*line;
 
@@ -28,21 +28,16 @@ int	ft_read_file(int fd, t_g *g)
 		else if (ft_isdigit(line[0]) || line[0] == ' ')
 			ft_complet_map(g, line);
 	}
-	return (0);
 }
 
 void	ft_cub(int fd)
 {
-	int		bool;
 	t_g		tg;
 
 	tg = (t_g){};
 	ft_init_global(&tg);
 	test(tg);
-	bool = ft_read_file(fd, &tg);
-	printf("hein\n");
-	if (bool)
-		ft_putstr("Error\n");
+	ft_read_file(fd, &tg);
 	// ft_print_struct_p(tg);
 	// ft_print_player(tg);
 	ft_print_map(tg);

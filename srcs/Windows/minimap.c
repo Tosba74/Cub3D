@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:28:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/11 16:35:51 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/13 19:30:39 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void	print_view(t_g *g, int x, int y, int color)
 	(void)color;
 	dest.x = (int)(x + g->ray.dirX * SPEED * 200);
 	dest.y = (int)(y + g->ray.dirY * SPEED * 200);
-	// draw_line(player, dest, g, color);
 }
 
 static void	print_player(t_g *g, int x, int y, int color)

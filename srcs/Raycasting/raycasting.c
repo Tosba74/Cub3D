@@ -36,23 +36,6 @@ static void	init_ray_side_and_step(t_ray *ray)
 	}
 }
 
-// static void	init_ray_delta(t_ray *ray)
-// {
-// 	if (ray->rayDirY == 0)
-// 		ray->deltaDistX = 0;
-// 	else if (ray->rayDirX == 0)
-// 		ray->deltaDistX = 1;
-// 	else
-// 		ray->deltaDistX = fabs(1 / ray->rayDirX);
-// 	if (ray->rayDirX == 0)
-// 		ray->deltaDistY = 0;
-// 	else if (ray->rayDirY == 0)
-// 		ray->deltaDistY = 1;
-// 	else
-// 		ray->deltaDistY = fabs(1 / ray->rayDirY);
-// 	ray->hit = 0;
-// }
-
 static void	init_ray(t_ray *ray, int w, int x)
 {
 	ray->cameraX = 2 * x / (float)(w) - 1;
@@ -73,44 +56,8 @@ static void	init_ray(t_ray *ray, int w, int x)
 	else
 		ray->deltaDistY = fabs(1 / ray->rayDirY);
 	ray->hit = 0;
-	// init_ray_delta(ray);
 	init_ray_side_and_step(ray);
 }
-
-// static double	ft_dist(t_ray *r)
-// {
-// 	if (r->side == 0)
-// 		r->perpWallDist = (r->mapX - r->posX + (1 - r->stepX) / 2) / r->rayDirX;
-// 	else
-// 		r->perpWallDist = (r->mapY - r->posY + (1 - r->stepY) / 2) / r->rayDirY;
-	// g->ray.side = r->side;
-	// g->zbuffer[x_win] = r->perpWallDist;
-// 	return (r->perpWallDist);
-// }
-
-// float	ft_dda(t_g *g, int x_win, t_ray *ray)
-// {
-// 	init_ray(ray, g, x_win);
-// 	while (ray->hit == 0)
-// 	{
-// 		if (ray->sideDistX < ray->sideDistY)
-// 		{
-// 			ray->sideDistX += ray->deltaDistX;
-// 			ray->mapX += ray->stepX;
-// 			ray->side = 0;
-// 		}
-// 		else
-// 		{
-// 			ray->sideDistY += ray->deltaDistY;
-// 			ray->mapY += ray->stepY;
-// 			ray->side = 1;
-// 		}
-// 		if (g->map.map[ray->mapY][ray->mapX] == '1')
-// 			ray->hit = 1;
-// 	}
-// 	g->ray.side = ray->side;
-// 	return (ft_dist(ray));
-// }
 
 float	ft_dda(t_g *g, int x_win)
 {

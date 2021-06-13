@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:35:27 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/11 17:27:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/13 19:26:12 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ void	mov_updown(t_g *g, int neg)
 		g->ray.posX = xpos;
 	if (!is_wall(*g, (int)g->ray.posX, (int)ypos))
 		g->ray.posY = ypos;
-	// if (!is_wall(*g, (int)xpos, (int)ypos))
-	// {
-	// 	g->ray.posY = ypos;
-	// }
-	// else if (!is_wall(*g, (int)xpos, (int)ypos))
-	// {
 }
 
 void	mov_lateral(t_g *g, int neg)
@@ -52,9 +46,11 @@ void	rot_view(t_g *g, int neg)
 
 	dirX = g->ray.dirX;
 	dirY = g->ray.dirY;
-	g->ray.dirX = dirX * cos(neg * SPEEDTURN) - dirY * sin(neg * SPEEDTURN);
-	g->ray.dirY = dirX * sin(neg * SPEEDTURN) + dirY * cos(neg * SPEEDTURN);
 	planeX = g->ray.planeX;
+	g->ray.dirX = dirX * cos(neg * SPEEDTURN)
+		- dirY * sin(neg * SPEEDTURN);
+	g->ray.dirY = dirX * sin(neg * SPEEDTURN)
+		+ dirY * cos(neg * SPEEDTURN);
 	g->ray.planeX = planeX * cos(neg * SPEEDTURN)
 		- g->ray.planeY * sin(neg * SPEEDTURN);
 	g->ray.planeY = planeX * sin(neg * SPEEDTURN)
