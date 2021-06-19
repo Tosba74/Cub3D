@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 21:20:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/15 23:30:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/19 14:54:31 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,41 @@ static void	init_sprite2(t_sprite *sprite, t_win win)
 		+ sprite->spriteScreenX;
 	if (sprite->drawStartX < 0)
 		sprite->drawStartX = 0;
+	printf("drawstartX = %d", sprite->drawStartX);
 	sprite->drawEndX = sprite->spriteWidth / 2
 		+ sprite->spriteScreenX;
 	if (sprite->drawEndX >= win.w)
 		sprite->drawEndX = win.w - 1;
+	printf("drawEndX = %d", sprite->drawEndX );
 }
 
 static void	init_sprite(t_sprite *sprite, t_win win, t_ray ray)
 {
 	sprite->spriteX = sprite->lst->x - ray.posX;
 	sprite->spriteY = sprite->lst->y - ray.posY;
+	printf("spriteX-Y = %f || %f", sprite->spriteX, sprite->spriteY);
 	sprite->invDet = 1.0 / (ray.planeX * ray.dirY - ray.dirX * ray.planeY);
+	printf("invDet = %f", sprite->invDet);
 	sprite->transformX = sprite->invDet * (ray.dirY * sprite->spriteX
 		- ray.dirX * sprite->spriteY);
 	sprite->transformY = sprite->invDet * (-ray.planeY * sprite->spriteX
 		+ ray.planeX * sprite->spriteY);
+	printf("transformX-Y = %f || %f", sprite->transformX, sprite->transformY);
 	sprite->spriteScreenX = (int)((win.w / 2)
 		* (1 + sprite->transformX / sprite->transformY));
+	printf("spritescreenX = %d", sprite->spriteScreenX);
 	sprite->spriteHeight = abs((int)(win.h / sprite->transformY));
+	printf("spriteHeight = %d", sprite->spriteHeight);
 	sprite->drawStartY = -sprite->spriteHeight / 2 + win.h / 2;
 	if (sprite->drawStartY < 0)
 		sprite->drawStartY = 0;
+	printf("drawstartY = %d", sprite->drawStartY);
 	sprite->drawEndY = sprite->spriteHeight / 2 + win.h / 2;
 	if (sprite->drawEndY >= win.h)
 		sprite->drawEndY = win.h - 1;
+	printf("drawEndY = %d", sprite->drawEndY);
 	sprite->spriteWidth = abs((int)(win.h / sprite->transformY));
+	printf("spriteWidth = %d", sprite->spriteWidth);
 	init_sprite2(sprite, win);
 }
 
