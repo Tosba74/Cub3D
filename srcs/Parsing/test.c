@@ -98,4 +98,5 @@ void	test(t_g g)
 	// ft_print_struct_p(g);
 	// ft_print_player(g);
 	ft_print_img(g);
+	ft_print_map(g);
 }

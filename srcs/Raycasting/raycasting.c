@@ -59,6 +59,21 @@ static void	init_ray(t_ray *ray, int w, int x)
 	init_ray_side_and_step(ray);
 }
 
+static void	ft_dda_x_inf_y(t_ray *ray)
+{
+	ray->sideDistX += ray->deltaDistX;
+	ray->mapX += ray->stepX;
+	ray->side = 0;
+}
+
+static void	ft_dda_x_sup_y(t_ray *ray)
+{
+	ray->sideDistY += ray->deltaDistY;
+	ray->mapY += ray->stepY;
+	ray->side = 1;
+}
+
+
 float	ft_dda(t_g *g, int x_win)
 {
 	init_ray(&g->ray, g->win.w, x_win);
@@ -70,17 +85,17 @@ float	ft_dda(t_g *g, int x_win)
 			ft_dda_x_sup_y(&g->ray);
 		if (g->map.map[g->ray.mapY][g->ray.mapX] == '1')
 			g->ray.hit = 1;
-		// if (g->map.map[g->ray.mapY][g->ray.mapX] == '2')
-		// {
-		// 	if (g->lst_sprite == NULL)
-		// 		g->lst_sprite = ft_lst_new(g->ray.mapX + 0.5, g->ray.mapY + 0.5,
-		// 				g->map.map[g->ray.mapY][g->ray.mapX] - '0');
-		// 	else if (ft_in_lst(g->lst_sprite, g->ray.mapX + 0.5,
-		// 			g->ray.mapY + 0.5) == 0)
-		// 		ft_lstadd_frt(&g->lst_sprite, ft_lst_new(g->ray.mapX + 0.5,
-		// 				g->ray.mapY + 0.5,
-		// 				g->map.map[g->ray.mapY][g->ray.mapX] - '0'));
-		// }
+		if (g->map.map[g->ray.mapY][g->ray.mapX] == '2')
+		{
+			if (g->sprite.lst == NULL)
+				g->sprite.lst = ft_lst_new(g->ray.mapX + 0.5, g->ray.mapY + 0.5,
+						g->map.map[g->ray.mapY][g->ray.mapX] - '0');
+			else if (ft_in_lst(g->sprite.lst, g->ray.mapX + 0.5,
+					g->ray.mapY + 0.5) == 0)
+				ft_lstadd_frt(&g->sprite.lst, ft_lst_new(g->ray.mapX + 0.5,
+						g->ray.mapY + 0.5,
+						g->map.map[g->ray.mapY][g->ray.mapX] - '0'));
+		}
 	}
 	if (g->ray.side == 0)
 		g->ray.perpWallDist = (g->ray.mapX - g->ray.posX + (1 - g->ray.stepX) / 2) / g->ray.rayDirX;
@@ -88,5 +103,4 @@ float	ft_dda(t_g *g, int x_win)
 		g->ray.perpWallDist = (g->ray.mapY - g->ray.posY + (1 - g->ray.stepY) / 2) / g->ray.rayDirY;
 	g->zbuffer[x_win] = g->ray.perpWallDist;
 	return (g->ray.perpWallDist);
-	// return (ft_dist(&g->ray));
 }

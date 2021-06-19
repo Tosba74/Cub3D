@@ -6,76 +6,38 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:25:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/12 18:58:51 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/14 00:48:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_dda_x_inf_y(t_ray *ray)
-{
-	ray->sideDistX += ray->deltaDistX;
-	ray->mapX += ray->stepX;
-	ray->side = 0;
-}
-
-void	ft_dda_x_sup_y(t_ray *ray)
-{
-	ray->sideDistY += ray->deltaDistY;
-	ray->mapY += ray->stepY;
-	ray->side = 1;
-}
-
 static void	ft_init_textr(t_g *g)
 {
-	if (g->map.map[g->ray.mapY][g->ray.mapX] == '1')
+	if (g->ray.side == 0)
 	{
-		if (g->ray.side == 0)
+		if (g->map.map[g->ray.mapY][g->ray.mapX] == '1')
 		{
 			if (g->ray.posX > g->ray.mapX)
 				g->tex.texNum = 3;
 			else
 				g->tex.texNum = 2;
 		}
-		else
+		g->tex.wallX = g->ray.posY + g->ray.perpWallDist * g->ray.rayDirY;
+	}
+	else
+	{
+		if (g->map.map[g->ray.mapY][g->ray.mapX] == '1')
 		{
 			if (g->ray.posY > g->ray.mapY)
 				g->tex.texNum = 1;
 			else
 				g->tex.texNum = 0;
 		}
-	}
-	if (g->ray.side == 0)
-		g->tex.wallX = g->ray.posY + g->ray.perpWallDist * g->ray.rayDirY;
-	else
 		g->tex.wallX = g->ray.posX + g->ray.perpWallDist * g->ray.rayDirX;
+	}
+	printf("%d\n", g->tex.texNum);
 }
-
-// static void	ft_init_textr(t_g *g)
-// {
-// 	if (g->ray.side == 0)
-// 	{
-// 		if (g->map.map[g->ray.mapY][g->ray.mapX] == '1')
-// 		{
-// 			if (g->ray.posX > g->ray.mapX)
-// 				g->tex.texNum = 3;
-// 			else
-// 				g->tex.texNum = 2;
-// 		}
-// 		g->tex.wallX = g->ray.posY + g->ray.perpWallDist * g->ray.rayDirY;
-// 	}
-// 	else
-// 	{
-// 		if (g->map.map[g->ray.mapY][g->ray.mapX] == '1')
-// 		{
-// 			if (g->ray.posY > g->ray.mapY)
-// 				g->tex.texNum = 1;
-// 			else
-// 				g->tex.texNum = 0;
-// 		}
-// 		g->tex.wallX = g->ray.posX + g->ray.perpWallDist * g->ray.rayDirX;
-// 	}
-// }
 
 void	draw_wall(t_g *g, int x, t_col col)
 {

@@ -114,7 +114,7 @@ void	ft_complet_data(t_g *g, char *line)
 				g->tex.cardino[ret].road = get_road(line);
 		}
 		else if (!ft_strcmp(tab[0], "S"))
-			g->tex.sprite = ft_strdup((tab[1]));
+			g->tex.sprite.road = ft_strdup((tab[1]));
 		else if (!ft_strcmp(tab[0], "F") || !ft_strcmp(tab[0], "C"))
 			ft_complet_floor(g, tab);
 		printf("|%2d|line => [%-26s] - ok !|\n",ret, line);
@@ -141,7 +141,7 @@ void	ft_complet_map(t_g *g, char *line)
 				if (g->ray.nb_player == 1)
 					ft_init_player(&g->ray, &g->map, (int)i);
 				else if (g->ray.nb_player >= 2)
-					ft_err(20);
+					ft_err(7);
 				line[i] = '0';
 			}
 		}

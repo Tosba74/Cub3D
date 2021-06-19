@@ -45,7 +45,7 @@ void	close_window(t_g *g)
 {
 	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
 	mlx_destroy_window(g->win.mlx_ptr, g->win.win_ptr);
-	ft_err(19);
+	ft_err(9);
 }
 
 t_img	*open_xpm(void *mlx_ptr, char *cardino)

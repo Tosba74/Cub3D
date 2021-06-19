@@ -12,6 +12,20 @@
 
 #include "cub3d.h"
 
+int	update(void *param)
+{
+	t_g	*g;
+
+	g = param;
+	clear_window(g);
+	move(g);
+	draw_screen(g);
+	minimap(g);
+	mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, 0, 0);
+	mlx_do_sync(g->win.mlx_ptr);
+	return (0);
+}
+
 int	key_deal(int key, void *param)
 {
 	t_g	*g;

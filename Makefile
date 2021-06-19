@@ -18,6 +18,10 @@ override I_PATH		:= includes
 override S_PATH		:= srcs
 override T_PATH		:= textures
 override B_PATH		:= bin
+override P_PATH		:= Parsing
+override W_PATH		:= Windows
+override R_PATH		:= Raycasting
+override MAIN_PATH	:= Main
 
 VPATH		= ${OBJS1}
 #Parsing \
@@ -26,19 +30,13 @@ VPATH		= ${OBJS1}
 #Windows \
 #Main
 
-FILES_P		= ft_read_file.c ft_init_struct.c
-
-FILES_R		= raycasting.c texture.c
-
-FILES_E		= test.c ft_error.c
-
-FILES_W		= ft_windows.c key_event_move.c minimap.c move.c 
-
-FILES_M		= cub3d.c main.c tools.c mlx_tools.c
+override FILES_P	:= read_file.c init_struct.c test.c tools.c
+override FILES_W	:= windows.c event.c minimap.c move.c mlx_tools.c texture.c sprite.c sprite_tools.c
+override FILES_R	:= raycasting.c 
+override FILES_M	:= main.c
 
 FILES		= ${addprefix Parsing/, ${FILES_P}} \
 			${addprefix Raycasting/, ${FILES_R}} \
-			${addprefix Error/, ${FILES_E}} \
 			${addprefix Windows/, ${FILES_W}} \
 			${addprefix Main/, ${FILES_M}}
 SRCS		= ${addprefix ${S_PATH}/, ${FILES}}
@@ -113,7 +111,7 @@ minitruc :
 		@echo("      _____ _____  _     _")
 		@echo("|       |   |____]  \___/")
 		@echo("|____ __|__ |____] _/   \_")
-		@echo("  			 is ready !!!")
+		@echo("   is ready !!!")
 
 re:			fclean all
 

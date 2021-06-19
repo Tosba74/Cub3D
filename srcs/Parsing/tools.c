@@ -6,11 +6,38 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/11 16:50:16 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/16 20:27:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	check_color(int *color)
+{
+	int		i;
+
+	i = -1;
+	while (color[++i] && i < 3)
+	{
+		if (0 > color[i] || color[i] > 255)
+			ft_err(6);
+	}
+	if (i != 3)
+		ft_err(6);
+	return (ft_get_color(color[0], color[1], color[2]));
+}
+
+void	get_texture(t_g *g)
+{
+	g->tex.cardino[0] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[0].road);
+	g->tex.cardino[1] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[1].road);
+	g->tex.cardino[2] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[2].road);
+	g->tex.cardino[3] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[3].road);
+	g->tex.sprite.road = "./textures/sprites/mush.xpm";
+	g->tex.sprite = *open_xpm(g->win.mlx_ptr, g->tex.sprite.road); 
+	g->tex.floor = check_color(g->tex.f);
+	g->tex.ceiling = check_color(g->tex.c);
+}
 
 void	skip_space_eol(char *s)
 {
