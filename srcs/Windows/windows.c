@@ -50,6 +50,6 @@ void	draw_screen(t_g *g)
 		draw_col(&g->win, col);
 		x_win++;
 	}
-	// draw_sprite(g);
-	// clear_lst(&g->sprite.lst);
+	draw_sprite(g);
+	clear_lst(&g->sprite.lst);
 }

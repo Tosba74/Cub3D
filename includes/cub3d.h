@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/20 12:22:57 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/20 18:17:08 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,42 +57,42 @@
 // LIST SPRITE
 typedef struct s_lst
 {
-	float		x;
-	float		y;
-	int			id;
-	void		*next;
-}				t_lst;
+	float	x;
+	float	y;
+	int		id;
+	void	*next;
+}			t_lst;
 
 // SPRITES VAR
 typedef struct s_sprite
 {
-	float		spriteX;
-	float		spriteY;
-	float		invDet;
-	float		transformX;
-	float		transformY;
-	int			spriteScreenX;
-	int			spriteHeight;
-	int			drawStartY;
-	int			drawEndY;
-	int			spriteWidth;
-	int			drawStartX;
-	int			drawEndX;
-	int			texX;
-	int			texY;
-	int			d;
-	char		*road;
-	t_lst		*lst;
+	float	sprite_x;
+	float	sprite_y;
+	float	invdet;
+	float	transform_x;
+	float	transform_y;
+	int		screen_x;
+	int		sprite_w;
+	int		sprite_h;
+	int		start_draw_x;
+	int		start_draw_y;
+	int		end_draw_x;
+	int		end_draw_y;
+	int		text_x;
+	int		text_y;
+	int		d;
+	char	*road;
+	t_lst	*lst;
 }				t_sprite;
 
 // COLLUMN PXL
 typedef struct s_col
 {
-	int	x;
-	int	start;
-	int	size_max;
-	int	color;
-}				t_col;
+	int		x;
+	int		start;
+	int		size_max;
+	int		color;
+}			t_col;
 
 // IMAGE
 typedef struct s_img
@@ -110,10 +110,10 @@ typedef struct s_img
 // WALL_SIZE
 typedef struct s_wall
 {
-	int	start;
-	int	stop;
-	int	height;
-}		t_wall;
+	int		start;
+	int		stop;
+	int		height;
+}			t_wall;
 
 //TEXTURES
 typedef struct s_texture
@@ -123,12 +123,12 @@ typedef struct s_texture
 	t_wall	wall;
 	float	wallX;
 	float	step;
-	float	texPos;
-	int		texWidth;
-	int		texHeight;
-	int		texNum;
-	int		texX;
-	int		texY;
+	float	text_pos;
+	int		text_width;
+	int		text_height;
+	int		text_num;
+	int		text_x;
+	int		text_y;
 	int		f[3];
 	int		c[3];
 	int		floor;
@@ -183,7 +183,7 @@ typedef struct s_map
 	char	**map;
 	int		line;
 	int		collumn;
-}		t_map;
+}			t_map;
 
 //ALL
 typedef struct s_global

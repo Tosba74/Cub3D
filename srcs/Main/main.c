@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/19 14:59:23 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/20 19:22:54 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	ft_read_file(int fd, t_g *g)
 	line = NULL;
 	if (fd < 0)
 		ft_err(2);
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) == 1)
 	{
 		skip_space_eol(line);
 		printf("|%s|\n", line);
@@ -89,13 +89,12 @@ int	main(int ac, char **av)
 	{
 		tg = (t_g){};
 		ft_init_global(&tg);
-		test(tg);
 		fd = open(av[1], O_RDWR);
 		ft_read_file(fd, &tg);
+		close(fd);
 		test(tg);
 		proc_win(&tg);
 		wrdestroy();
-		close (fd);
 	}
 	else
 		ft_err(1);
