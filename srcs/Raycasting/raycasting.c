@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 17:19:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/08 14:44:70y bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/19 18:09:05 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,48 +59,55 @@ static void	init_ray(t_ray *ray, int w, int x)
 	init_ray_side_and_step(ray);
 }
 
-static void	ft_dda_x_inf_y(t_ray *ray)
+static void	dda_xy(t_ray *ray)
 {
-	ray->sideDistX += ray->deltaDistX;
-	ray->mapX += ray->stepX;
-	ray->side = 0;
+	if (ray->sideDistX < ray->sideDistY)
+	{
+		ray->sideDistX += ray->deltaDistX;
+		ray->mapX += ray->stepX;
+		ray->side = 0;
+	}
+	else
+	{
+		ray->sideDistY += ray->deltaDistY;
+		ray->mapY += ray->stepY;
+		ray->side = 1;
+	}
 }
 
-static void	ft_dda_x_sup_y(t_ray *ray)
+static void	add_sprite(t_sprite *sprite, t_ray ray, t_map map)
 {
-	ray->sideDistY += ray->deltaDistY;
-	ray->mapY += ray->stepY;
-	ray->side = 1;
+	if (!sprite->lst)
+		sprite->lst = lst_new((float)ray.mapX + 0.5, (float)ray.mapY + 0.5,
+				map.map[ray.mapY][ray.mapX] - '0');
+	else if (!in_lst(sprite->lst, ray.mapX + 0.5, ray.mapY + 0.5))
+		lstadd_frt(&sprite->lst, lst_new((float)ray.mapX + 0.5,
+				(float)ray.mapY + 0.5, map.map[ray.mapY][ray.mapX] - '0'));
 }
-
 
 float	ft_dda(t_g *g, int x_win)
 {
 	init_ray(&g->ray, g->win.w, x_win);
 	while (g->ray.hit == 0)
 	{
-		if (g->ray.sideDistX < g->ray.sideDistY)
-			ft_dda_x_inf_y(&g->ray);
-		else
-			ft_dda_x_sup_y(&g->ray);
+		dda_xy(&g->ray);
 		if (g->map.map[g->ray.mapY][g->ray.mapX] == '1')
 			g->ray.hit = 1;
 		if (g->map.map[g->ray.mapY][g->ray.mapX] == '2')
-		{
-			if (g->sprite.lst == NULL)
-				g->sprite.lst = ft_lst_new(g->ray.mapX + 0.5, g->ray.mapY + 0.5,
-						g->map.map[g->ray.mapY][g->ray.mapX] - '0');
-			else if (ft_in_lst(g->sprite.lst, g->ray.mapX + 0.5,
-					g->ray.mapY + 0.5) == 0)
-				ft_lstadd_frt(&g->sprite.lst, ft_lst_new(g->ray.mapX + 0.5,
-						g->ray.mapY + 0.5,
-						g->map.map[g->ray.mapY][g->ray.mapX] - '0'));
-		}
+			add_sprite(&g->sprite, g->ray, g->map);
 	}
 	if (g->ray.side == 0)
-		g->ray.perpWallDist = (g->ray.mapX - g->ray.posX + (1 - g->ray.stepX) / 2) / g->ray.rayDirX;
+		g->ray.perpWallDist = (g->ray.mapX - g->ray.posX
+				+ (1 - g->ray.stepX) / 2) / g->ray.rayDirX;
 	else
-		g->ray.perpWallDist = (g->ray.mapY - g->ray.posY + (1 - g->ray.stepY) / 2) / g->ray.rayDirY;
+		g->ray.perpWallDist = (g->ray.mapY - g->ray.posY
+				+ (1 - g->ray.stepY) / 2) / g->ray.rayDirY;
 	g->zbuffer[x_win] = g->ray.perpWallDist;
 	return (g->ray.perpWallDist);
 }
+
+// if (!g->sprite.lst)
+	// g->sprite.lst = lst_new((float)g->ray.mapX + 0.5, (float)g->ray.mapY + 0.5, g->map.map[g->ray.mapY][g->ray.mapX] - '0');
+// else if (!in_lst(g->sprite.lst, g->ray.mapX + 0.5,
+		// g->ray.mapY + 0.5))
+	// lstadd_frt(&g->sprite.lst, lst_new((float)g->ray.mapX + 0.5, (float)g->ray.mapY + 0.5, g->map.map[g->ray.mapY][g->ray.mapX] - '0'));

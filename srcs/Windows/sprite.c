@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 21:20:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/19 14:54:31 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/19 18:22:13 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_sprite2(t_sprite *sprite, t_win win)
 		+ sprite->spriteScreenX;
 	if (sprite->drawEndX >= win.w)
 		sprite->drawEndX = win.w - 1;
-	printf("drawEndX = %d", sprite->drawEndX );
+	printf("drawEndX = %d", sprite->drawEndX);
 }
 
 static void	init_sprite(t_sprite *sprite, t_win win, t_ray ray)
@@ -34,12 +34,12 @@ static void	init_sprite(t_sprite *sprite, t_win win, t_ray ray)
 	sprite->invDet = 1.0 / (ray.planeX * ray.dirY - ray.dirX * ray.planeY);
 	printf("invDet = %f", sprite->invDet);
 	sprite->transformX = sprite->invDet * (ray.dirY * sprite->spriteX
-		- ray.dirX * sprite->spriteY);
+			- ray.dirX * sprite->spriteY);
 	sprite->transformY = sprite->invDet * (-ray.planeY * sprite->spriteX
-		+ ray.planeX * sprite->spriteY);
+			+ ray.planeX * sprite->spriteY);
 	printf("transformX-Y = %f || %f", sprite->transformX, sprite->transformY);
 	sprite->spriteScreenX = (int)((win.w / 2)
-		* (1 + sprite->transformX / sprite->transformY));
+			* (1 + sprite->transformX / sprite->transformY));
 	printf("spritescreenX = %d", sprite->spriteScreenX);
 	sprite->spriteHeight = abs((int)(win.h / sprite->transformY));
 	printf("spriteHeight = %d", sprite->spriteHeight);
@@ -58,16 +58,7 @@ static void	init_sprite(t_sprite *sprite, t_win win, t_ray ray)
 
 static void	draw_pix_sprite(t_g *g, t_texture *tex, int startY, int startX)
 {
-	// int	color;
-
-	// color = 0;
-	// g->sprite.d = (startY) * 256 - g->win.h * 128
-	// 	+ g->sprite.spriteHeight * 128;
-	// g->sprite.texY = ((g->sprite.d * tex->texHeight)
-	// 		/ g->sprite.spriteHeight) / 256;
-	// color = tex->sprite.addr[tex->sprite.h
-	// 	* g->sprite.texY + g->sprite.texX];
-		int	color;
+	int	color;
 
 	color = 0;
 	g->sprite.d = (startY) * 256 - g->win.h * 128
@@ -77,9 +68,6 @@ static void	draw_pix_sprite(t_g *g, t_texture *tex, int startY, int startX)
 	if (g->sprite.lst->id == 2)
 		color = tex->sprite.addr[tex->sprite.h
 			* g->sprite.texY + g->sprite.texX];
-	// else if (g->sprite.lst->id == 3)
-	// 	color = tex->sprite.addr[tex->sprite.h
-	// 		* g->sprite.texY + g->sprite.texX];
 	if ((color & 0x00FFFFFF) != 0 && g->sprite.lst->id != 2)
 		my_pixel_put(&g->win, startX, startY, color);
 }
@@ -96,9 +84,9 @@ static int	texx(t_g *g, t_texture *tex, int startX)
 
 void	draw_sprite(t_g *g)
 {
-	int			startY;
-	int			startX;
-	t_lst		*lst;
+	int		startY;
+	int		startX;
+	t_lst	*lst;
 
 	lst = g->sprite.lst;
 	while (g->sprite.lst)
@@ -118,3 +106,19 @@ void	draw_sprite(t_g *g)
 	}
 	g->sprite.lst = lst;
 }
+
+// static void	draw_pix_sprite(t_g *g, t_texture *tex, int startY, int startX)
+// {
+	// int	color;
+
+	// color = 0;
+	// g->sprite.d = (startY) * 256 - g->win.h * 128
+	// 	+ g->sprite.spriteHeight * 128;
+	// g->sprite.texY = ((g->sprite.d * tex->texHeight)
+	// 		/ g->sprite.spriteHeight) / 256;
+	// color = tex->sprite.addr[tex->sprite.h
+	// 	* g->sprite.texY + g->sprite.texX];
+	// else if (g->sprite.lst->id == 3)
+	// 	color = tex->sprite.addr[tex->sprite.h
+	// 		* g->sprite.texY + g->sprite.texX];
+// }

@@ -12,13 +12,13 @@
 
 #include "cub3d.h"
 
-void	ft_lstadd_frt(t_lst **lst, t_lst *new)
+void	lstadd_frt(t_lst **lst, t_lst *new)
 {
 	new->next = *lst;
 	*lst = new;
 }
 
-t_lst	*ft_lst_new(float x, float y, int id)
+t_lst	*lst_new(float x, float y, int id)
 {
 	t_lst	*lst;
 
@@ -33,7 +33,7 @@ t_lst	*ft_lst_new(float x, float y, int id)
 	return (lst);
 }
 
-void	ft_clear_lst(t_lst **lst)
+void	clear_lst(t_lst **lst)
 {
 	t_lst	*tmp;
 
@@ -46,7 +46,7 @@ void	ft_clear_lst(t_lst **lst)
 	*lst = NULL;
 }
 
-int	ft_in_lst(t_lst *lst, float x, float y)
+int	in_lst(t_lst *lst, float x, float y)
 {
 	while (lst)
 	{
@@ -57,7 +57,7 @@ int	ft_in_lst(t_lst *lst, float x, float y)
 	return (0);
 }
 
-int	ft_lst_size(t_lst *lst)
+int	lst_size(t_lst *lst)
 {
 	int	size;
 

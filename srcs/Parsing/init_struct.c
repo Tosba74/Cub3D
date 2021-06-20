@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 23:36:49 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/18 18:08:26 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/19 14:59:57 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_init_player(t_ray *ray, t_map *map, int i)
 static void	init_struct(t_g *g)
 {
 	int		i;
-	
+
 	i = -1;
 	g->win.mlx_ptr = mlx_init();
 	g->sprite.lst = &(t_lst){};
@@ -50,7 +50,6 @@ static void	init_struct(t_g *g)
 	g->tex.sprite = (t_img){};
 	while (++i < 4)
 		g->tex.cardino[i] = (t_img){};
-	
 }
 
 void	ft_init_global(t_g *global)

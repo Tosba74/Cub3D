@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/16 19:26:32 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/20 12:22:57 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx/mlx.h"
 
-// LIST SPRITES
-typedef struct 	s_lst
+// LIST SPRITE
+typedef struct s_lst
 {
 	float		x;
 	float		y;
@@ -94,15 +94,8 @@ typedef struct s_col
 	int	color;
 }				t_col;
 
-// VECTOR
-typedef struct	s_vector 
-{
-	float	x;
-	float	y;
-}				t_vector;
-
 // IMAGE
-typedef struct	s_img
+typedef struct s_img
 {
 	char	*road;
 	void	*img;
@@ -112,7 +105,7 @@ typedef struct	s_img
 	int		endian;
 	int		bytes;
 	int		sizeline;
-}				t_img;
+}			t_img;
 
 // WALL_SIZE
 typedef struct s_wall
@@ -120,31 +113,30 @@ typedef struct s_wall
 	int	start;
 	int	stop;
 	int	height;
-}
-				t_wall;
+}		t_wall;
 
 //TEXTURES
-typedef	struct		s_texture
+typedef struct s_texture
 {
-	t_img		cardino[4];
-	t_img		sprite;
-	t_wall		wall;
-	float		wallX;
-	float		step;
-	float		texPos;
-	int			texWidth;
-	int			texHeight;
-	int			texNum;
-	int			texX;
-	int			texY;
-	int			f[3];
-	int			c[3];
-	int			floor;
-	int			ceiling;
-}					t_texture;
+	t_img	cardino[4];
+	t_img	sprite;
+	t_wall	wall;
+	float	wallX;
+	float	step;
+	float	texPos;
+	int		texWidth;
+	int		texHeight;
+	int		texNum;
+	int		texX;
+	int		texY;
+	int		f[3];
+	int		c[3];
+	int		floor;
+	int		ceiling;
+}			t_texture;
 
 // RAY
-typedef struct	s_ray
+typedef struct s_ray
 {
 	float	posX;
 	float	posY;
@@ -168,33 +160,33 @@ typedef struct	s_ray
 	int		side;
 	int		nb_player;
 	char	camera;
-}				t_ray;
+}			t_ray;
 
 // WINDOWS
-typedef struct	s_win
+typedef struct s_win
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img;
-	int			*addr;
-	int			bpp;
-	int			line_length;
-	int			endian;
-	int			w;
-	int			h;
-	int			keypress;
-}				t_win;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img;
+	int		*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+	int		w;
+	int		h;
+	int		keypress;
+}			t_win;
 
 // MAP
-typedef struct	s_map
+typedef struct s_map
 {
-	char		**map;
-	int			line;
-	int			collumn;
-}				t_map;
+	char	**map;
+	int		line;
+	int		collumn;
+}		t_map;
 
 //ALL
-typedef struct	s_global
+typedef struct s_global
 {
 	t_map		map;
 	t_win		win;
@@ -205,78 +197,73 @@ typedef struct	s_global
 }				t_g;
 
 // sprite.c
-void	ft_lstadd_frt(t_lst **lst, t_lst *new);
-t_lst	*ft_lst_new(float x, float y, int id);
-void	ft_clear_lst(t_lst **lst);
-int		ft_in_lst(t_lst *lst, float x, float y);
-int		ft_lst_size(t_lst *lst);
-void	draw_sprite(t_g *g);
+void		lstadd_frt(t_lst **lst, t_lst *new);
+t_lst		*lst_new(float x, float y, int id);
+void		clear_lst(t_lst **lst);
+int			in_lst(t_lst *lst, float x, float y);
+int			lst_size(t_lst *lst);
+void		draw_sprite(t_g *g);
 
 // tools.c
-void	skip_space_eol(char *s);
-int		iscardino(t_g *g, char *s, int nb);
-int		is_wall(t_g g, int x, int y);
+void		skip_space_eol(char *s);
+int			iscardino(t_g *g, char *s, int nb);
+int			is_wall(t_g g, int x, int y);
 
 // mlx_tools.c
-void	my_pixel_put(t_win *win, int x, int y, int color);
-void	clear_window(t_g *g);
-void	close_window(t_g *g);
-void	draw_col(t_win *win, t_col col);
-t_img	*open_xpm(void *mlx_ptr, char *cardino);
-
-
-
+void		my_pixel_put(t_win *win, int x, int y, int color);
+void		clear_window(t_g *g);
+void		close_window(t_g *g);
+void		draw_col(t_win *win, t_col col);
+t_img		*open_xpm(void *mlx_ptr, char *cardino);
 
 // test.c
-void	ft_print_struct_p(t_g g);
-int		ft_print_map(t_g g);
+void		ft_print_struct_p(t_g g);
+int			ft_print_map(t_g g);
 // void	ft_print_struct_p(t_g g);
 // void	ft_print_player(t_g g);
-void	ft_print_img(t_g g);
-void	test(t_g g);
-
-
+void		ft_print_img(t_g g);
+void		test(t_g g);
 
 // inti_texture.c
-void	get_texture(t_g *g);
+void		get_texture(t_g *g);
 
 // texture.c
 // void	draw_wall(t_g *g, int x, t_col col);
-void	draw_wall(t_g *g, t_wall size, t_texture *t, int x);
-void	draw_screen(t_g *g);
+void		draw_wall(t_g *g, t_wall size, t_texture *t, int x);
+void		draw_screen(t_g *g);
 
 // minimap
-int		minimap(t_g *g);
+int			minimap(t_g *g);
 
 // move.c
-void	mov_updown(t_g *g, int neg);
-void	mov_lateral(t_g *g, int neg);
-void	rot_view(t_g *g, int neg);
+void		mov_updown(t_g *g, int neg);
+void		mov_lateral(t_g *g, int neg);
+void		rot_view(t_g *g, int neg);
 
 // events.c
-int		update(void *param);
-int		key_deal(int key, void *param);
-int		key_death(int key, void *param);
-void	move(t_g *g);
+int			update(void *param);
+int			key_deal(int key, void *param);
+int			key_death(int key, void *param);
+void		move(t_g *g);
 
 // windows.c
-void	get_wall_size(int x_win, t_g *g);
-void	draw_screen(t_g *g);
+void		get_wall_size(int x_win, t_g *g);
+void		draw_screen(t_g *g);
 
 // raycasting.c
-float	ft_dda(t_g *g, int x_win);
+float		ft_dda(t_g *g, int x_win);
 
 // init_struct.c
-void	get_texture(t_g *g);
-void	ft_init_player(t_ray *ray, t_map *map, int i);
-void	ft_init_global(t_g *global);
+void		get_texture(t_g *g);
+void		ft_init_player(t_ray *ray, t_map *map, int i);
+void		ft_init_global(t_g *global);
 
 // read_map.c
-void	ft_complet_data(t_g *g, char *line);
-void	ft_complet_map(t_g *g, char *line);
+void		ft_complet_data(t_g *g, char *line);
+void		ft_complet_map(t_g *g, char *line);
 
 // main.c
-void	ft_err(int err);
+void		ft_err(int err);
 
-void	draw_line(t_vector p0, t_vector p1, t_g *g, int rgb);
+// void		draw_line(t_vector p0, t_vector p1, t_g *g, int rgb);
 #endif

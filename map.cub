@@ -3,6 +3,7 @@ SO ./textures/wall/grasswall.xpm
 WE ./textures/wall/satan.xpm
 EA ./textures/wall/satan.xpm             
 S ./textures/sprites/.xpm
+
 F 255,60,5
 C 35,255,5
 

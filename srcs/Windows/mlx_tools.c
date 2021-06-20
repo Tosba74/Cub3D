@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 13:58:35 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/08 14:06:44by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/19 15:14:21 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_img	*open_xpm(void *mlx_ptr, char *cardino)
 				&img->w, &img->h);
 		if (img->img)
 		{
-			img->addr = (int *)mlx_get_data_addr(img->img, &img->bytes,
-				&img->sizeline, &img->endian);
+			img->addr = (int *) mlx_get_data_addr(img->img,
+					&img->bytes, &img->sizeline, &img->endian);
 			return (img);
 		}
 	}

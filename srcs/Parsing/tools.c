@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/16 20:27:48 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/19 15:15:32 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	get_texture(t_g *g)
 	g->tex.cardino[2] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[2].road);
 	g->tex.cardino[3] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[3].road);
 	g->tex.sprite.road = "./textures/sprites/mush.xpm";
-	g->tex.sprite = *open_xpm(g->win.mlx_ptr, g->tex.sprite.road); 
+	g->tex.sprite = *open_xpm(g->win.mlx_ptr, g->tex.sprite.road);
 	g->tex.floor = check_color(g->tex.f);
 	g->tex.ceiling = check_color(g->tex.c);
 }

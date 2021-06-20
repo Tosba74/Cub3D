@@ -70,24 +70,35 @@ int	ft_print_map(t_g g)
 	return (0);
 }
 
+void	ft_print_cardino(t_img img)
+{
+	printf("| ROAD => %-39s|\n", img.road);
+	printf("| IMG => %-39p|\n", img.img);
+	// printf("| ADDR => %-38d|\n", img.addr);
+	printf("| W => %-19d H => %-19d|\n", img.w, img.h);
+	printf("| ENDIAN => %-13d BYTES => %-13d SIZE => %-13d|\n", img.endian,
+		img.bytes, img.sizeline);
+
+}
+
 void	ft_print_img(t_g g)
 {
-	(void)g;
 	printf("*-----------------------------------------------*\n");
 	printf("| --------------  IMAGES  --------------------- |\n");
 	printf("*-----------------------------------------------*\n");
-	printf("| ROAD =>NO => %-33s|\n", g.tex.cardino[0].road);
-	printf("| ROAD =>SO => %-33s|\n", g.tex.cardino[1].road);
-	printf("| ROAD =>EA => %-33s|\n", g.tex.cardino[2].road);
-	printf("| ROAD =>WE => %-33s|\n", g.tex.cardino[3].road);
-	printf("| tex=>NO => %-33p|\n", g.tex.cardino[0].img);
-	printf("| tex=>SO => %-33p|\n", g.tex.cardino[1].img);
-	printf("| tex=>EA => %-33p|\n", g.tex.cardino[2].img);
-	printf("| tex=>WE => %-33p|\n", g.tex.cardino[3].img);
+	printf("* CARDINO -- NORD -- INFO --                    *\n");
+	ft_print_cardino(g.tex.cardino[0]);
+	printf("* CARDINO -- SUD -- INFO --                     *\n");
+	ft_print_cardino(g.tex.cardino[1]);
+	printf("* CARDINO -- EST -- INFO --                     *\n");
+	ft_print_cardino(g.tex.cardino[2]);
+	printf("* CARDINO -- WEST -- INFO --                    *\n");
+	ft_print_cardino(g.tex.cardino[3]);
+	printf("* SPRITE -- INFO --                             *\n");
+	ft_print_cardino(g.tex.sprite);
 	printf("| Wall_X    => %-33f|\n", g.tex.wallX);
 	printf("| Step      => %-33f|\n", g.tex.step);
-	printf("| COLORCEIL => %-33d|\n", g.tex.ceiling);
-	printf("| COLORCEIL => %-33d|\n", g.tex.ceiling);
+	printf("| texPos    => %-33f|\n", g.tex.texPos);
 	printf("| COLORFLOOR=> %-33d|\n", g.tex.floor);
 	printf("| COLORCEIL => %-33d|\n", g.tex.ceiling);
 	printf("*-----------------------------------------------*\n");
@@ -100,3 +111,33 @@ void	test(t_g g)
 	ft_print_img(g);
 	ft_print_map(g);
 }
+
+// typedef struct s_img
+// {
+// 	char	*road;
+// 	void	*img;
+// 	int		*addr;
+// 	int		w;
+// 	int		h;
+// 	int		endian;
+// 	int		bytes;
+// 	int		sizeline;
+// }			t_img;
+// typedef struct s_texture
+// {
+// 	t_img	cardino[4];
+// 	t_img	sprite;
+// 	t_wall	wall;
+// 	float	wallX;
+// 	float	step;
+// 	float	texPos;
+// 	int		texWidth;
+// 	int		texHeight;
+// 	int		texNum;
+// 	int		texX;
+// 	int		texY;
+// 	int		f[3];
+// 	int		c[3];
+// 	int		floor;
+// 	int		ceiling;
+// }			t_texture;

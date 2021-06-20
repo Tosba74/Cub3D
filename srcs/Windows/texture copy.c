@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:25:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/14 00:48:59 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/19 18:23:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_init_textr(t_g *g)
+static void	ft_init_texture(t_g *g)
 {
 	if (g->ray.side == 0)
 	{
@@ -36,48 +36,74 @@ static void	ft_init_textr(t_g *g)
 		}
 		g->tex.wallX = g->ray.posX + g->ray.perpWallDist * g->ray.rayDirX;
 	}
-	printf("%d\n", g->tex.texNum);
 }
 
-void	draw_wall(t_g *g, int x, t_col col)
+// GOOD
+// void	draw_wall(t_g *g, int x, t_col col)
+// {
+// 	int	y;
+// 	int	color;
+
+// 	ft_init_textr(g);
+// 	// g->tex.wall.stop = col.size_max;
+// 	g->tex.wall.start = col.start;
+// 	g->tex.wall.height = col.size_max - col.start;
+// 	// printf("wallx = %f\n", g->tex.wallX);
+// 	g->tex.wallX -= floor((g->tex.wallX));
+// 	g->tex.texX = (int)(g->tex.wallX * (float)(g->tex.cardino[g->tex.texNum].w));
+// 	if (g->ray.side == 0 && g->ray.rayDirX > 0)
+// 		g->tex.texX = g->tex.cardino[g->tex.texNum].w - g->tex.texX - 1;
+// 	if (g->ray.side == 1 && g->ray.rayDirY < 0)
+// 		g->tex.texX = g->tex.cardino[g->tex.texNum].w - g->tex.texX - 1;
+// 	g->tex.step = 1.0 * g->tex.cardino[g->tex.texNum].h / g->tex.wall.height;
+// 	// printf("texh = %d, wallheight = %d\n", g->tex.cardino[g->tex.texNum].h, g->tex.wall.height);
+// 	g->tex.texPos = (g->tex.wall.start - g->win.h / 2 + g->tex.wall.height / 2)
+// 		* g->tex.step;
+// 	y = g->tex.wall.start - 1;
+// 	// if (y < 0)
+// 	// 	y = 0;
+// 	// if (col.size_max > g->win.h)
+// 	// 	col.size_max = g->win.h;
+// 	while (++y < col.size_max)
+// 	{
+// 		g->tex.texY = (int)(g->tex.texPos) & (g->tex.cardino[g->tex.texNum].h - 1);
+// 		g->tex.texPos += g->tex.step;
+// 		color = g->tex.cardino[g->tex.texNum].addr[g->tex.cardino[g->tex.texNum].h
+// 			* g->tex.texY + g->tex.texX];
+// 		if (g->ray.side == 1)
+// 			color = (color >> 1) & 8355711;
+// 		// printf("h = %d, texY = %d, texX = %d texNUM = %d\n", g->tex.cardino[g->tex.texNum].h, g->tex.texY, g->tex.texX, g->tex.texNum);
+// 		// printf("color => r = %d, g = %d, b = %d\n", color / (256*256), (color % (256*256)) / 256, ((color % (256*256)) % 256));
+// 		my_pixel_put(&g->win, x, y, color);
+// 	}
+// }
+
+void	draw_wall(t_g *g, t_wall size, t_texture *t, int x)
 {
 	int	y;
 	int	color;
 
-	ft_init_textr(g);
-	// g->tex.wall.stop = col.size_max;
-	g->tex.wall.start = col.start;
-	g->tex.wall.height = col.size_max - col.start;
-	// printf("wallx = %f\n", g->tex.wallX);
-	g->tex.wallX -= floor((g->tex.wallX));
-	g->tex.texX = (int)(g->tex.wallX * (float)(g->tex.cardino[g->tex.texNum].w));
+	ft_init_texture(g);
+	t->wallX -= floor((t->wallX));
+	t->texX = (int)(t->wallX * (float)(t->texWidth));
 	if (g->ray.side == 0 && g->ray.rayDirX > 0)
-		g->tex.texX = g->tex.cardino[g->tex.texNum].w - g->tex.texX - 1;
+		t->texX = t->texWidth - t->texX - 1;
 	if (g->ray.side == 1 && g->ray.rayDirY < 0)
-		g->tex.texX = g->tex.cardino[g->tex.texNum].w - g->tex.texX - 1;
-	g->tex.step = 1.0 * g->tex.cardino[g->tex.texNum].h / g->tex.wall.height;
-	// printf("texh = %d, wallheight = %d\n", g->tex.cardino[g->tex.texNum].h, g->tex.wall.height);
-	g->tex.texPos = (g->tex.wall.start - g->win.h / 2 + g->tex.wall.height / 2)
-		* g->tex.step;
-	y = g->tex.wall.start - 1;
-	// if (y < 0)
-	// 	y = 0;
-	// if (col.size_max > g->win.h)
-	// 	col.size_max = g->win.h;
-	while (++y < col.size_max)
+		t->texX = t->texWidth - t->texX - 1;
+	t->step = 1.0 * t->texHeight / size.height;
+	t->texPos = (size.start - g->win.h / 2 + size.height / 2) * t->step;
+	y = size.start - 1;
+	while (++y < size.stop)
 	{
-		g->tex.texY = (int)(g->tex.texPos) & (g->tex.cardino[g->tex.texNum].h - 1);
-		g->tex.texPos += g->tex.step;
-		color = g->tex.cardino[g->tex.texNum].addr[g->tex.cardino[g->tex.texNum].h
-			* g->tex.texY + g->tex.texX];
+		t->texY = (int)(t->texPos) & (t->texHeight - 1);
+		t->texPos += t->step;
+		color = t->cardino[t->texNum].addr[t->cardino[t->texNum].h
+			* t->texY + t->texX];
 		if (g->ray.side == 1)
 			color = (color >> 1) & 8355711;
-		// printf("h = %d, texY = %d, texX = %d texNUM = %d\n", g->tex.cardino[g->tex.texNum].h, g->tex.texY, g->tex.texX, g->tex.texNum);
-		// printf("color => r = %d, g = %d, b = %d\n", color / (256*256), (color % (256*256)) / 256, ((color % (256*256)) % 256));
 		my_pixel_put(&g->win, x, y, color);
 	}
 }
-
 // void	draw_wall(t_g *g, int x, t_col size)
 // {
 // 	int	y;
