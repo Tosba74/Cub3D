@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 17:19:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/19 18:09:05 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 00:51:19 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ static void	dda_xy(t_ray *ray)
 
 static void	add_sprite(t_sprite *sprite, t_ray ray, t_map map)
 {
-	if (!sprite->lst)
+	if (sprite->lst == NULL)
 		sprite->lst = lst_new((float)ray.mapX + 0.5, (float)ray.mapY + 0.5,
 				map.map[ray.mapY][ray.mapX] - '0');
-	else if (!in_lst(sprite->lst, ray.mapX + 0.5, ray.mapY + 0.5))
+	else if (in_lst(sprite->lst, ray.mapX + 0.5, ray.mapY + 0.5) == 0)
 		lstadd_frt(&sprite->lst, lst_new((float)ray.mapX + 0.5,
 				(float)ray.mapY + 0.5, map.map[ray.mapY][ray.mapX] - '0'));
 }

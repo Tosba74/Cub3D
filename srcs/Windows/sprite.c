@@ -6,58 +6,73 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 21:20:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/20 19:14:14 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/21 01:01:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_sprite2(t_sprite *sprite, t_win win)
+static void	init_sprite2(t_sprite *sprite, t_win win, t_ray ray)
 {
-	sprite->start_draw_x = -sprite->sprite_w / 2
-		+ sprite->screen_x;
-	if (sprite->start_draw_x < 0)
-		sprite->start_draw_x = 0;
-	printf("start_draw_x = %d\n", sprite->start_draw_x);
-	sprite->end_draw_x = sprite->sprite_w / 2
-		+ sprite->screen_x;
-	if (sprite->end_draw_x >= win.w)
-		sprite->end_draw_x = win.w - 1;
-	printf("end_draw_x = %d\n", sprite->end_draw_x);
-	printf("*-----------------------------------------------*\n");
+	(void)win;
+	printf("%f|%f|%f\n", ray.posX, sprite->lst->x, sprite->sprite_x);
+	sprite->sprite_x = sprite->lst->x - ray.posX;
+	printf("%f|%f|%f\n", ray.posY, sprite->lst->y, sprite->sprite_y);
+	sprite->sprite_y = sprite->lst->y - ray.posY;
+	// sprite->invdet = 1.0 / (ray.planeX * ray.dirY - ray.dirX * ray.planeY);
+	// sprite->transform_x = sprite->invdet * (ray.dirY * sprite->sprite_x
+			// - ray.dirX * sprite->sprite_y);
+	// sprite->transform_y = sprite->invdet * (-ray.planeY * sprite->sprite_x
+			// + ray.planeX * sprite->sprite_y);
+	// sprite->screen_x = (int)((win.w / 2)
+			// * (1 + sprite->transform_x / sprite->transform_y));
+	// sprite->sprite_h = abs((int)(win.h / sprite->transform_y));
+	// sprite->start_draw_y = -sprite->sprite_h / 2 + win.h / 2;
+	// if (sprite->start_draw_y < 0)
+		// sprite->start_draw_y = 0;
+	// sprite->end_draw_y = sprite->sprite_h / 2 + win.h / 2;
+	// if (sprite->end_draw_y >= win.h)
+		// sprite->end_draw_y = win.h - 1;
+	// sprite->sprite_w = abs((int)(win.h / sprite->transform_y));
+	// sprite->start_draw_x = -sprite->sprite_w / 2
+		// + sprite->screen_x;
+	// if (sprite->start_draw_x < 0)
+		// sprite->start_draw_x = 0;
+	// sprite->end_draw_x = sprite->sprite_w / 2
+		// + sprite->screen_x;
+	// if (sprite->end_draw_x >= win.w)
+		// sprite->end_draw_x = win.w - 1;
 }
 
 static void	init_sprite(t_sprite *sprite, t_win win, t_ray ray)
 {
-	printf("*-----------------------------------------------*\n");
-	printf("| --------------  INIT_S  --------------------- |\n");
-	printf("*-----------------------------------------------*\n");
-	sprite->sprite_x = sprite->lst->x - ray.posX;
-	sprite->sprite_y = sprite->lst->y - ray.posY;
-	printf("sprite_x-Y = %f || %f\n", sprite->sprite_x, sprite->sprite_y);
+	init_sprite2(sprite, win, ray);
+	// sprite->sprite_x = sprite->lst->x - ray.posX;
+	// sprite->sprite_y = sprite->lst->y - ray.posY;
 	sprite->invdet = 1.0 / (ray.planeX * ray.dirY - ray.dirX * ray.planeY);
-	printf("invdet = %f\n", sprite->invdet);
 	sprite->transform_x = sprite->invdet * (ray.dirY * sprite->sprite_x
 			- ray.dirX * sprite->sprite_y);
 	sprite->transform_y = sprite->invdet * (-ray.planeY * sprite->sprite_x
 			+ ray.planeX * sprite->sprite_y);
-	printf("transform_x-Y = %f || %f\n", sprite->transform_x, sprite->transform_y);
 	sprite->screen_x = (int)((win.w / 2)
 			* (1 + sprite->transform_x / sprite->transform_y));
-	printf("screen_x = %d\n", sprite->screen_x);
 	sprite->sprite_h = abs((int)(win.h / sprite->transform_y));
-	printf("sprite_h = %d\n", sprite->sprite_h);
 	sprite->start_draw_y = -sprite->sprite_h / 2 + win.h / 2;
 	if (sprite->start_draw_y < 0)
 		sprite->start_draw_y = 0;
-	printf("start_draw_y = %d\n", sprite->start_draw_y);
 	sprite->end_draw_y = sprite->sprite_h / 2 + win.h / 2;
 	if (sprite->end_draw_y >= win.h)
 		sprite->end_draw_y = win.h - 1;
-	printf("end_draw_y = %d\n", sprite->end_draw_y);
 	sprite->sprite_w = abs((int)(win.h / sprite->transform_y));
-	printf("sprite_w = %d\n", sprite->sprite_w);
-	init_sprite2(sprite, win);
+	sprite->start_draw_x = -sprite->sprite_w / 2
+		+ sprite->screen_x;
+	if (sprite->start_draw_x < 0)
+		sprite->start_draw_x = 0;
+	sprite->end_draw_x = sprite->sprite_w / 2
+		+ sprite->screen_x;
+	if (sprite->end_draw_x >= win.w)
+		sprite->end_draw_x = win.w - 1;
+	// init_sprite2(sprite, win, ray);
 }
 
 static void	draw_pix_sprite(t_g *g, t_texture *tex, int startY, int startX)
@@ -96,7 +111,7 @@ void	draw_sprite(t_g *g)
 	while (g->sprite.lst)
 	{
 		init_sprite(&g->sprite, g->win, g->ray);
-		ft_print_img(*g);
+		// ft_print_img(*g);
 		startX = g->sprite.start_draw_x - 1;
 		while (++startX < g->sprite.end_draw_x)
 		{
