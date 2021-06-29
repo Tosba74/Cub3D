@@ -88,14 +88,13 @@ void	ft_complet_data(t_g *g, char *line)
 		ret = iscardino(g, tab[0], 2);
 		if (0 <= ret && ret < 4)
 			g->tex.cardino[ret].road = get_road(line);
-		else if (!ft_strcmp(tab[0], "S"))
-			g->tex.sprite.road = ft_strdup((tab[1]));
 		else if (!ft_strcmp(tab[0], "F") || !ft_strcmp(tab[0], "C"))
 			ft_complet_floor(g, tab);
 	}
 	wrfree(tab);
 }
 
+/*
 void	stock_sprite(t_g *g, float index)
 {
 	// t_lst	*new;
@@ -104,13 +103,13 @@ void	stock_sprite(t_g *g, float index)
 	// new = lst_new((float)index, ((float)g->map.line) + 0.5, 2);
 	// new = &(t_lst){.x = index, .y = (float)g->map.line + 0.5, .id = 2};
 	if (!g->lst)
-		g->lst = lst_new((float)index + 0.5, ((float)g->map.line) + 0.5, 2);
+		g->lst = lst_new((float)index, ((float)g->map.line) + 0.5, 2);
 	else if (in_lst(g->lst, g->ray.mapX, g->ray.mapY) == 0)
-		lstadd_frt(&g->lst, lst_new((float)index + 0.5, ((float)g->map.line) + 0.5, 2));
+		ft_lstadd_front(g->lst, lst_new((float)index, ((float)g->map.line) + 0.5, 2));
 	g->map.nb_sprite++;
 	// wrfree(new);
 }
-
+*/
 // void	stock_sprite(t_g *g, int index)
 // {
 // 	t_lst	new;
@@ -147,8 +146,8 @@ void	ft_complet_map(t_g *g, char *line)
 			else
 				ft_err(8);
 		}
-		else if (line[i] == '2')
-			stock_sprite(g, i);
+		// else if (line[i] == '2')
+			// stock_sprite(g, i);
 	if (g->map.collumn < i)
 		g->map.collumn = i;
 	g->map.map = ft_strsjoin(g->map.map, line);

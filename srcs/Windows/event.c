@@ -21,7 +21,11 @@ int	update(void *param)
 	move(g);
 	draw_screen(g);
 	minimap(g);
-	draw_sprite(g, &g->ray, &g->tex);
+	if (g->time == 10)
+		g->time = 0;
+	else
+		g->time++;
+	// draw_sprite(g, &g->ray, &g->tex);
 	mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, 0, 0);
 	mlx_do_sync(g->win.mlx_ptr);
 	return (0);
@@ -60,13 +64,13 @@ int	key_death(int key, void *param)
 		g->win.keypress ^= MOV_UP;
 	else if (key == KEY_DOWN || key == KEY_S)
 		g->win.keypress ^= MOV_DOWN;
-	else if (key == KEY_LEFT || key == KEY_A)
+	else if (key == KEY_A)
 		g->win.keypress ^= MOV_LEFT;
-	else if (key == KEY_RIGHT || key == KEY_D)
+	else if (key == KEY_D)
 		g->win.keypress ^= MOV_RIGHT;
-	else if (key == KEY_Q)
+	else if (key == KEY_Q || key == KEY_LEFT)
 		g->win.keypress ^= TURN_LEFT;
-	else if (key == KEY_E)
+	else if (key == KEY_E || key == KEY_RIGHT)
 		g->win.keypress ^= TURN_RIGHT;
 	return (0);
 }

@@ -76,20 +76,23 @@ void	ft_print_srite(t_g g)
 
 void	ft_print_lst(t_g g)
 {
+	t_lst		*start;
 	int		size;
 
-	size = -1;
+	size = 0;
+	start = g.lst;
 	printf("*-----------------------------------------------*\n");
 	printf("| -------------  INFO LST  -------------------- |\n");
 	printf("*-----------------------------------------------*\n");
-	while (++size < g.map.nb_sprite)
+		while (start)
 	{
-		printf("| SPRITE #%-38d|\n", size + 1);
-		printf("| POS X => %-37f|\n", g.lst->x);
-		printf("| POS Y => %-37f|\n", g.lst->y);
-		printf("| POS Id => %-36d|\n", g.lst->id);
-		printf("| POS next => %-34p|\n", g.lst->next);
+		printf("| SPRITE #%-38d|\n", size++);
+		printf("| POS X => %-37f|\n", start->x);
+		printf("| POS Y => %-37f|\n", start->y);
+		printf("| POS Id => %-36d|\n", start->id);
+		printf("| POS next => %-34p|\n", start->next);
 		printf("*-----------------------------------------------*\n");
+		start = start->next;
 	}
 	printf("| Nb_Sprite => %-33d|\n", g.map.nb_sprite);
 	printf("*-----------------------------------------------*\n");
@@ -105,7 +108,8 @@ void	ft_print_img(t_g g)
 	ft_print_cardino(g.tex.cardino[1], "SUD");
 	ft_print_cardino(g.tex.cardino[2], "EST");
 	ft_print_cardino(g.tex.cardino[3], "WEST");
-	ft_print_cardino(g.tex.sprite, "SPRITE");
+	ft_print_cardino(g.tex.sprite[0], "SPRITE1");
+	ft_print_cardino(g.tex.sprite[1], "SPRITE2");
 	printf("| Wall_X   	=> %-29f|\n", g.tex.wallX);
 	printf("| Step     	=> %-29f|\n", g.tex.step);
 	printf("| text_pos   	=> %-29f|\n", g.tex.text_pos);

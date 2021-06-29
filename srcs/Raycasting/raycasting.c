@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 17:19:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/23 21:33:11 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/29 14:23:02 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ static void	dda_xy(t_ray *ray)
 	}
 }
 
-static void	add_sprite(t_lst *lst, t_ray ray, t_map map)
+static void	add_sprite(t_g *g, t_ray ray, t_map map)
 {
-	if (lst == NULL)
-		lst = lst_new((float)ray.mapX, (float)ray.mapY,
+	if (g->lst == NULL)
+		g->lst = lst_new((float)ray.mapX, (float)ray.mapY,
 				map.map[ray.mapY][ray.mapX] - '0');
-	else if (in_lst(lst, ray.mapX, ray.mapY) == 0)
-		lstadd_frt(&lst, lst_new((float)ray.mapX, (float)ray.mapY,
+	else if (in_lst(g->lst, ray.mapX, ray.mapY) == 0)
+		lstadd_frt(&g->lst, lst_new((float)ray.mapX, (float)ray.mapY,
 				map.map[ray.mapY][ray.mapX] - '0'));
 }
 
@@ -94,7 +94,7 @@ float	ft_dda(t_g *g, int x_win)
 		if (g->map.map[g->ray.mapY][g->ray.mapX] == '1')
 			g->ray.hit = 1;
 		if (g->map.map[g->ray.mapY][g->ray.mapX] == '2')
-			add_sprite(g->lst, g->ray, g->map);
+			add_sprite(g, g->ray, g->map);
 	}
 	if (g->ray.side == 0)
 		g->ray.perpWallDist = (g->ray.mapX - g->ray.posX
@@ -107,7 +107,7 @@ float	ft_dda(t_g *g, int x_win)
 }
 
 // if (!g->lst)
-	// g->lst = lst_new((float)g->ray.mapX + 0.5, (float)g->ray.mapY + 0.5, g->map.map[g->ray.mapY][g->ray.mapX] - '0');
+// 	g->lst = lst_new((float)g->ray.mapX + 0.5, (float)g->ray.mapY + 0.5, g->map.map[g->ray.mapY][g->ray.mapX] - '0');
 // else if (!in_lst(g->lst, g->ray.mapX + 0.5,
-		// g->ray.mapY + 0.5))
-	// lstadd_frt(&g->lst, lst_new((float)g->ray.mapX + 0.5, (float)g->ray.mapY + 0.5, g->map.map[g->ray.mapY][g->ray.mapX] - '0'));
+// 		g->ray.mapY + 0.5))
+// 	lstadd_frt(&g->lst, lst_new((float)g->ray.mapX + 0.5, (float)g->ray.mapY + 0.5, g->map.map[g->ray.mapY][g->ray.mapX] - '0'));

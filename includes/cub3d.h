@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/25 14:37:27 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/29 17:56:08 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct s_wall
 typedef struct s_texture
 {
 	t_img	cardino[4];
-	t_img	sprite;
+	t_img	sprite[2];
 	t_wall	wall;
 	float	wallX;
 	float	step;
@@ -194,8 +194,9 @@ typedef struct s_global
 	t_texture	tex;
 	t_sprite	sprite;
 	t_lst		*lst;
-	int			zbuffer[X_RES];
-}				t_g;
+	int		time;
+	int		zbuffer[X_RES];
+}			t_g;
 
 // sprite.c
 void		lstadd_frt(t_lst **lst, t_lst *new);
@@ -216,6 +217,7 @@ void		clear_window(t_g *g);
 void		close_window(t_g *g);
 void		draw_col(t_win *win, t_col col);
 t_img		*open_xpm(void *mlx_ptr, char *cardino);
+t_img		*open_xpm_sprite(void *mlx_ptr, char *cardino);
 
 // test.c
 // void		ft_print_struct_p(t_g g);
