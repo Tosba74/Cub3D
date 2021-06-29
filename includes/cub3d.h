@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/29 17:56:08 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/29 20:11:37 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct s_wall
 typedef struct s_texture
 {
 	t_img	cardino[4];
-	t_img	sprite[2];
+	t_img	sprite[6];
 	t_wall	wall;
 	float	wallX;
 	float	step;

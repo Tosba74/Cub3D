@@ -6,11 +6,32 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 21:20:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/29 18:47:38 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/29 20:26:04 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int 	fucking_animated(t_g *g)
+{
+	if (g->time < 10)
+		return (0);
+	else if (g->time < 20)
+		return (1);
+	else if (g->time < 30)
+		return (0);
+	else if (g->time < 40)
+		return (1);
+	else if (g->time < 50)
+		return (2);
+	else if (g->time < 60)
+		return (3);
+	else if (g->time < 70)
+		return (4);
+	else if (g->time < 80)
+		return (5);
+	return (0);
+}
 
 static void	ft_init_sprite2(t_g *g)
 {
@@ -70,7 +91,8 @@ static int	ft_texx(t_g *g, t_texture *t, int startX)
 			/ g->sprite.sprite_w) / 256;
 	return (ret);
 }
- void	draw_sprite(t_g *g, t_ray *ray, t_texture *t)
+
+void	draw_sprite(t_g *g, t_ray *ray, t_texture *t)
 {
 	int				startY;
 	int				startX;
@@ -89,12 +111,8 @@ static int	ft_texx(t_g *g, t_texture *t, int startX)
 				&& startX < g->win.w
 				&& g->sprite.transform_y < g->zbuffer[startX])
 				while (++startY < g->sprite.end_draw_y)
-				{
-					if (g->time < 5)
-						ft_draw_pix_sprite(g, &t->sprite[0], startY, startX);
-					else
-						ft_draw_pix_sprite(g, &t->sprite[1], startY, startX);
-				}
+					ft_draw_pix_sprite(g, &t->sprite[fucking_animated(g)],
+						startY, startX);
 		}
 		g->lst = g->lst->next;
 	}

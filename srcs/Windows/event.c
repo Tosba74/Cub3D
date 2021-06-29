@@ -21,11 +21,10 @@ int	update(void *param)
 	move(g);
 	draw_screen(g);
 	minimap(g);
-	if (g->time == 10)
+	if (g->time == 100)
 		g->time = 0;
 	else
 		g->time++;
-	// draw_sprite(g, &g->ray, &g->tex);
 	mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, 0, 0);
 	mlx_do_sync(g->win.mlx_ptr);
 	return (0);
