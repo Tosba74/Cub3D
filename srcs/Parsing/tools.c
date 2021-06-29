@@ -6,11 +6,21 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/19 15:15:32 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/25 14:29:28 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// data->time = clock();
+// 	data->frame_time = (float)(data->time - data->prev_time) / CLOCKS_PER_SEC;
+// 	if (++data->frame_uni > 30)
+// 	{
+// 		printf("\rfps:%.2f", 1 / data->frame_time);
+// 		fflush(stdout);
+// 		data->frame_uni = 0;
+// 	}
+// 	data->prev_time = data->time;
 
 static int	check_color(int *color)
 {

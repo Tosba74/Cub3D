@@ -12,47 +12,13 @@
 
 #include "cub3d.h"
 
-// void	ft_print_struct_p(t_g g)
-// {
-// 	printf("*-----------------------------------------------*\n");
-// 	printf("| ---------------  DATA  ---------------------- |\n");
-// 	printf("*-----------------------------------------------*\n");
-// 	printf("|%8s == [%-4d]                             |\n", "weight", g.data.w);
-// 	printf("|%8s == [%-4d]                             |\n", "height", g.data.h);
-// 	printf("|%8s == [%-32s] |\n", g.data.cardino[0][0], g.data.cardino[1][0]);
-// 	printf("|%8s == [%-32s] |\n", g.data.cardino[0][1], g.data.cardino[1][1]);
-// 	printf("|%8s == [%-32s] |\n", g.data.cardino[0][2], g.data.cardino[1][2]);
-// 	printf("|%8s == [%-32s] |\n", g.data.cardino[0][3], g.data.cardino[1][3]);
-// 	printf("|%8s == [%-32s] |\n", g.data.cardino[0][4], g.data.cardino[1][4]);
-// 	printf("|%8s == [%-32s] |\n", "sprite", g.data.sprite);
-// 	printf("|%8s == [%3d] [%3d] [%3d]                  |\n", "floor",
-// 		g.data.f[0], g.data.f[1], g.data.f[2]);
-// 	printf("|%8s == [%3d] [%3d] [%3d]                  |\n", "color",
-// 		g.data.c[0], g.data.c[1], g.data.c[2]);
-// 	printf("|%8s == [%7d]                          |\n", "floor", g.data.floor);
-// 	printf("|%8s == [%7d]                          |\n", "ceiling",
-// 		g.data.ceiling);
-// 	printf("*-----------------------------------------------*\n\n");
-// }
-
-// void	ft_print_player(t_g g)
-// {
-// 	printf("*-----------------------------------------------*\n");
-// 	printf("| --------------  PLAYER  --------------------- |\n");
-// 	printf("*-----------------------------------------------*\n");
-// 	printf("| NB PLAYER => %-33d|\n", g.player.nb);
-// 	printf("| View PLAYER ONE => %-27c|\n", g.player.view);
-// 	printf("| Pos X => %-12f Pos Y => %-14f |\n", g.player.x, g.player.y);
-// 	printf("*-----------------------------------------------*\n");
-// }
-
-int	ft_print_map(t_g g)
+void	ft_print_map(t_g g)
 {
 	int	t;
 
 	t = -1;
 	if (g.map.map == NULL)
-		return (1);
+		printf("LA MAP est Vide !!!\n");
 	printf("*-----------------------------------------------*\n");
 	printf("| ----------  MAP -- %4d x %4d  ------------- |\n",
 		g.map.line + 1, g.map.collumn + 1);
@@ -65,58 +31,28 @@ int	ft_print_map(t_g g)
 	{
 		printf("|%6s%-35s%6s|\n", "", g.map.map[t], "");
 	}
+	printf("*-----------------------------------------------*\n");
+	printf("| nb_player = %-34d|\n", g.map.nb_player);
+	printf("| nb_sprite = %-34d|\n", g.map.nb_sprite);
 	printf("*-----------------------------------------------*\n\n");
-	return (0);
 }
 
-void	ft_print_cardino(t_img img)
+void	ft_print_cardino(t_img img, char *str)
 {
+	printf("| -- TEXTURE -- %4s -- INFO --  ---------------|\n", str);
+	printf("*-----------------------------------------------*\n");
 	printf("| ROAD => %-38s|\n", img.road);
 	printf("| IMG => %-39p|\n", img.img);
 	printf("| ADDR => %-38s|\n", (char *)img.addr);
 	printf("| W => %-17d |H => %-17d|\n", img.w, img.h);
 	printf("| ENDIAN => [%-3d] BYTES => [%-3d] SIZE => [%-3d]  |\n", img.endian,
 		img.bytes, img.sizeline);
+	printf("*-----------------------------------------------*\n");
 
 }
 
-void	ft_print_img(t_g g)
+void	ft_print_srite(t_g g)
 {
-	printf("*-----------------------------------------------*\n");
-	printf("| --------------  IMAGES  --------------------- |\n");
-	printf("*-----------------------------------------------*\n");
-	printf("| -- CARDINO -- NORD -- INFO --  ---------------|\n");
-	printf("*-----------------------------------------------*\n");
-	ft_print_cardino(g.tex.cardino[0]);
-	printf("*-----------------------------------------------*\n");
-	printf("| -- CARDINO -- SUD -- INFO --  ----------------|\n");
-	printf("*-----------------------------------------------*\n");
-	ft_print_cardino(g.tex.cardino[1]);
-	printf("*-----------------------------------------------*\n");
-	printf("| -- CARDINO -- EST -- INFO --  ----------------|\n");
-	printf("*-----------------------------------------------*\n");
-	ft_print_cardino(g.tex.cardino[2]);
-	printf("*-----------------------------------------------*\n");
-	printf("| -- CARDINO -- WEST -- INFO --  ---------------|\n");
-	printf("*-----------------------------------------------*\n");
-	ft_print_cardino(g.tex.cardino[3]);
-	printf("*-----------------------------------------------*\n");
-	printf("* SPRITE -- INFO --   --------------------------*\n");
-	printf("*-----------------------------------------------*\n");
-	ft_print_cardino(g.tex.sprite);
-	printf("*-----------------------------------------------*\n");
-	printf("| -------------  INFO TEX  -------------------- |\n");
-	printf("*-----------------------------------------------*\n");
-	printf("| Wall_X   	=> %-29f|\n", g.tex.wallX);
-	printf("| Step     	=> %-29f|\n", g.tex.step);
-	printf("| text_pos   	=> %-29f|\n", g.tex.text_pos);
-	printf("| text_width	=> %-29d|\n", g.tex.text_width);
-	printf("| text_height	=> %-29d|\n", g.tex.text_height);
-	printf("| text_num	=> %-29d|\n", g.tex.text_num);
-	printf("| text_x	=> %-29d|\n", g.tex.text_x);
-	printf("| text_y	=> %-29d|\n", g.tex.text_y);
-	printf("| COLORFLOOR	=> %-29d|\n", g.tex.floor);
-	printf("| COLORCEIL 	=> %-29d|\n", g.tex.ceiling);
 	printf("*-----------------------------------------------*\n");
 	printf("| -------------  INFO SPRITE  ----------------- |\n");
 	printf("*-----------------------------------------------*\n");
@@ -138,10 +74,86 @@ void	ft_print_img(t_g g)
 	printf("*-----------------------------------------------*\n");
 }
 
+void	ft_print_lst(t_g g)
+{
+	int		size;
+
+	size = -1;
+	printf("*-----------------------------------------------*\n");
+	printf("| -------------  INFO LST  -------------------- |\n");
+	printf("*-----------------------------------------------*\n");
+	while (++size < g.map.nb_sprite)
+	{
+		printf("| SPRITE #%-38d|\n", size + 1);
+		printf("| POS X => %-37f|\n", g.lst->x);
+		printf("| POS Y => %-37f|\n", g.lst->y);
+		printf("| POS Id => %-36d|\n", g.lst->id);
+		printf("| POS next => %-34p|\n", g.lst->next);
+		printf("*-----------------------------------------------*\n");
+	}
+	printf("| Nb_Sprite => %-33d|\n", g.map.nb_sprite);
+	printf("*-----------------------------------------------*\n");
+
+}
+
+void	ft_print_img(t_g g)
+{
+	printf("*-----------------------------------------------*\n");
+	printf("| --------------  IMAGES  --------------------- |\n");
+	printf("*-----------------------------------------------*\n");
+	ft_print_cardino(g.tex.cardino[0], "NORD");
+	ft_print_cardino(g.tex.cardino[1], "SUD");
+	ft_print_cardino(g.tex.cardino[2], "EST");
+	ft_print_cardino(g.tex.cardino[3], "WEST");
+	ft_print_cardino(g.tex.sprite, "SPRITE");
+	printf("| Wall_X   	=> %-29f|\n", g.tex.wallX);
+	printf("| Step     	=> %-29f|\n", g.tex.step);
+	printf("| text_pos   	=> %-29f|\n", g.tex.text_pos);
+	printf("| text_width	=> %-29d|\n", g.tex.text_width);
+	printf("| text_height	=> %-29d|\n", g.tex.text_height);
+	printf("| text_num	=> %-29d|\n", g.tex.text_num);
+	printf("| text_x	=> %-29d|\n", g.tex.text_x);
+	printf("| text_y	=> %-29d|\n", g.tex.text_y);
+	printf("| COLORFLOOR	=> %-29d|\n", g.tex.floor);
+	printf("| COLORCEIL 	=> %-29d|\n", g.tex.ceiling);
+	ft_print_srite(g);
+}
+
+void	ft_print_ray(t_g g)
+{
+
+	printf("*-----------------------------------------------*\n");
+	printf("| ------------ --  INFO RAY  -- --------------- |\n");
+	printf("*-----------------------------------------------*\n");
+	printf("| posX = %-41f|\n", g.ray.posX);
+	printf("| posY = %-41f|\n", g.ray.posY);
+	printf("| dirX = %-41f|\n", g.ray.dirX);
+	printf("| dirY = %-41f|\n", g.ray.dirY);
+	printf("| planeX = %-39f|\n", g.ray.planeX);
+	printf("| planeY = %-39f|\n", g.ray.planeY);
+	printf("| cameraX = %-38f|\n", g.ray.cameraX);
+	printf("| rayDirX = %-38f|\n", g.ray.rayDirX);
+	printf("| rayDirY = %-38f|\n", g.ray.rayDirY);
+	printf("| sideDistX = %-37f|\n", g.ray.sideDistX);
+	printf("| sideDistY = %-37f|\n", g.ray.sideDistY);
+	printf("| deltaDistX = %-38f|\n", g.ray.deltaDistX);
+	printf("| deltaDistY = %-38f|\n", g.ray.deltaDistY);
+	printf("| perpWallDist = %-33f|\n", g.ray.perpWallDist);
+	// printf("| alpha = %-33f|\n", g.ray.alpha);
+	printf("| mapX = %-41d|\n", g.ray.mapX);
+	printf("| mapY = %-41d|\n", g.ray.mapY);
+	printf("| stepX = %-40d|\n", g.ray.stepX);
+	printf("| stepY = %-40d|\n", g.ray.stepY);
+	printf("| hit = %-42d|\n", g.ray.hit);
+	printf("| side = %-41d|\n", g.ray.side);
+	printf("| camera = %-40c|\n", g.ray.camera);
+	printf("*-----------------------------------------------*\n");
+}
+
 void	test(t_g g)
 {
-	// ft_print_struct_p(g);
-	// ft_print_player(g);
+	ft_print_ray(g);
 	ft_print_img(g);
 	ft_print_map(g);
+	ft_print_lst(g);
 }

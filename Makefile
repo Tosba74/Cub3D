@@ -24,16 +24,11 @@ override R_PATH		:= Raycasting
 override MAIN_PATH	:= Main
 
 VPATH		= ${OBJS1}
-#Parsing \
-#Raycasting \
-#Error \
-#Windows \
-#Main
 
-override FILES_P	:= read_file.c init_struct.c test.c tools.c
-override FILES_W	:= windows.c event.c minimap.c move.c mlx_tools.c texture.c sprite.c sprite_tools.c
+override FILES_P	:= read_file.c test.c tools.c
+override FILES_W	:= windows.c event.c minimap.c move.c mlx_tools.c sprite.c sprite_tools.c
 override FILES_R	:= raycasting.c 
-override FILES_M	:= main.c
+override FILES_M	:= init_global.c main.c
 
 FILES		= ${addprefix Parsing/, ${FILES_P}} \
 			${addprefix Raycasting/, ${FILES_R}} \

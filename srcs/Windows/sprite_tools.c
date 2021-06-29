@@ -22,11 +22,11 @@ t_lst	*lst_new(float x, float y, int id)
 {
 	t_lst	*lst;
 
-	lst = malloc(sizeof(t_lst));
+	lst = wrmalloc(sizeof(t_lst));
 	if (lst)
 	{
-		lst->x = x;
-		lst->y = y;
+		lst->x = x + 0.5;
+		lst->y = y + 0.5;
 		lst->id = id;
 		lst->next = NULL;
 	}
@@ -40,7 +40,7 @@ void	clear_lst(t_lst **lst)
 	while (*lst)
 	{
 		tmp = (*lst)->next;
-		free(*lst);
+		wrfree(*lst);
 		*lst = tmp;
 	}
 	*lst = NULL;
@@ -50,7 +50,7 @@ int	in_lst(t_lst *lst, float x, float y)
 {
 	while (lst)
 	{
-		if (lst->x == x && lst->y == y)
+		if (lst->x == x + 0.5 && lst->y == y + 0.5)
 			return (1);
 		lst = lst->next;
 	}

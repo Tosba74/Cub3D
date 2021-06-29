@@ -93,20 +93,39 @@ void	ft_complet_data(t_g *g, char *line)
 		else if (!ft_strcmp(tab[0], "F") || !ft_strcmp(tab[0], "C"))
 			ft_complet_floor(g, tab);
 	}
-	wrfree(line);
 	wrfree(tab);
 }
 
-void	stock_sprite(t_g *g, int index)
+void	stock_sprite(t_g *g, float index)
 {
-	t_lst	new;
+	// t_lst	*new;
 
-	new = (t_lst){index, g->map.line, 2, NULL};
-	if (!g->sprite.lst)
-		g->sprite.lst = &new;
-	else
-		g->sprite.lst->next = &new;
+	index += 0.5;
+	// new = lst_new((float)index, ((float)g->map.line) + 0.5, 2);
+	// new = &(t_lst){.x = index, .y = (float)g->map.line + 0.5, .id = 2};
+	if (!g->lst)
+		g->lst = lst_new((float)index + 0.5, ((float)g->map.line) + 0.5, 2);
+	else if (in_lst(g->lst, g->ray.mapX, g->ray.mapY) == 0)
+		lstadd_frt(&g->lst, lst_new((float)index + 0.5, ((float)g->map.line) + 0.5, 2));
+	g->map.nb_sprite++;
+	// wrfree(new);
 }
+
+// void	stock_sprite(t_g *g, int index)
+// {
+// 	t_lst	new;
+
+// 	new = (t_lst){index, g->map.line, 2, NULL};
+// 	if (!g->lst)
+// 		g->lst = &new;
+// 	else
+// 	{
+// 		while(!g->lst->next)
+// 			g->lst++;
+// 		g->lst->next = &new;
+// 	}
+// 	g->map.nb_sprite++;
+// }
 
 void	ft_complet_map(t_g *g, char *line)
 {
@@ -114,25 +133,24 @@ void	ft_complet_map(t_g *g, char *line)
 
 	i = -1;
 	while (line[++i])
-	{
-		if (line[i] == '2')
-			stock_sprite(g, i);
-		else if (!(48 <= line[i] && line[i] <= 50) && line[i] != ' ')
+		if (!(48 <= line[i] && line[i] <= 50) && line[i] != ' ')
 		{
 			if (iscardino(g, line + i, 1) != -1)
 			{
 				g->ray.camera = line[i];
-				g->ray.nb_player++;
-				if (g->ray.nb_player == 1)
+				if (!g->map.nb_player)
 					ft_init_player(&g->ray, &g->map, (int)i);
-				else if (g->ray.nb_player >= 2)
+				else
 					ft_err(7);
 				line[i] = '0';
 			}
+			else
+				ft_err(8);
 		}
-	}
+		else if (line[i] == '2')
+			stock_sprite(g, i);
 	if (g->map.collumn < i)
 		g->map.collumn = i;
 	g->map.map = ft_strsjoin(g->map.map, line);
-	g->map.line += 1;
+	g->map.line++;
 }

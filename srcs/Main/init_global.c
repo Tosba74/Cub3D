@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   init_global.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 23:36:49 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/20 18:16:51 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/25 14:39:30 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_init_player(t_ray *ray, t_map *map, int i)
 		ray->dirX = -1;
 		ray->planeY = -0.66;
 	}
+	map->nb_player++;
 }
 
 static void	init_struct(t_g *g)
@@ -44,7 +45,7 @@ static void	init_struct(t_g *g)
 
 	i = -1;
 	g->win.mlx_ptr = mlx_init();
-	g->sprite.lst = &(t_lst){};
+	// g->lst = &(t_lst){};
 	g->tex = (t_texture){.text_width = 64, .text_height = 64};
 	g->tex.wall = (t_wall){};
 	g->tex.sprite = (t_img){};

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/20 18:17:08 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/25 14:37:27 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct s_sprite
 	int		text_y;
 	int		d;
 	char	*road;
-	t_lst	*lst;
 }				t_sprite;
 
 // COLLUMN PXL
@@ -158,7 +157,6 @@ typedef struct s_ray
 	int		stepY;
 	int		hit;
 	int		side;
-	int		nb_player;
 	char	camera;
 }			t_ray;
 
@@ -183,6 +181,8 @@ typedef struct s_map
 	char	**map;
 	int		line;
 	int		collumn;
+	int		nb_player;
+	int		nb_sprite;
 }			t_map;
 
 //ALL
@@ -193,6 +193,7 @@ typedef struct s_global
 	t_ray		ray;
 	t_texture	tex;
 	t_sprite	sprite;
+	t_lst		*lst;
 	int			zbuffer[X_RES];
 }				t_g;
 
@@ -202,7 +203,7 @@ t_lst		*lst_new(float x, float y, int id);
 void		clear_lst(t_lst **lst);
 int			in_lst(t_lst *lst, float x, float y);
 int			lst_size(t_lst *lst);
-void		draw_sprite(t_g *g);
+void		draw_sprite(t_g *g, t_ray *ray, t_texture *t);
 
 // tools.c
 void		skip_space_eol(char *s);
@@ -217,11 +218,13 @@ void		draw_col(t_win *win, t_col col);
 t_img		*open_xpm(void *mlx_ptr, char *cardino);
 
 // test.c
-void		ft_print_struct_p(t_g g);
-int			ft_print_map(t_g g);
+// void		ft_print_struct_p(t_g g);
 // void	ft_print_struct_p(t_g g);
 // void	ft_print_player(t_g g);
+void		ft_print_map(t_g g);
 void		ft_print_img(t_g g);
+void		ft_print_ray(t_g g);
+void		ft_print_lst(t_g g);
 void		test(t_g g);
 
 // inti_texture.c
@@ -229,8 +232,8 @@ void		get_texture(t_g *g);
 
 // texture.c
 // void	draw_wall(t_g *g, int x, t_col col);
-void		draw_wall(t_g *g, t_wall size, t_texture *t, int x);
-void		draw_screen(t_g *g);
+// void		draw_wall(t_g *g, t_wall size, t_texture *t, int x);
+// void		draw_screen(t_g *g);
 
 // minimap
 int			minimap(t_g *g);
@@ -247,7 +250,7 @@ int			key_death(int key, void *param);
 void		move(t_g *g);
 
 // windows.c
-void		get_wall_size(int x_win, t_g *g);
+// void		get_wall_size(int x_win, t_g *g);
 void		draw_screen(t_g *g);
 
 // raycasting.c
