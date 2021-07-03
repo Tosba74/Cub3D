@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 17:19:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/29 14:23:02 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/30 12:44:44 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,3 @@ float	ft_dda(t_g *g, int x_win)
 	g->zbuffer[x_win] = g->ray.perpWallDist;
 	return (g->ray.perpWallDist);
 }
-
-// if (!g->lst)
-// 	g->lst = lst_new((float)g->ray.mapX + 0.5, (float)g->ray.mapY + 0.5, g->map.map[g->ray.mapY][g->ray.mapX] - '0');
-// else if (!in_lst(g->lst, g->ray.mapX + 0.5,
-// 		g->ray.mapY + 0.5))
-// 	lstadd_frt(&g->lst, lst_new((float)g->ray.mapX + 0.5, (float)g->ray.mapY + 0.5, g->map.map[g->ray.mapY][g->ray.mapX] - '0'));

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 21:20:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/29 20:26:04 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/03 19:21:14 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 int 	fucking_animated(t_g *g)
 {
-	if (g->time < 10)
-		return (0);
-	else if (g->time < 20)
-		return (1);
-	else if (g->time < 30)
-		return (0);
-	else if (g->time < 40)
-		return (1);
-	else if (g->time < 50)
-		return (2);
-	else if (g->time < 60)
+	if (g->time < 300)
+	{
+		if ((g->time / 10) % 2 == 0)
+			return (0);
+		else
+			return (1);
+	}
+	if (g->time < 320)
 		return (3);
-	else if (g->time < 70)
+	if (g->time < 340)
 		return (4);
-	else if (g->time < 80)
+	if (g->time < 360)
 		return (5);
+	if (g->time == 400)
+		g->time = 0;
 	return (0);
 }
 

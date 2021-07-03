@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/29 20:11:37 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/02 12:16:04 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 # define SPEED 0.1
 # define SPEEDTURN 0.05
 
-# define X_RES 1200
-# define Y_RES 800
+# define X_RES 12000
+# define Y_RES 8000
 
 # include <errno.h>
 # include <math.h>

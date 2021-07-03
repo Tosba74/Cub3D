@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite.c                                           :+:      :+:    :+:   */
+/*   spritecop copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 21:20:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/23 19:46:41 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/06/30 17:25:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	draw_sprite(t_g *g)
 	while (g->lst)
 	{
 		init_sprite(&g->sprite, g->win, g->ray);
-		// ft_print_img(*g);
 		startX = g->sprite.start_draw_x - 1;
 		while (++startX < g->sprite.end_draw_x)
 		{
@@ -126,19 +125,3 @@ void	draw_sprite(t_g *g)
 	}
 	g->lst = lst;
 }
-
-// static void	draw_pix_sprite(t_g *g, t_texture *tex, int startY, int startX)
-// {
-	// int	color;
-
-	// color = 0;
-	// g->sprite.d = (startY) * 256 - g->win.h * 128
-	// 	+ g->sprite.sprite_h * 128;
-	// g->sprite.text_y = ((g->sprite.d * tex->text_height)
-	// 		/ g->sprite.sprite_h) / 256;
-	// color = tex->sprite.addr[tex->sprite.h
-	// 	* g->sprite.text_y + g->sprite.text_x];
-	// else if (g->lst->id == 3)
-	// 	color = tex->sprite.addr[tex->sprite.h
-	// 		* g->sprite.text_y + g->sprite.text_x];
-// }
