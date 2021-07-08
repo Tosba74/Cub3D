@@ -26,7 +26,7 @@ override MAIN_PATH	:= Main
 VPATH		= ${OBJS1}
 
 override FILES_P	:= read_file.c test.c tools.c
-override FILES_W	:= windows.c event.c minimap.c move.c mlx_tools.c sprite.c sprite_tools.c
+override FILES_W	:= windows.c update.c minimap.c move.c mlx_tools.c sprite.c sprite_tools.c
 override FILES_R	:= raycasting.c 
 override FILES_M	:= init_global.c main.c
 

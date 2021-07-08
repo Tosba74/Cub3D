@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 00:58:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/08 23:13:01 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/07 18:52:34 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
+int					ft_isinstr(char *str, int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					ft_strcmp(const char *s1, const char *s2);

@@ -12,31 +12,22 @@
 
 #include "cub3d.h"
 
-/*
-void    fill_flood_map(t_cub *cub, int y, int x)
+void	fill_flood_map(t_map map, int x, int y)
 {
-    if (y < 0 || x < 0 || y > (ft_tablen(cub) - 1) || \
-	x > ((int)ft_strlen(cub->map.tab_map[y]) - 1))
-	error("The map is not close.\n", cub);
-    if (ft_ischar("|.$#", cub->map.tab_map[y][x]))
-	return ;
-    if (cub->map.tab_map[y][x] == '1')
-    {
-	cub->map.tab_map[y][x] = '|';
-	return ;
-    }
-    if (cub->map.tab_map[y][x] == '0')
-	cub->map.tab_map[y][x] = '.';
-    if (cub->map.tab_map[y][x] == '2')
-	cub->map.tab_map[y][x] = '$';
-    if (cub->map.tab_map[y][x] == '3')
-	cub->map.tab_map[y][x] = '#';
-    fill_flood_map(cub, y - 1, x);
-    fill_flood_map(cub, y + 1, x);
-    fill_flood_map(cub, y, x - 1);
-    fill_flood_map(cub, y, x + 1);
+	if (y < 0 || x < 0 || y > (ft_strslen(map.map) - 1)
+		|| x > ((int)ft_strlen(map.map[y]) - 1))
+		ft_err(8);
+	if (ft_isinstr("012", map.map[y][x]))
+		return ;
+	else
+		ft_err(8);
+	if (map.map[y][x] == '1')
+		return ;
+	fill_flood_map(map, y - 1, x);
+	fill_flood_map(map, y + 1, x);
+	fill_flood_map(map, y, x - 1);
+	fill_flood_map(map, y, x + 1);
 }
-*/
 
 static void	ft_complet_floor(t_g *g, char **tab)
 {
@@ -92,8 +83,64 @@ void	ft_complet_data(t_g *g, char *line)
 			ft_complet_floor(g, tab);
 	}
 	wrfree(tab);
+	wrfree(line);
 }
 
+static void	add_map_line(t_g *g, char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i])
+		if (!(48 <= line[i] && line[i] <= 51) && line[i] != ' ')
+		{
+			if (iscardino(g, line + i, 1) != -1)
+			{
+				g->ray.camera = line[i];
+				if (!g->map.nb_player)
+					ft_init_player(&g->ray, &g->map, (int)i);
+				else
+					ft_err(7);
+				line[i] = '0';
+			}
+			else
+				ft_err(8);
+		}
+	if (g->map.collumn < i)
+		g->map.collumn = i;
+	g->map.map = ft_strsjoin(g->map.map, line);
+	g->map.line++;
+	wrfree(line);
+}
+
+void	ft_complet_map(t_g *g, char *line, int fd, int ret)
+{
+	while (ret == 1 && (line[0] == ' ' || line[0] == '1' || line[0] == '0'))
+	{
+		add_map_line(g, line);
+		ret = get_next_line(fd, &line);
+	}
+	if (ret == 0 && line != NULL)
+		add_map_line(g, line);
+	else if (line[0] != 0 && ret == 1)
+		ft_err(8);
+	else
+		wrfree(line);
+	while (get_next_line(fd, &line) == 1)
+	{
+		if (line[0] != 0)
+			ft_err(8);
+		wrfree(line);
+	}
+	if (line[0] != 0)
+		ft_err(8);
+	if (ret == -1)
+		ft_err(8);
+	g->map.line = ft_strslen(g->map.map);
+	wrfree(line);
+}
+
+/*
 void	ft_complet_map(t_g *g, char *line)
 {
 	int	i;
@@ -118,4 +165,6 @@ void	ft_complet_map(t_g *g, char *line)
 		g->map.collumn = i;
 	g->map.map = ft_strsjoin(g->map.map, line);
 	g->map.line++;
+	wrfree(line);
 }
+*/

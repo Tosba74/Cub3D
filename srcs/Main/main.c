@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/29 18:51:22 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/07 21:13:03 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*msg_err(int i)
 {
-	static char	*tab[21];
+	static char	*tab[10];
 
 	tab[0] = "Cub3d need an argument\nLa map Connard\n";
 	tab[1] = "Too many arguments\n";
@@ -34,8 +34,13 @@ void	ft_err(int err)
 	char	*str_err;
 
 	str_err = msg_err(err);
-	ft_putstr("Error: ");
-	ft_putstr(str_err);
+	if (err == 9)
+		ft_putstr("FINISH !!!");
+	else
+	{
+		ft_putstr("Error: ");
+		ft_putstr(str_err);
+	}
 	wrdestroy();
 	exit(1);
 }
@@ -71,18 +76,24 @@ static void	ft_read_file(int fd, t_g *g)
 	ret = get_next_line(fd, &line);
 	while (ret != -1)
 	{
+		printf("%s\n", line);
 		skip_space_eol(line);
+		
 		if (ft_isalpha(line[0]))
 			ft_complet_data(g, line);
 		else if (ft_isdigit(line[0]) || line[0] == ' ')
-			ft_complet_map(g, line);
-		wrfree(line);
+			ft_complet_map(g, line, fd, ret);
+		else if (line[0] != 0)
+			ft_err(9);
+		else
+			wrfree(line);
 		if (ret == 0)
 			break;
 		ret = get_next_line(fd, &line);
 	}
 	if (ret == -1)
 		ft_err(2);
+	fill_flood_map(g->map, g->ray.posX, g->ray.posY);
 }
 
 int	main(int ac, char **av)

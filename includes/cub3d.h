@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/02 12:16:04 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/07 20:16:57 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,8 @@ void		ft_init_global(t_g *global);
 
 // read_map.c
 void		ft_complet_data(t_g *g, char *line);
-void		ft_complet_map(t_g *g, char *line);
+void		ft_complet_map(t_g *g, char *line, int fd, int ret);
+void		fill_flood_map(t_map map, int y, int x);
 
 // main.c
 void		ft_err(int err);

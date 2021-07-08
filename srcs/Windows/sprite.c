@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 21:20:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/03 19:21:14 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/03 19:20:34by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int 	fucking_animated(t_g *g)
 	if (g->time == 400)
 		g->time = 0;
 	return (0);
+	
 }
 
 static void	ft_init_sprite2(t_g *g)

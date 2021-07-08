@@ -12,21 +12,6 @@
 
 #include "cub3d.h"
 
-int	update(void *param)
-{
-	t_g	*g;
-
-	g = param;
-	clear_window(g);
-	move(g);
-	draw_screen(g);
-	minimap(g);
-	g->time++;
-	mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, 0, 0);
-	mlx_do_sync(g->win.mlx_ptr);
-	return (0);
-}
-
 int	key_deal(int key, void *param)
 {
 	t_g	*g;
@@ -94,4 +79,19 @@ void	move(t_g *g)
 		rot_view(g, 1);
 	else if (rot == TURN_LEFT)
 		rot_view(g, -1);
+}
+
+int	update(void *param)
+{
+	t_g	*g;
+
+	g = param;
+	clear_window(g);
+	move(g);
+	draw_screen(g);
+	minimap(g);
+	g->time++;
+	mlx_put_image_to_window(g->win.mlx_ptr, g->win.win_ptr, g->win.img, 0, 0);
+	mlx_do_sync(g->win.mlx_ptr);
+	return (0);
 }
