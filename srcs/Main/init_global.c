@@ -6,14 +6,16 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 23:36:49 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/29 18:50:12 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/12 01:02:35 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_init_player(t_ray *ray, t_map *map, int i)
+void	ft_init_player(t_ray *ray, t_map *map, char *line, int i)
 {
+	ray->camera = line[i];
+	line[i] = '0';
 	ray->posX = (float)i;
 	ray->posY = (float)map->line;
 	if (ray->camera == 'N')

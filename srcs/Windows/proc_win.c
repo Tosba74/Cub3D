@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_event_move.c                                   :+:      :+:    :+:   */
+/*   proc_win.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 14:55:10 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/25 18:22:50y bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/07/08 15:52:59 by bmangin           #+#    #+#             */
+/*   Updated: 2021/07/12 00:15:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	close_window(t_g *g)
+{
+	mlx_clear_window(g->win.mlx_ptr, g->win.win_ptr);
+	mlx_destroy_window(g->win.mlx_ptr, g->win.win_ptr);
+	ft_err(-1);
+	return (0);
+}
 
 int	key_deal(int key, void *param)
 {
@@ -56,29 +64,19 @@ int	key_death(int key, void *param)
 	return (0);
 }
 
-void	move(t_g *g)
+static void	clear_window(t_g *g)
 {
-	char	mov;
-	char	movx;
-	char	movy;
-	char	rot;
+	int	x;
+	int	y;
 
-	mov = g->win.keypress;
-	movx = mov & (MOV_LEFT | MOV_RIGHT);
-	movy = mov & (MOV_DOWN | MOV_UP);
-	rot = mov & (TURN_LEFT | TURN_RIGHT);
-	if (movx == MOV_RIGHT)
-		mov_lateral(g, 1);
-	else if (movx == MOV_LEFT)
-		mov_lateral(g, -1);
-	if (movy == MOV_DOWN)
-		mov_updown(g, -1);
-	else if (movy == MOV_UP)
-		mov_updown(g, 1);
-	if (rot == TURN_RIGHT)
-		rot_view(g, 1);
-	else if (rot == TURN_LEFT)
-		rot_view(g, -1);
+	x = -1;
+	y = -1;
+	while (++y < g->win.h)
+	{
+		x = -1;
+		while (++x < g->win.w)
+			my_pixel_put(&g->win, x, y, 0x00000000);
+	}
 }
 
 int	update(void *param)

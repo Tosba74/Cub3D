@@ -6,14 +6,12 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:09:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/07 20:16:57 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/08 15:58:49by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
-# define PI 3.14159265
 
 # define NORTH 1
 # define SOUTH 0
@@ -44,8 +42,8 @@
 # define SPEED 0.1
 # define SPEEDTURN 0.05
 
-# define X_RES 12000
-# define Y_RES 8000
+# define X_RES 1200
+# define Y_RES 800
 
 # include <errno.h>
 # include <math.h>
@@ -194,79 +192,63 @@ typedef struct s_global
 	t_texture	tex;
 	t_sprite	sprite;
 	t_lst		*lst;
-	int		time;
-	int		zbuffer[X_RES];
-}			t_g;
+	int			time;
+	int			zbuffer[X_RES];
+}				t_g;
 
-// sprite.c
+// test.c
+void		ft_print_map(t_g g);
+void		ft_print_cardino(t_img img, char *str);
+void		ft_print_img(t_g g);
+void		ft_print_ray(t_g g);
+void		test(t_g g);
+
+// raycasting.c
+float		ft_dda(t_g *g, int x_win);
+
+// draw_sprite.c
+void		draw_sprite(t_g *g, t_ray *ray, t_texture *t);
+
+// draw_screen.c
+void		draw_screen(t_g *g);
+
+// move.c
+void		move(t_g *g);
+
+// minimap
+int			minimap(t_g *g);
+
+// proc_win.c
+int			close_window(t_g *g);
+int			key_deal(int key, void *param);
+int			key_death(int key, void *param);
+int			update(void *param);
+
+// read_map.c
+void		ft_complet_data(t_g *g, char *line);
+void		ft_complet_map(t_g *g, char *line, int fd, int ret);
+
+// init_global.c
+void		ft_init_player(t_ray *ray, t_map *map, char *line, int i);
+void		ft_init_global(t_g *global);
+
+// sprite_tools.c
 void		lstadd_frt(t_lst **lst, t_lst *new);
 t_lst		*lst_new(float x, float y, int id);
 void		clear_lst(t_lst **lst);
 int			in_lst(t_lst *lst, float x, float y);
 int			lst_size(t_lst *lst);
-void		draw_sprite(t_g *g, t_ray *ray, t_texture *t);
-
-// tools.c
-void		skip_space_eol(char *s);
-int			iscardino(t_g *g, char *s, int nb);
-int			is_wall(t_g g, int x, int y);
 
 // mlx_tools.c
 void		my_pixel_put(t_win *win, int x, int y, int color);
-void		clear_window(t_g *g);
-void		close_window(t_g *g);
 void		draw_col(t_win *win, t_col col);
-t_img		*open_xpm(void *mlx_ptr, char *cardino);
-t_img		*open_xpm_sprite(void *mlx_ptr, char *cardino);
-
-// test.c
-// void		ft_print_struct_p(t_g g);
-// void	ft_print_struct_p(t_g g);
-// void	ft_print_player(t_g g);
-void		ft_print_map(t_g g);
-void		ft_print_img(t_g g);
-void		ft_print_ray(t_g g);
-void		ft_print_lst(t_g g);
-void		test(t_g g);
-
-// inti_texture.c
 void		get_texture(t_g *g);
 
-// texture.c
-// void	draw_wall(t_g *g, int x, t_col col);
-// void		draw_wall(t_g *g, t_wall size, t_texture *t, int x);
-// void		draw_screen(t_g *g);
-
-// minimap
-int			minimap(t_g *g);
-
-// move.c
-void		mov_updown(t_g *g, int neg);
-void		mov_lateral(t_g *g, int neg);
-void		rot_view(t_g *g, int neg);
-
-// events.c
-int			update(void *param);
-int			key_deal(int key, void *param);
-int			key_death(int key, void *param);
-void		move(t_g *g);
-
-// windows.c
-// void		get_wall_size(int x_win, t_g *g);
-void		draw_screen(t_g *g);
-
-// raycasting.c
-float		ft_dda(t_g *g, int x_win);
-
-// init_struct.c
-void		get_texture(t_g *g);
-void		ft_init_player(t_ray *ray, t_map *map, int i);
-void		ft_init_global(t_g *global);
-
-// read_map.c
-void		ft_complet_data(t_g *g, char *line);
-void		ft_complet_map(t_g *g, char *line, int fd, int ret);
-void		fill_flood_map(t_map map, int y, int x);
+// tools.c
+void		fill_flood_map(t_map *map, int x, int y);
+void		skip_space_eol(char *s);
+int			iscardino(t_g *g, char *s, int nb);
+int			is_wall(t_g g, int x, int y);
 
 // main.c
 void		ft_err(int err);

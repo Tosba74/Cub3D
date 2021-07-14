@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Cub3d
+NAME = cub3d
 
 override L_PATH		:= libft
 override M_PATH		:= minilibx
@@ -25,10 +25,10 @@ override MAIN_PATH	:= Main
 
 VPATH		= ${OBJS1}
 
-override FILES_P	:= read_file.c test.c tools.c
-override FILES_W	:= windows.c update.c minimap.c move.c mlx_tools.c sprite.c sprite_tools.c
+override FILES_P	:= read_file.c test.c 
 override FILES_R	:= raycasting.c 
-override FILES_M	:= init_global.c main.c
+override FILES_W	:= draw_screen.c proc_win.c minimap.c move.c draw_sprite.c
+override FILES_M	:= init_global.c main.c tools.c mlx_tools.c sprite_tools.c
 
 FILES		= ${addprefix Parsing/, ${FILES_P}} \
 			${addprefix Raycasting/, ${FILES_R}} \
@@ -59,6 +59,7 @@ CC			:= clang
 FLAGS		:= -Wall -Wextra -Werror -g
 FLAGS_FS	:= -Wall -Wextra -Werror -g3 -fsanitize=address
 FLAGS_O		:= -Wall -Wextra -Werror -O3
+FLAGS_F		:= -Wall -Wextra -Werror -Ofast
 FSANIT		:= -g3 -fsanitize=address
 MLX			:= -L ${M_PATH} -lmlx
 MAKE		:= make -C
@@ -81,6 +82,9 @@ ${NAME}:	${OBJS} ${INC}
 
 opti:		${SRCS} ${INC} ${INC_MLX}
 		${CC} ${FLAGS_O} -I ${M_PATH} -I ${I_PATH} ${MLX} ${LIBFT} ${SRCS} -o ${NAME}
+
+speed:		${SRCS} ${INC} ${INC_MLX}
+		${CC} ${FLAGS_F} -I ${M_PATH} -I ${I_PATH} ${MLX} ${LIBFT} ${SRCS} -o ${NAME}
 
 fs:			${SRCS} ${INC} ${INC_MLX}
 		${CC} ${FLAGS_FS} -I ${M_PATH} -I ${I_PATH} ${MLX} ${LIBFT} ${SRCS} -o ${NAME}
@@ -112,6 +116,8 @@ re:			fclean all
 
 seg:		fclean lib fs
 
-oreo:		fclean lib opti
+op:			fclean lib opti
 
-.PHONY: all lib op opti fsanit fs clean fclean re bonus
+fast:		fclean lib speed
+
+.PHONY: all lib op opti fast speed fsanit fs clean fclean re bonus

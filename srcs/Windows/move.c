@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:35:27 by bmangin           #+#    #+#             */
-/*   Updated: 2021/06/13 19:26:12 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/08 15:35:35 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	mov_updown(t_g *g, int neg)
+static void	mov_updown(t_g *g, int neg)
 {
 	float	xpos;
 	float	ypos;
@@ -25,7 +25,7 @@ void	mov_updown(t_g *g, int neg)
 		g->ray.posY = ypos;
 }
 
-void	mov_lateral(t_g *g, int neg)
+static void	mov_lateral(t_g *g, int neg)
 {
 	float	xpos;
 	float	ypos;
@@ -38,7 +38,7 @@ void	mov_lateral(t_g *g, int neg)
 		g->ray.posY = ypos;
 }
 
-void	rot_view(t_g *g, int neg)
+static void	rot_view(t_g *g, int neg)
 {
 	float	dirX;
 	float	dirY;
@@ -55,4 +55,29 @@ void	rot_view(t_g *g, int neg)
 		- g->ray.planeY * sin(neg * SPEEDTURN);
 	g->ray.planeY = planeX * sin(neg * SPEEDTURN)
 		+ g->ray.planeY * cos(neg * SPEEDTURN);
+}
+
+void	move(t_g *g)
+{
+	char	mov;
+	char	movx;
+	char	movy;
+	char	rot;
+
+	mov = g->win.keypress;
+	movx = mov & (MOV_LEFT | MOV_RIGHT);
+	movy = mov & (MOV_DOWN | MOV_UP);
+	rot = mov & (TURN_LEFT | TURN_RIGHT);
+	if (movx == MOV_RIGHT)
+		mov_lateral(g, 1);
+	else if (movx == MOV_LEFT)
+		mov_lateral(g, -1);
+	if (movy == MOV_DOWN)
+		mov_updown(g, -1);
+	else if (movy == MOV_UP)
+		mov_updown(g, 1);
+	if (rot == TURN_RIGHT)
+		rot_view(g, 1);
+	else if (rot == TURN_LEFT)
+		rot_view(g, -1);
 }

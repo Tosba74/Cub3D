@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite.c                                           :+:      :+:    :+:   */
+/*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/14 21:20:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/03 19:20:34by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/07/08 15:27:47 by bmangin           #+#    #+#             */
+/*   Updated: 2021/07/08 16:08:53 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int 	fucking_animated(t_g *g)
+static int 	fucking_animated(t_g *g)
 {
 	if (g->time < 300)
-	{
-		if ((g->time / 10) % 2 == 0)
-			return (0);
-		else
-			return (1);
-	}
+		return ((g->time / 10) % 2);
 	if (g->time < 320)
 		return (3);
 	if (g->time < 340)
@@ -82,16 +77,6 @@ static void	ft_draw_pix_sprite(t_g *g, t_img *sprt, int startY, int startX)
 		my_pixel_put(&g->win, startX, startY, color);
 }
 
-static int	ft_texx(t_g *g, t_texture *t, int startX)
-{
-	int	ret;
-
-	ret = (int)(256 * (startX - (-g->sprite.sprite_w / 2
-					+ g->sprite.screen_x)) * t->text_width
-			/ g->sprite.sprite_w) / 256;
-	return (ret);
-}
-
 void	draw_sprite(t_g *g, t_ray *ray, t_texture *t)
 {
 	int				startY;
@@ -105,10 +90,11 @@ void	draw_sprite(t_g *g, t_ray *ray, t_texture *t)
 		startX = g->sprite.start_draw_x - 1;
 		while (++startX < g->sprite.end_draw_x)
 		{
-			g->sprite.text_x = ft_texx(g, t, startX);
+			g->sprite.text_x = (int)(256 * (startX -
+				(-g->sprite.sprite_w / 2 + g->sprite.screen_x))
+				* t->text_width / g->sprite.sprite_w) / 256;
 			startY = g->sprite.start_draw_y - 1;
-			if (g->sprite.transform_y > 0 && startX > 0
-				&& startX < g->win.w
+			if (g->sprite.transform_y > 0 && startX > 0 && startX < g->win.w
 				&& g->sprite.transform_y < g->zbuffer[startX])
 				while (++startY < g->sprite.end_draw_y)
 					ft_draw_pix_sprite(g, &t->sprite[fucking_animated(g)],

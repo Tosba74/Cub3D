@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/07 21:13:03 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/11 21:27:31y bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*msg_err(int i)
 {
-	static char	*tab[10];
+	static char	*tab[12];
 
 	tab[0] = "Cub3d need an argument\nLa map Connard\n";
 	tab[1] = "Too many arguments\n";
@@ -25,7 +25,9 @@ static char	*msg_err(int i)
 	tab[6] = "Color incorrect\n";
 	tab[7] = "Too many players";
 	tab[8] = "Map -- Bad Format !!!\n";
-	tab[9] = "FINISH !!!\n";
+	tab[9] = "Map -- Bad Caratere !!!\n";
+	tab[10] = "Map isn't closed !!!\n";
+	tab[11] = "You need position's player\n";
 	return (tab[i]);
 }
 
@@ -34,7 +36,7 @@ void	ft_err(int err)
 	char	*str_err;
 
 	str_err = msg_err(err);
-	if (err == 9)
+	if (err == -1)
 		ft_putstr("FINISH !!!");
 	else
 	{
@@ -61,11 +63,12 @@ static void	proc_win(t_g *g)
 	mlx_do_key_autorepeatoff(g->win.mlx_ptr);
 	mlx_hook(g->win.win_ptr, 02, KeyPressMask, key_deal, g);
 	mlx_hook(g->win.win_ptr, 03, KeyReleaseMask, key_death, g);
+	mlx_hook(g->win.win_ptr, 17, 0, close_window, g);
 	mlx_loop_hook(g->win.mlx_ptr, update, g);
 	mlx_loop(g->win.mlx_ptr);
 }
 
-static void	ft_read_file(int fd, t_g *g)
+static void	read_file(int fd, t_g *g)
 {
 	char	*line;
 	int		ret;
@@ -76,7 +79,6 @@ static void	ft_read_file(int fd, t_g *g)
 	ret = get_next_line(fd, &line);
 	while (ret != -1)
 	{
-		printf("%s\n", line);
 		skip_space_eol(line);
 		
 		if (ft_isalpha(line[0]))
@@ -84,7 +86,7 @@ static void	ft_read_file(int fd, t_g *g)
 		else if (ft_isdigit(line[0]) || line[0] == ' ')
 			ft_complet_map(g, line, fd, ret);
 		else if (line[0] != 0)
-			ft_err(9);
+			ft_err(-1);
 		else
 			wrfree(line);
 		if (ret == 0)
@@ -93,7 +95,7 @@ static void	ft_read_file(int fd, t_g *g)
 	}
 	if (ret == -1)
 		ft_err(2);
-	fill_flood_map(g->map, g->ray.posX, g->ray.posY);
+	// fill_flood_map(&g->map, (int)g->ray.posX, (int)g->ray.posY);
 }
 
 int	main(int ac, char **av)
@@ -111,11 +113,18 @@ int	main(int ac, char **av)
 		ext = ft_strdup(ft_strrchr(av[1], 46));
 		if (ft_strncmp(ext, ".cub", 4))
 			ft_err(2);
+		else
+			wrfree(ext);	
 		fd = open(av[1], O_RDWR);
-		ft_read_file(fd, &tg);
+		read_file(fd, &tg);
 		close(fd);
 		test(tg);
-		proc_win(&tg);
+		// fill_flood_map(&tg.map, (int)tg.ray.posX, (int)tg.ray.posY);
+		// test(tg);
+		if (tg.map.nb_player == 1)
+			proc_win(&tg);
+		else
+			ft_err(11);
 		wrdestroy();
 	}
 	else
