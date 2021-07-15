@@ -6,28 +6,48 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/12 12:27:15 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/15 17:49:50 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	fill_flood_map(t_map *map, int x, int y)
+void	reset_map(char **map)
 {
-	if (y < 0 || x < 0 || y > map->line - 1 || x > map->collumn)
-		ft_err(8);
-	if (!ft_isinstr("012", map->map[y][x]))
-		ft_err(9);
-	else if (map->map[y][x] == ' ')
+	int x;
+	int y;
+
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while(map[y][++x])
+		{
+			if (map[y][x] == 'x')
+			map[y][x] = '0';
+			else if (map[y][x] == '*')
+			map[y][x] = '2';
+		}
+	}
+}
+
+void	map_flood_fill(char **map, int x, int y)
+{
+	if (x < 0 || x >= (int)ft_strlen(map[y])
+			|| y < 0 || y >= ft_strslen(map)
+			|| map[y][x] == ' ')
 		ft_err(10);
-	else if (map->map[y][x] == '1')
-		return ;
-	// else if (map->map[y][x] == '0')
-		// map->map[y][x] = '1';
-	fill_flood_map(map, y - 1, x);
-	fill_flood_map(map, y + 1, x);
-	fill_flood_map(map, y, x - 1);
-	fill_flood_map(map, y, x + 1);
+	if (map[y][x] == '0' || map[y][x] == '2')
+	{
+		if (map[y][x] == '0')
+		map[y][x] = 'x';
+		else if (map[y][x] == '2')
+		map[y][x] = '*';
+		map_flood_fill(map, x + 1, y);
+		map_flood_fill(map, x - 1, y);
+		map_flood_fill(map, x, y + 1);
+		map_flood_fill(map, x, y - 1);
+	}
 }
 
 void	skip_space_eol(char *s)

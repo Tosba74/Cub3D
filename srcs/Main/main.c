@@ -37,7 +37,7 @@ void	ft_err(int err)
 
 	str_err = msg_err(err);
 	if (err == -1)
-		ft_putstr("FINISH !!!");
+		ft_putstr("FINISH !!!\n");
 	else
 	{
 		ft_putstr("Error: ");
@@ -80,7 +80,6 @@ static void	read_file(int fd, t_g *g)
 	while (ret != -1)
 	{
 		skip_space_eol(line);
-		
 		if (ft_isalpha(line[0]))
 			ft_complet_data(g, line);
 		else if (ft_isdigit(line[0]) || line[0] == ' ')
@@ -95,32 +94,25 @@ static void	read_file(int fd, t_g *g)
 	}
 	if (ret == -1)
 		ft_err(2);
-	// fill_flood_map(&g->map, (int)g->ray.posX, (int)g->ray.posY);
 }
 
 int	main(int ac, char **av)
 {
 	int		fd;
-	char	*ext;
 	t_g		tg;
 
-	if (ac == 1)
-		ft_err(0);
-	else if (ac == 2)
+	if (ac == 2)
 	{
 		tg = (t_g){};
 		ft_init_global(&tg);
-		ext = ft_strdup(ft_strrchr(av[1], 46));
-		if (ft_strncmp(ext, ".cub", 4))
+		if (ft_check_ext(av[1], ".cub"))
 			ft_err(2);
-		else
-			wrfree(ext);	
 		fd = open(av[1], O_RDWR);
 		read_file(fd, &tg);
 		close(fd);
+		map_flood_fill(tg.map.map, tg.ray.posX, tg.ray.posY);
+		reset_map(tg.map.map);
 		test(tg);
-		// fill_flood_map(&tg.map, (int)tg.ray.posX, (int)tg.ray.posY);
-		// test(tg);
 		if (tg.map.nb_player == 1)
 			proc_win(&tg);
 		else
@@ -128,6 +120,6 @@ int	main(int ac, char **av)
 		wrdestroy();
 	}
 	else
-		ft_err(1);
+		ft_err(0);
 	return (0);
 }

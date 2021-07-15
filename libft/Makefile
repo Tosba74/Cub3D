@@ -26,7 +26,7 @@ FILES	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		  ft_strslen.c ft_putbytes.c ft_get_color.c ft_lstadd_back.c \
 		  ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
 		  ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_strtolower.c ft_wrdestroy.c \
-		  get_next_line.c
+		  ft_check_ext.c get_next_line.c
 
 OBJS	= ${FILES:.c=.o}
 

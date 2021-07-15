@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 00:58:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/07 18:52:34 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/15 17:44:21 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int					ft_putnbr_len(int n);
 int					ft_len_itoa(int n, int b);
 int					ft_putbytes(int nb);
 int					ft_get_color(int r, int g, int b);
+int					ft_check_ext(char *s, char *ext);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int n, const char *base);
 char				*ft_utoa_base(unsigned int n, const char *base);

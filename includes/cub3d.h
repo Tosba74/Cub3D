@@ -245,8 +245,10 @@ void		draw_col(t_win *win, t_col col);
 void		get_texture(t_g *g);
 
 // tools.c
-void		fill_flood_map(t_map *map, int x, int y);
+void		map_flood_fill(char **map, int x, int y);
+void		reset_map(char **map);
 void		skip_space_eol(char *s);
+int			check_extention(char *s, char *ext);
 int			iscardino(t_g *g, char *s, int nb);
 int			is_wall(t_g g, int x, int y);
 
