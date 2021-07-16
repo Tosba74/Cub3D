@@ -12,25 +12,25 @@
 
 #include "libft.h"
 
-int     ft_putbytes(int nb)
+int	ft_putbytes(int nb)
 {
-    if (nb == 1)
-    {
-        ft_putchar('1');
-        return (SUCCESS);
-    }
-    else if (nb == 0)
-    {
-        ft_putchar('0');
-        return (SUCCESS);
-    }
-    else
-    {
-        ft_putbytes(nb / 2);
-        if ((nb % 2) > 0)
-            ft_putchar('1');
-        else
-            ft_putchar('0');
-    }
-    return (FAILURE);
+	if (nb == 1)
+	{
+		ft_putchar('1');
+		return (SUCCESS);
+	}
+	else if (nb == 0)
+	{
+		ft_putchar('0');
+		return (SUCCESS);
+	}
+	else
+	{
+		ft_putbytes(nb / 2);
+		if ((nb % 2) > 0)
+			ft_putchar('1');
+		else
+			ft_putchar('0');
+	}
+	return (FAILURE);
 }

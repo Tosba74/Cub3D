@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:09:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/15 17:49:50 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/16 19:47:01 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	reset_map(char **map)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = -1;
 	while (map[++y])
 	{
 		x = -1;
-		while(map[y][++x])
+		while (map[y][++x])
 		{
 			if (map[y][x] == 'x')
-			map[y][x] = '0';
+				map[y][x] = '0';
 			else if (map[y][x] == '*')
-			map[y][x] = '2';
+				map[y][x] = '2';
 		}
 	}
 }
@@ -34,15 +34,14 @@ void	reset_map(char **map)
 void	map_flood_fill(char **map, int x, int y)
 {
 	if (x < 0 || x >= (int)ft_strlen(map[y])
-			|| y < 0 || y >= ft_strslen(map)
-			|| map[y][x] == ' ')
+		|| y < 0 || y >= ft_strslen(map) || map[y][x] == ' ')
 		ft_err(10);
 	if (map[y][x] == '0' || map[y][x] == '2')
 	{
 		if (map[y][x] == '0')
-		map[y][x] = 'x';
+			map[y][x] = 'x';
 		else if (map[y][x] == '2')
-		map[y][x] = '*';
+			map[y][x] = '*';
 		map_flood_fill(map, x + 1, y);
 		map_flood_fill(map, x - 1, y);
 		map_flood_fill(map, x, y + 1);

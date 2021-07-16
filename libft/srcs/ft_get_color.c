@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 23:07:52 by bmangin           #+#    #+#             */
-/*   Updated: 2021/05/08 23:13:31 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/16 19:35:58 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_get_color(int r, int g, int b)
+int	ft_get_color(int r, int g, int b)
 {
 	int		color;
 

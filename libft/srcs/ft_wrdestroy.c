@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:22:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/04/26 21:17:17 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/16 19:24:58 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_list	**wrgetter(void)
 {
 	static t_list	*wrm;
+
 	return (&wrm);
 }
 
@@ -22,6 +23,7 @@ void	*wrmalloc(unsigned long size)
 {
 	char	*buffer;
 	t_list	*new_elem;
+
 	buffer = malloc(size);
 	if (!buffer)
 	{
@@ -49,6 +51,7 @@ int	wrfree(void *ptr)
 	t_list	*current;
 	t_list	*next;
 	t_list	**wrstart;
+
 	prev = 0;
 	wrstart = wrgetter();
 	current = *wrstart;
@@ -76,6 +79,7 @@ void	wrdestroy(void)
 	t_list	*current;
 	t_list	*next;
 	t_list	**wrstart;
+
 	wrstart = wrgetter();
 	current = *wrstart;
 	while (current)

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:14:04 by bmangin           #+#    #+#             */
-/*   Updated: 2021/04/30 14:18:21 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/16 19:25:50 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ char	*ft_strtolower(char *s)
 	int		i;
 
 	i = -1;
-	while(s[++i])
-	{
+	while (s[++i])
 		s[i] = ft_tolower(s[i]);
-	}
-	return(s);
+	return (s);
 }

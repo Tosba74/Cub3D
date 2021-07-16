@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:04:53 by bmangin           #+#    #+#             */
-/*   Updated: 2021/04/26 21:05:24 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/16 19:41:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_all(char **strs, int j)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i != j)

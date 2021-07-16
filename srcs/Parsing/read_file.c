@@ -19,7 +19,7 @@ static void	ft_complet_floor(int *c_rgb, int *color, char **tab)
 
 	i = -1;
 	tab_tmp = ft_split(tab[1], ',');
-	if(ft_strslen(tab_tmp) != 3 || ft_strlen(tab[0]) != 1)
+	if (ft_strslen(tab_tmp) != 3 || ft_strlen(tab[0]) != 1)
 		ft_err(6);
 	if (tab)
 	{
@@ -73,6 +73,7 @@ static void	add_map_line(t_g *g, char *line)
 
 	i = -1;
 	while (line[++i])
+	{
 		if (!(48 <= line[i] && line[i] <= 51) && line[i] != ' ')
 		{
 			if (iscardino(g, line + i, 1) != -1)
@@ -87,6 +88,7 @@ static void	add_map_line(t_g *g, char *line)
 		}
 		else if (line[i] == '2')
 			g->map.nb_sprite++;
+	}
 	if (g->map.collumn < i)
 		g->map.collumn = i;
 	g->map.map = ft_strsjoin(g->map.map, line);

@@ -89,7 +89,7 @@ static void	read_file(int fd, t_g *g)
 		else
 			wrfree(line);
 		if (ret == 0)
-			break;
+			break ;
 		ret = get_next_line(fd, &line);
 	}
 	if (ret == -1)

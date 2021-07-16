@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:27:47 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/15 17:57:57 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/07/16 20:10:45 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int 	fucking_animated(t_g *g)
+static int	fucking_animated(t_g *g)
 {
 	if (g->time < 300)
 		return ((g->time / 10) % 2);
@@ -25,7 +25,6 @@ static int 	fucking_animated(t_g *g)
 	if (g->time > 400)
 		g->time = 0;
 	return (5);
-	
 }
 
 static void	ft_init_sprite2(t_g *g)
@@ -90,9 +89,9 @@ void	draw_sprite(t_g *g, t_ray *ray, t_texture *t)
 		startX = g->sprite.start_draw_x - 1;
 		while (++startX < g->sprite.end_draw_x)
 		{
-			g->sprite.text_x = (int)(256 * (startX -
-				(-g->sprite.sprite_w / 2 + g->sprite.screen_x))
-				* t->text_width / g->sprite.sprite_w) / 256;
+			g->sprite.text_x = (int)(256 * (startX - \
+				(-g->sprite.sprite_w / 2 + g->sprite.screen_x)) \
+					* t->text_width / g->sprite.sprite_w) / 256;
 			startY = g->sprite.start_draw_y - 1;
 			if (g->sprite.transform_y > 0 && startX > 0 && startX < g->win.w
 				&& g->sprite.transform_y < g->zbuffer[startX])

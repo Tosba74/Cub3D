@@ -61,6 +61,7 @@ t_img	*open_xpm(void *mlx_ptr, char *cardino)
 	ft_err(5);
 	return (img);
 }
+
 void	get_texture(t_g *g)
 {
 	g->tex.cardino[0] = *open_xpm(g->win.mlx_ptr, g->tex.cardino[0].road);
